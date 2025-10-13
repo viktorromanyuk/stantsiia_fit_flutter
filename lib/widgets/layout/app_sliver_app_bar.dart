@@ -87,12 +87,15 @@ class AppSliverAppBar extends StatelessWidget {
             centerTitle: false,
             titlePadding: const EdgeInsets.all(16),
             expandedTitleScale: 1,
-            title: Opacity(
-              opacity: appBarState.tExpanded,
-              child: Text(
-                title,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: tColorInverted,
+            title: Transform.translate(
+              offset: Offset(0, appBarState.tCollapsed * -15),
+              child: Opacity(
+                opacity: appBarState.tExpanded,
+                child: Text(
+                  title,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    color: tColorInverted,
+                  ),
                 ),
               ),
             ),

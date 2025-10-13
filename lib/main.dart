@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:stantsiia_fit_flutter/router/index.dart';
 
-void main() => runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
-  @override
-  Widget build(BuildContext context) => MaterialApp.router(routerConfig: router);
+  runApp(
+    MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      routerConfig: router,
+    ),
+  );
 }
