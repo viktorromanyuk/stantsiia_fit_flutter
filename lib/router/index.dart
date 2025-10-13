@@ -18,6 +18,7 @@ final router = GoRouter(
         StatefulShellBranch(
           routes: [
             GoRoute(
+              name: 'schedule',
               path: '/schedule',
               builder: (context, state) => const ScheduleScreen(),
             ),
@@ -26,6 +27,7 @@ final router = GoRouter(
         StatefulShellBranch(
           routes: [
             GoRoute(
+              name: 'trainings',
               path: '/trainings',
               builder: (context, state) => const TrainingsScreen(),
               routes: [
