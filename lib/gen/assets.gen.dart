@@ -29,12 +29,6 @@ class $AssetsIconsGen {
   /// File path: assets/icons/arrow.svg
   SvgGenImage get arrow => const SvgGenImage('assets/icons/arrow.svg');
 
-  /// File path: assets/icons/calendar.svg
-  SvgGenImage get calendar => const SvgGenImage('assets/icons/calendar.svg');
-
-  /// File path: assets/icons/card.svg
-  SvgGenImage get card => const SvgGenImage('assets/icons/card.svg');
-
   /// File path: assets/icons/caret-right.svg
   SvgGenImage get caretRight =>
       const SvgGenImage('assets/icons/caret-right.svg');
@@ -65,14 +59,27 @@ class $AssetsIconsGen {
   /// File path: assets/icons/instagram.svg
   SvgGenImage get instagram => const SvgGenImage('assets/icons/instagram.svg');
 
+  /// File path: assets/icons/logo-full.svg
+  SvgGenImage get logoFull => const SvgGenImage('assets/icons/logo-full.svg');
+
   /// File path: assets/icons/logo.svg
   SvgGenImage get logo => const SvgGenImage('assets/icons/logo.svg');
 
   /// File path: assets/icons/logout.svg
   SvgGenImage get logout => const SvgGenImage('assets/icons/logout.svg');
 
+  /// File path: assets/icons/schedule.svg
+  SvgGenImage get schedule => const SvgGenImage('assets/icons/schedule.svg');
+
   /// File path: assets/icons/tik-tok.svg
   SvgGenImage get tikTok => const SvgGenImage('assets/icons/tik-tok.svg');
+
+  /// File path: assets/icons/training-package.svg
+  SvgGenImage get trainingPackage =>
+      const SvgGenImage('assets/icons/training-package.svg');
+
+  /// File path: assets/icons/trainings.svg
+  SvgGenImage get trainings => const SvgGenImage('assets/icons/trainings.svg');
 
   /// File path: assets/icons/user.svg
   SvgGenImage get user => const SvgGenImage('assets/icons/user.svg');
@@ -83,8 +90,6 @@ class $AssetsIconsGen {
     arrowLeft,
     arrowLong,
     arrow,
-    calendar,
-    card,
     caretRight,
     checkFilled,
     checkMark,
@@ -94,9 +99,13 @@ class $AssetsIconsGen {
     infoFilled,
     info,
     instagram,
+    logoFull,
     logo,
     logout,
+    schedule,
     tikTok,
+    trainingPackage,
+    trainings,
     user,
   ];
 }

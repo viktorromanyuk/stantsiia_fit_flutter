@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
+import 'package:stantsiia_fit_flutter/gen/assets.gen.dart';
 import 'package:stantsiia_fit_flutter/styles/colors.dart';
+import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
+import 'package:stantsiia_fit_flutter/styles/styles.dart';
 
 class AppNavigationBar extends StatelessWidget {
   const AppNavigationBar({super.key, required this.navigationShell});
@@ -13,28 +17,42 @@ class AppNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) => NavigationBarTheme(
     data: NavigationBarThemeData(
+      height: kBottomNavigationBarHeight,
+      labelPadding: const EdgeInsets.only(top: 0),
       backgroundColor: Colors.transparent,
       indicatorColor: Colors.transparent,
-      iconTheme: WidgetStateProperty.resolveWith((states) => IconThemeData(color: _getColor(states))),
+      iconTheme: WidgetStateProperty.resolveWith(
+        (states) => IconThemeData(color: _getColor(states)),
+      ),
       labelTextStyle: WidgetStateProperty.resolveWith(
-        (states) => TextStyle(
+        (states) => AppFontSize.xs.copyWith(
           color: _getColor(states),
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w500,
         ),
       ),
     ),
     child: Container(
       decoration: const BoxDecoration(
-        border: Border(top: BorderSide(color: AppColors.grayLight)),
+        border: Border(top: BorderSide(color: AppColors.grayLight, width: 0.5)),
       ),
       child: NavigationBar(
         backgroundColor: AppColors.grayDark,
         overlayColor: WidgetStateProperty.all(Colors.transparent),
         selectedIndex: navigationShell.currentIndex,
         onDestinationSelected: navigationShell.goBranch,
-        destinations: const [
-          NavigationDestination(icon: Icon(Icons.home), label: 'Schedule'),
-          NavigationDestination(icon: Icon(Icons.fitness_center), label: 'Trainings'),
+        destinations: [
+          NavigationDestination(
+            icon: AppIcon(Assets.icons.schedule),
+            label: 'Розклад',
+          ),
+          NavigationDestination(
+            icon: AppIcon(Assets.icons.trainings, height: 24),
+            label: 'Тренування',
+          ),
+          NavigationDestination(
+            icon: AppIcon(Assets.icons.trainingPackage),
+            label: 'Абонементи',
+          ),
         ],
       ),
     ),

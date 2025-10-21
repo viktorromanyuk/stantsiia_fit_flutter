@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stantsiia_fit_flutter/styles/colors.dart';
-import 'package:stantsiia_fit_flutter/gen/index.dart';
+import 'package:stantsiia_fit_flutter/styles/styles.dart';
+import 'package:stantsiia_fit_flutter/core/extensions/extensions.dart';
 
 typedef AppSliverAppBarLeadingBuilder = Widget Function(BuildContext context, Color tColor);
 typedef AppSliverAppBarActionsBuilder = List<Widget> Function(BuildContext context, Color tColor);
@@ -9,20 +9,17 @@ class AppSliverAppBar extends StatelessWidget {
   const AppSliverAppBar({
     super.key,
     required this.title,
-    this.theme = ThemeMode.light,
+    this.flexibleSpaceTitle,
     this.leadingBuilder,
+    this.leadingWidth,
     this.actionsBuilder,
   });
 
   final String title;
+  final String? flexibleSpaceTitle;
   final AppSliverAppBarLeadingBuilder? leadingBuilder;
+  final double? leadingWidth;
   final AppSliverAppBarActionsBuilder? actionsBuilder;
-  final ThemeMode theme;
-
-  static const double _minToolbarHeight = kToolbarHeight;
-  static const double _maxToolbarHeight = kToolbarHeight + 48;
-
-  bool get isLightTheme => theme == ThemeMode.light;
 
   ({double tCollapsed, double tExpanded}) getAppBarState({
     required double offset,
@@ -37,12 +34,19 @@ class AppSliverAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: use context.theme.isLight
+    final isLightTheme = Theme.of(context).brightness == Brightness.light;
+    const double _toolbarHeight = 48.0;
+    final double _collapsedToolbarHeight = MediaQuery.paddingOf(context).top + _toolbarHeight;
+
+    const double _expandedToolbarHeight = _toolbarHeight * 2;
+
     return SliverLayoutBuilder(
       builder: (context, constraints) {
         final appBarState = getAppBarState(
           offset: constraints.scrollOffset,
-          min: _minToolbarHeight,
-          max: _maxToolbarHeight,
+          min: _toolbarHeight,
+          max: _expandedToolbarHeight,
         );
 
         final tColor = Color.lerp(
@@ -59,27 +63,31 @@ class AppSliverAppBar extends StatelessWidget {
 
         final tBorderColor = Color.lerp(
           AppColors.transparent,
-          isLightTheme ? AppColors.transparent : AppColors.grayLight,
+          AppColors.grayLight,
           appBarState.tCollapsed,
         )!;
 
         return SliverAppBar.medium(
           pinned: true,
-          expandedHeight: _maxToolbarHeight,
           backgroundColor: AppColors.grayDark,
+          toolbarHeight: _toolbarHeight,
+          expandedHeight: _expandedToolbarHeight,
+          collapsedHeight: _collapsedToolbarHeight,
           surfaceTintColor: AppColors.transparent,
           shape: Border(
             bottom: BorderSide(
               color: tBorderColor,
-              width: 1,
+              width: 0.5,
             ),
           ),
 
           foregroundColor: tColor,
           title: Text(
             title,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              color: AppColors.whiteMilk,
+            style: AppFontSize.xl.copyWith(
+              height: AppLineHeight.none,
+              fontFamily: FontFamily.unbounded,
+              color: tColor,
             ),
           ),
 
@@ -92,8 +100,11 @@ class AppSliverAppBar extends StatelessWidget {
               child: Opacity(
                 opacity: appBarState.tExpanded,
                 child: Text(
-                  title,
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  flexibleSpaceTitle ?? title,
+                  style: TextStyle(
+                    fontSize: context.breakpoints.minLg ? 40 : 30,
+                    height: AppLineHeight.condensed,
+                    fontFamily: FontFamily.unbounded,
                     color: tColorInverted,
                   ),
                 ),
@@ -103,7 +114,7 @@ class AppSliverAppBar extends StatelessWidget {
               color: isLightTheme ? AppColors.whiteMilk : AppColors.grayDark,
             ),
           ),
-
+          leadingWidth: leadingWidth,
           leading: leadingBuilder?.call(context, tColor),
           actions: actionsBuilder?.call(context, tColor),
         );

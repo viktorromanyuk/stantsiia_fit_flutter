@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:stantsiia_fit_flutter/widgets/layout/app_navigation_bar.dart';
+import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
 
 class DefaultLayout extends StatelessWidget {
   const DefaultLayout({

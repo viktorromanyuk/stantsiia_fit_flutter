@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../layouts/default_layout.dart';
-import '../screens/schedule_screen.dart';
-import '../screens/trainings_nested_screen.dart';
-import '../screens/trainings_screen.dart';
+import 'package:stantsiia_fit_flutter/layouts/default_layout.dart';
+
+import 'package:stantsiia_fit_flutter/screens/schedule_screen.dart';
+import 'package:stantsiia_fit_flutter/screens/trainings_screen.dart';
+import 'package:stantsiia_fit_flutter/screens/trainings_packages_screen.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 
@@ -30,12 +31,15 @@ final router = GoRouter(
               name: 'trainings',
               path: '/trainings',
               builder: (context, state) => const TrainingsScreen(),
-              routes: [
-                GoRoute(
-                  path: 'nested',
-                  builder: (context, state) => const TrainingsNestedScreen(),
-                ),
-              ],
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              name: 'trainings-packages',
+              path: '/trainings-packages',
+              builder: (context, state) => const TrainingsPackagesScreen(),
             ),
           ],
         ),

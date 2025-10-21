@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stantsiia_fit_flutter/styles/colors.dart';
-import 'package:stantsiia_fit_flutter/gen/index.dart';
+import 'package:stantsiia_fit_flutter/styles/styles.dart';
 
 import './app_sliver_app_bar.dart';
 
@@ -24,21 +23,12 @@ class AppScaffold extends StatelessWidget {
       data: ThemeData(
         brightness: isLightTheme ? Brightness.light : Brightness.dark,
         fontFamily: FontFamily.fixel,
-        textTheme: TextTheme(
-          titleMedium: TextStyle(fontFamily: FontFamily.unbounded),
-          titleLarge: TextStyle(fontFamily: FontFamily.unbounded),
-        ),
       ),
       child: Scaffold(
         backgroundColor: isLightTheme ? AppColors.whiteMilk : AppColors.grayDark,
         body: CustomScrollView(
           slivers: [
-            AppSliverAppBar(
-              theme: theme,
-              title: appBar.title,
-              leadingBuilder: appBar.leadingBuilder,
-              actionsBuilder: appBar.actionsBuilder,
-            ),
+            appBar,
             ...children,
           ],
         ),

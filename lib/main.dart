@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:stantsiia_fit_flutter/router/index.dart';
+import 'package:stantsiia_fit_flutter/router/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
