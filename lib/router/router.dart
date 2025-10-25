@@ -3,9 +3,9 @@ import 'package:go_router/go_router.dart';
 
 import 'package:stantsiia_fit_flutter/layouts/default_layout.dart';
 
-import 'package:stantsiia_fit_flutter/screens/schedule_screen.dart';
-import 'package:stantsiia_fit_flutter/screens/trainings_screen.dart';
-import 'package:stantsiia_fit_flutter/screens/trainings_packages_screen.dart';
+import 'package:stantsiia_fit_flutter/features/schedule/screens/screens.dart';
+import 'package:stantsiia_fit_flutter/features/trainings/screens/screens.dart';
+import 'package:stantsiia_fit_flutter/features/trainings_packages/screens/screens.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 

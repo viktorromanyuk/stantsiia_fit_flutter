@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stantsiia_fit_flutter/gen/assets.gen.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
+import 'package:stantsiia_fit_flutter/core/enums.dart';
 
 class ScheduleScreen extends StatelessWidget {
   const ScheduleScreen({super.key});
@@ -18,6 +19,9 @@ class ScheduleScreen extends StatelessWidget {
         ),
       ),
       children: [
+        SliverToBoxAdapter(
+          child: EntityCheckMark(type: EEntityType.fitness),
+        ),
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (context, i) => ListTile(

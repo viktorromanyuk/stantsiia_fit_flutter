@@ -35,45 +35,46 @@ class AppSliverAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: use context.theme.isLight
-    final isLightTheme = Theme.of(context).brightness == Brightness.light;
-    const double _toolbarHeight = 48.0;
-    final double _collapsedToolbarHeight = MediaQuery.paddingOf(context).top + _toolbarHeight;
 
-    const double _expandedToolbarHeight = _toolbarHeight * 2;
+    final isLightTheme = Theme.of(context).brightness == Brightness.light;
+    const double toolbarHeight = 48.0;
+    final double collapsedToolbarHeight = MediaQuery.paddingOf(context).top + toolbarHeight;
+
+    const double expandedToolbarHeight = toolbarHeight * 2;
 
     return SliverLayoutBuilder(
       builder: (context, constraints) {
         final appBarState = getAppBarState(
           offset: constraints.scrollOffset,
-          min: _toolbarHeight,
-          max: _expandedToolbarHeight,
+          min: toolbarHeight,
+          max: expandedToolbarHeight,
         );
 
         final tColor = Color.lerp(
-          isLightTheme ? AppColors.grayDark : AppColors.whiteMilk,
-          AppColors.whiteMilk,
+          isLightTheme ? AppStyles.colors.grayDark : AppStyles.colors.whiteMilk,
+          AppStyles.colors.whiteMilk,
           appBarState.tCollapsed,
         )!;
 
         final tColorInverted = Color.lerp(
-          isLightTheme ? AppColors.grayDark : AppColors.whiteMilk,
-          AppColors.grayDark,
+          isLightTheme ? AppStyles.colors.grayDark : AppStyles.colors.whiteMilk,
+          AppStyles.colors.grayDark,
           appBarState.tCollapsed,
         )!;
 
         final tBorderColor = Color.lerp(
-          AppColors.transparent,
-          AppColors.grayLight,
+          AppStyles.colors.transparent,
+          AppStyles.colors.grayLight,
           appBarState.tCollapsed,
         )!;
 
         return SliverAppBar.medium(
           pinned: true,
-          backgroundColor: AppColors.grayDark,
-          toolbarHeight: _toolbarHeight,
-          expandedHeight: _expandedToolbarHeight,
-          collapsedHeight: _collapsedToolbarHeight,
-          surfaceTintColor: AppColors.transparent,
+          backgroundColor: AppStyles.colors.grayDark,
+          toolbarHeight: toolbarHeight,
+          expandedHeight: expandedToolbarHeight,
+          collapsedHeight: collapsedToolbarHeight,
+          surfaceTintColor: AppStyles.colors.transparent,
           shape: Border(
             bottom: BorderSide(
               color: tBorderColor,
@@ -84,8 +85,8 @@ class AppSliverAppBar extends StatelessWidget {
           foregroundColor: tColor,
           title: Text(
             title,
-            style: AppFontSize.xl.copyWith(
-              height: AppLineHeight.none,
+            style: AppStyles.fontSize.xl.copyWith(
+              height: AppStyles.lineHeight.none,
               fontFamily: FontFamily.unbounded,
               color: tColor,
             ),
@@ -103,7 +104,7 @@ class AppSliverAppBar extends StatelessWidget {
                   flexibleSpaceTitle ?? title,
                   style: TextStyle(
                     fontSize: context.breakpoints.minLg ? 40 : 30,
-                    height: AppLineHeight.condensed,
+                    height: AppStyles.lineHeight.condensed,
                     fontFamily: FontFamily.unbounded,
                     color: tColorInverted,
                   ),
@@ -111,7 +112,7 @@ class AppSliverAppBar extends StatelessWidget {
               ),
             ),
             background: ColoredBox(
-              color: isLightTheme ? AppColors.whiteMilk : AppColors.grayDark,
+              color: isLightTheme ? AppStyles.colors.whiteMilk : AppStyles.colors.grayDark,
             ),
           ),
           leadingWidth: leadingWidth,

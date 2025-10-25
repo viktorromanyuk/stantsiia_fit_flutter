@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stantsiia_fit_flutter/gen/assets.gen.dart';
-import 'package:stantsiia_fit_flutter/styles/colors.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:stantsiia_fit_flutter/styles/styles.dart';
 
 class AppIcon extends StatelessWidget {
   const AppIcon(
@@ -25,7 +25,7 @@ class AppIcon extends StatelessWidget {
       child: icon.svg(
         width: width,
         height: height,
-        theme: SvgTheme(currentColor: color ?? IconTheme.of(context).color ?? AppColors.grayDark),
+        theme: SvgTheme(currentColor: color ?? IconTheme.of(context).color ?? AppStyles.colors.grayDark),
       ),
     );
   }

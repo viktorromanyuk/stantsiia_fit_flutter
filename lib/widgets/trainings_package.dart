@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stantsiia_fit_flutter/core/extensions/extensions.dart';
 import 'package:stantsiia_fit_flutter/styles/styles.dart';
-import 'package:stantsiia_fit_flutter/gen/fonts.gen.dart';
-import 'package:stantsiia_fit_flutter/styles/typography/font_size.dart';
 
 class TrainingsPackage extends StatelessWidget {
   const TrainingsPackage({super.key});
@@ -12,7 +10,7 @@ class TrainingsPackage extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: AppColors.grayDark,
+        color: AppStyles.colors.grayDark,
         borderRadius: BorderRadius.circular(30),
       ),
       child: Column(
@@ -20,9 +18,9 @@ class TrainingsPackage extends StatelessWidget {
         children: [
           Text(
             'Пробне тренування',
-            style: (context.breakpoints.maxMd ? AppFontSize.xl : AppFontSize.xxl).copyWith(
+            style: (context.breakpoints.maxMd ? AppStyles.fontSize.xl : AppStyles.fontSize.xxl).copyWith(
               fontFamily: FontFamily.unbounded,
-              color: AppColors.whiteMilk,
+              color: AppStyles.colors.whiteMilk,
             ),
           ),
 
@@ -30,8 +28,8 @@ class TrainingsPackage extends StatelessWidget {
 
           RichText(
             text: TextSpan(
-              style: (context.breakpoints.maxMd ? AppFontSize.xl : AppFontSize.xxl).copyWith(
-                color: AppColors.purple100,
+              style: (context.breakpoints.maxMd ? AppStyles.fontSize.xl : AppStyles.fontSize.xxl).copyWith(
+                color: AppStyles.colors.purple100,
               ),
               children: [
                 TextSpan(
@@ -50,9 +48,9 @@ class TrainingsPackage extends StatelessWidget {
 
           Text(
             'Термін дії - 1 місяць',
-            style: (context.breakpoints.maxMd ? AppFontSize.md : AppFontSize.lg).copyWith(
+            style: (context.breakpoints.maxMd ? AppStyles.fontSize.md : AppStyles.fontSize.lg).copyWith(
               fontWeight: FontWeight.w500,
-              color: AppColors.whiteMilk,
+              color: AppStyles.colors.whiteMilk,
             ),
           ),
         ],

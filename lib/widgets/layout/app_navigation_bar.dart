@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:stantsiia_fit_flutter/gen/assets.gen.dart';
-import 'package:stantsiia_fit_flutter/styles/colors.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
 import 'package:stantsiia_fit_flutter/styles/styles.dart';
 
@@ -11,7 +10,7 @@ class AppNavigationBar extends StatelessWidget {
   final StatefulNavigationShell navigationShell;
 
   Color _getColor(Set<WidgetState> states) {
-    return states.contains(WidgetState.selected) ? AppColors.orange100 : AppColors.whiteMilk;
+    return states.contains(WidgetState.selected) ? AppStyles.colors.orange100 : AppStyles.colors.whiteMilk;
   }
 
   @override
@@ -25,18 +24,18 @@ class AppNavigationBar extends StatelessWidget {
         (states) => IconThemeData(color: _getColor(states)),
       ),
       labelTextStyle: WidgetStateProperty.resolveWith(
-        (states) => AppFontSize.xs.copyWith(
+        (states) => AppStyles.fontSize.xs.copyWith(
           color: _getColor(states),
           fontWeight: FontWeight.w500,
         ),
       ),
     ),
     child: Container(
-      decoration: const BoxDecoration(
-        border: Border(top: BorderSide(color: AppColors.grayLight, width: 0.5)),
+      decoration: BoxDecoration(
+        border: Border(top: BorderSide(color: AppStyles.colors.grayLight, width: 0.5)),
       ),
       child: NavigationBar(
-        backgroundColor: AppColors.grayDark,
+        backgroundColor: AppStyles.colors.grayDark,
         overlayColor: WidgetStateProperty.all(Colors.transparent),
         selectedIndex: navigationShell.currentIndex,
         onDestinationSelected: navigationShell.goBranch,

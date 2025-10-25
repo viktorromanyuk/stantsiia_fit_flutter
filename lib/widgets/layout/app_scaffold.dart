@@ -25,7 +25,7 @@ class AppScaffold extends StatelessWidget {
         fontFamily: FontFamily.fixel,
       ),
       child: Scaffold(
-        backgroundColor: isLightTheme ? AppColors.whiteMilk : AppColors.grayDark,
+        backgroundColor: isLightTheme ? AppStyles.colors.whiteMilk : AppStyles.colors.grayDark,
         body: CustomScrollView(
           slivers: [
             appBar,
