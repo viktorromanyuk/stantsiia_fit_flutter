@@ -11,10 +11,12 @@ part 'typography/line_height.dart';
 
 // Decoration
 part 'decoration/box_shadow.dart';
+part 'decoration/border_radius.dart';
 
 abstract final class AppStyles {
   static const colors = AppColors.values;
   static const fontSize = AppFontSize.values;
   static const boxShadow = AppBoxShadow.values;
+  static const borderRadius = AppBorderRadius.values;
   static const lineHeight = AppLineHeight.values;
 }

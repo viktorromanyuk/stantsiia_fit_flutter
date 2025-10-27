@@ -5,7 +5,7 @@ abstract final class _Breakpoints {
   static const md = 768;
   static const lg = 1024;
   static const xl = 1280;
-  static const xxl = 1536;
+  static const xl2 = 1536;
 }
 
 class AppBreakpoints {
@@ -20,14 +20,14 @@ class AppBreakpoints {
   bool get minMd => _width >= _Breakpoints.md;
   bool get minLg => _width >= _Breakpoints.lg;
   bool get minXl => _width >= _Breakpoints.xl;
-  bool get minXxl => _width >= _Breakpoints.xxl;
+  bool get minXl2 => _width >= _Breakpoints.xl2;
 
   // ----- Max-width -----
   bool get maxXs => _width < _Breakpoints.sm;
   bool get maxSm => _width < _Breakpoints.md;
   bool get maxMd => _width < _Breakpoints.lg;
   bool get maxLg => _width < _Breakpoints.xl;
-  bool get maxXl => _width < _Breakpoints.xxl;
+  bool get maxXl => _width < _Breakpoints.xl2;
 
   // ----- Exact range matchers -----
   bool get xs => maxXs;
@@ -35,7 +35,7 @@ class AppBreakpoints {
   bool get md => minMd && maxMd;
   bool get lg => minLg && maxLg;
   bool get xl => minXl && maxXl;
-  bool get xxl => minXxl;
+  bool get xl2 => minXl2;
 }
 
 extension BreakpointsExtension on BuildContext {

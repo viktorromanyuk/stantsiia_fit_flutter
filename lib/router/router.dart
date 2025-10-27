@@ -6,6 +6,7 @@ import 'package:stantsiia_fit_flutter/layouts/default_layout.dart';
 import 'package:stantsiia_fit_flutter/features/schedule/screens/screens.dart';
 import 'package:stantsiia_fit_flutter/features/trainings/screens/screens.dart';
 import 'package:stantsiia_fit_flutter/features/trainings_packages/screens/screens.dart';
+import 'package:stantsiia_fit_flutter/features/account/screens/screens.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 
@@ -40,6 +41,15 @@ final router = GoRouter(
               name: 'trainings-packages',
               path: '/trainings-packages',
               builder: (context, state) => const TrainingsPackagesScreen(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              name: 'account',
+              path: '/account',
+              builder: (context, state) => const AccountScreen(),
             ),
           ],
         ),

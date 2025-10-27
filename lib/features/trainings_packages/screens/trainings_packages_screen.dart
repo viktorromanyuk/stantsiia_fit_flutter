@@ -11,7 +11,7 @@ class TrainingsPackagesScreen extends StatelessWidget {
       appBar: AppSliverAppBar(title: 'Абонементи'),
       children: [
         SliverPadding(
-          padding: const EdgeInsets.fromLTRB(16, 40, 16, 16),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
           sliver: SliverList.separated(
             itemBuilder: (BuildContext context, int index) => TrainingsPackage(),
             separatorBuilder: (BuildContext context, int index) => const SizedBox(height: 20),

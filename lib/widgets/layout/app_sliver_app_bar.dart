@@ -34,9 +34,6 @@ class AppSliverAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: use context.theme.isLight
-
-    final isLightTheme = Theme.of(context).brightness == Brightness.light;
     const double toolbarHeight = 48.0;
     final double collapsedToolbarHeight = MediaQuery.paddingOf(context).top + toolbarHeight;
 
@@ -51,13 +48,13 @@ class AppSliverAppBar extends StatelessWidget {
         );
 
         final tColor = Color.lerp(
-          isLightTheme ? AppStyles.colors.grayDark : AppStyles.colors.whiteMilk,
+          context.theme.isLight ? AppStyles.colors.grayDark : AppStyles.colors.whiteMilk,
           AppStyles.colors.whiteMilk,
           appBarState.tCollapsed,
         )!;
 
         final tColorInverted = Color.lerp(
-          isLightTheme ? AppStyles.colors.grayDark : AppStyles.colors.whiteMilk,
+          context.theme.isLight ? AppStyles.colors.grayDark : AppStyles.colors.whiteMilk,
           AppStyles.colors.grayDark,
           appBarState.tCollapsed,
         )!;
@@ -112,7 +109,7 @@ class AppSliverAppBar extends StatelessWidget {
               ),
             ),
             background: ColoredBox(
-              color: isLightTheme ? AppStyles.colors.whiteMilk : AppStyles.colors.grayDark,
+              color: context.theme.isLight ? AppStyles.colors.whiteMilk : AppStyles.colors.grayDark,
             ),
           ),
           leadingWidth: leadingWidth,

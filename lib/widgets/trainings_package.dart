@@ -18,7 +18,7 @@ class TrainingsPackage extends StatelessWidget {
         children: [
           Text(
             'Пробне тренування',
-            style: (context.breakpoints.maxMd ? AppStyles.fontSize.xl : AppStyles.fontSize.xxl).copyWith(
+            style: (context.breakpoints.maxMd ? AppStyles.fontSize.xl : AppStyles.fontSize.xl2).copyWith(
               fontFamily: FontFamily.unbounded,
               color: AppStyles.colors.whiteMilk,
             ),
@@ -28,7 +28,7 @@ class TrainingsPackage extends StatelessWidget {
 
           RichText(
             text: TextSpan(
-              style: (context.breakpoints.maxMd ? AppStyles.fontSize.xl : AppStyles.fontSize.xxl).copyWith(
+              style: (context.breakpoints.maxMd ? AppStyles.fontSize.xl : AppStyles.fontSize.xl2).copyWith(
                 color: AppStyles.colors.purple100,
               ),
               children: [

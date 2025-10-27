@@ -19,13 +19,26 @@ class AppScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textColor = isLightTheme ? AppStyles.colors.grayDark : AppStyles.colors.whiteMilk;
+    final backgroundColor = isLightTheme ? AppStyles.colors.whiteMilk : AppStyles.colors.grayDark;
+    final brightness = isLightTheme ? Brightness.light : Brightness.dark;
+
     return Theme(
       data: ThemeData(
-        brightness: isLightTheme ? Brightness.light : Brightness.dark,
+        brightness: brightness,
         fontFamily: FontFamily.fixel,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: AppStyles.colors.grayDark,
+          surface: backgroundColor,
+          onSurface: textColor,
+          brightness: brightness,
+        ),
+        listTileTheme: ListTileThemeData(
+          textColor: textColor,
+          iconColor: textColor,
+        ),
       ),
       child: Scaffold(
-        backgroundColor: isLightTheme ? AppStyles.colors.whiteMilk : AppStyles.colors.grayDark,
         body: CustomScrollView(
           slivers: [
             appBar,
