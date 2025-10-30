@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:stantsiia_fit_flutter/router/router.gr.dart';
 
+// TODO: add from guidelines
+
 @AutoRouterConfig(replaceInRouteName: 'Screen|Page,Route')
 class AppRouter extends RootStackRouter {
   @override
