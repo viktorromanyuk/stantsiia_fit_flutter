@@ -3,12 +3,16 @@ import 'package:stantsiia_fit_flutter/core/extensions/extensions.dart';
 import 'package:stantsiia_fit_flutter/styles/styles.dart';
 
 class TrainingsPackage extends StatelessWidget {
-  const TrainingsPackage({super.key});
+  const TrainingsPackage({super.key, required this.data});
+
+  // TODO: add models
+  final Map<String, dynamic> data;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(24),
+      clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: AppStyles.colors.grayDark,
         borderRadius: BorderRadius.circular(30),
@@ -17,7 +21,7 @@ class TrainingsPackage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Пробне тренування',
+            data['name'],
             style: (context.breakpoints.maxMd ? AppStyles.fontSize.xl : AppStyles.fontSize.xl2).copyWith(
               fontFamily: FontFamily.unbounded,
               color: AppStyles.colors.whiteMilk,
@@ -33,7 +37,7 @@ class TrainingsPackage extends StatelessWidget {
               ),
               children: [
                 TextSpan(
-                  text: '150',
+                  text: data['price'].toString(),
                   style: TextStyle(fontFamily: FontFamily.unbounded),
                 ),
                 TextSpan(
@@ -47,7 +51,7 @@ class TrainingsPackage extends StatelessWidget {
           const SizedBox(height: 16),
 
           Text(
-            'Термін дії - 1 місяць',
+            'Термін дії - ${data['duration']} місяць',
             style: (context.breakpoints.maxMd ? AppStyles.fontSize.md : AppStyles.fontSize.lg).copyWith(
               fontWeight: FontWeight.w500,
               color: AppStyles.colors.whiteMilk,

@@ -39,7 +39,7 @@ class AppNavigationBar extends StatelessWidget {
           backgroundColor: AppStyles.colors.grayDark,
           overlayColor: WidgetStateProperty.all(Colors.transparent),
           selectedIndex: navigationShell.currentIndex,
-          onDestinationSelected: navigationShell.goBranch,
+          onDestinationSelected: (index) => navigationShell.goBranch(index, initialLocation: true),
           destinations: [
             NavigationDestination(
               icon: AppIcon(Assets.icons.schedule),

@@ -1,6 +1,6 @@
-enum EEntityType {
+enum EntityType {
   fitness,
   dance,
   photo,
-  defaultType,
+  unset,
 }

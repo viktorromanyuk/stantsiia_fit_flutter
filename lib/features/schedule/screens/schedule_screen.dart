@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:stantsiia_fit_flutter/gen/assets.gen.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
 
 class ScheduleScreen extends StatelessWidget {
@@ -12,21 +11,12 @@ class ScheduleScreen extends StatelessWidget {
       appBar: AppSliverAppBar(
         title: 'Жовтень',
         flexibleSpaceTitle: 'Розклад',
-        leadingBuilder: (context, tColor) => IconButton(
-          onPressed: () {},
-          icon: AppIcon(Assets.icons.checkFilled, color: tColor),
-        ),
       ),
       children: [
         SliverToBoxAdapter(
-          child: AppIcon(Assets.icons.logoFull, width: 200),
-        ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (context, i) => ListTile(
-              title: AppIcon(Assets.icons.logoFull, width: 200),
-            ),
-            childCount: 50,
+          child: AppButton(
+            onPressed: () {},
+            text: 'Записатись',
           ),
         ),
       ],

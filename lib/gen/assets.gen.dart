@@ -23,11 +23,17 @@ class $AssetsIconsGen {
   /// File path: assets/icons/arrow-left.svg
   SvgGenImage get arrowLeft => const SvgGenImage('assets/icons/arrow-left.svg');
 
-  /// File path: assets/icons/arrow-long.svg
-  SvgGenImage get arrowLong => const SvgGenImage('assets/icons/arrow-long.svg');
+  /// File path: assets/icons/arrow-long-left.svg
+  SvgGenImage get arrowLongLeft =>
+      const SvgGenImage('assets/icons/arrow-long-left.svg');
 
-  /// File path: assets/icons/arrow.svg
-  SvgGenImage get arrow => const SvgGenImage('assets/icons/arrow.svg');
+  /// File path: assets/icons/arrow-long-right.svg
+  SvgGenImage get arrowLongRight =>
+      const SvgGenImage('assets/icons/arrow-long-right.svg');
+
+  /// File path: assets/icons/arrow-right.svg
+  SvgGenImage get arrowRight =>
+      const SvgGenImage('assets/icons/arrow-right.svg');
 
   /// File path: assets/icons/caret-right.svg
   SvgGenImage get caretRight =>
@@ -91,8 +97,9 @@ class $AssetsIconsGen {
   List<SvgGenImage> get values => [
     apple,
     arrowLeft,
-    arrowLong,
-    arrow,
+    arrowLongLeft,
+    arrowLongRight,
+    arrowRight,
     caretRight,
     checkFilled,
     checkMark,

@@ -10,20 +10,20 @@ class TrainingCard extends StatelessWidget {
     required this.height,
   });
 
-  final EEntityType type;
+  final EntityType type;
   final Widget child;
   final double height;
 
-  static final Map<EEntityType, ({Color color, String image})> _cardConfig = {
-    EEntityType.fitness: (color: AppStyles.colors.orange100.withValues(alpha: 0.7), image: 'train'),
-    EEntityType.dance: (color: AppStyles.colors.purple100.withValues(alpha: 0.7), image: 'dance'),
-    EEntityType.photo: (color: AppStyles.colors.orange100.withValues(alpha: 0.7), image: 'relax'),
-    EEntityType.defaultType: (color: AppStyles.colors.orange100.withValues(alpha: 0.7), image: 'train'),
+  static final Map<EntityType, ({Color color, String image})> _cardConfig = {
+    EntityType.fitness: (color: AppStyles.colors.orange100.withValues(alpha: 0.7), image: 'train'),
+    EntityType.dance: (color: AppStyles.colors.purple100.withValues(alpha: 0.7), image: 'dance'),
+    EntityType.photo: (color: AppStyles.colors.orange100.withValues(alpha: 0.7), image: 'relax'),
+    EntityType.unset: (color: AppStyles.colors.orange100.withValues(alpha: 0.7), image: 'train'),
   };
 
   @override
   Widget build(BuildContext context) {
-    final config = _cardConfig[type] ?? _cardConfig[EEntityType.defaultType]!;
+    final config = _cardConfig[type] ?? _cardConfig[EntityType.unset]!;
 
     return Container(
       height: height,

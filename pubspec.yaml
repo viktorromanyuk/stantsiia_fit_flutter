@@ -32,6 +32,7 @@ dependencies:
     sdk: flutter
 
   flutter_native_splash: ^2.4.6
+  auto_route: ^10.2.0
   go_router: ^16.2.4
 
   #local storage
@@ -42,6 +43,8 @@ dependencies:
   json_annotation: ^4.9.0
 
   flutter_svg: ^2.2.1
+  supabase_flutter: ^2.10.3
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -49,6 +52,7 @@ dev_dependencies:
 
   #builders
   build_runner: ^2.9.0
+  auto_route_generator: '10.2.5'
   flutter_gen_runner: ^5.12.0
   injectable_generator: ^2.9.0
   json_serializable: ^6.11.1

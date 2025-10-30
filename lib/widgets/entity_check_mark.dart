@@ -11,16 +11,16 @@ import 'package:stantsiia_fit_flutter/widgets/app_icon.dart';
 class EntityCheckMark extends StatelessWidget {
   const EntityCheckMark({
     super.key,
-    this.type = EEntityType.defaultType,
+    this.type = EntityType.unset,
   });
 
-  final EEntityType type;
+  final EntityType type;
 
-  static final Map<EEntityType, Color> _borderConfig = {
-    EEntityType.fitness: AppStyles.colors.orange100,
-    EEntityType.dance: AppStyles.colors.purple100,
-    EEntityType.photo: AppStyles.colors.green100,
-    EEntityType.defaultType: AppStyles.colors.whiteMilk,
+  static final Map<EntityType, Color> _borderConfig = {
+    EntityType.fitness: AppStyles.colors.orange100,
+    EntityType.dance: AppStyles.colors.purple100,
+    EntityType.photo: AppStyles.colors.green100,
+    EntityType.unset: AppStyles.colors.whiteMilk,
   };
 
   Color get currentBorderColor => _borderConfig[type]!;

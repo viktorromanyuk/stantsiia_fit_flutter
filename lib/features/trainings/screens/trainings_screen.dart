@@ -20,7 +20,7 @@ class TrainingsScreen extends StatelessWidget {
           sliver: SliverList.separated(
             itemBuilder: (BuildContext context, int index) => TrainingCard(
               height: 400,
-              type: [EEntityType.fitness, EEntityType.dance, EEntityType.photo][index % 3],
+              type: [EntityType.fitness, EntityType.dance, EntityType.photo][index % 3],
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
