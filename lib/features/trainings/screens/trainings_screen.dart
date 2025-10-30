@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:stantsiia_fit_flutter/core/enums.dart';
+import 'package:auto_route/auto_route.dart';
 
+import 'package:stantsiia_fit_flutter/core/enums.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
 import 'package:stantsiia_fit_flutter/features/trainings/widgets/widgets.dart';
-
 import 'package:stantsiia_fit_flutter/styles/styles.dart';
 
+@RoutePage()
 class TrainingsScreen extends StatelessWidget {
   const TrainingsScreen({super.key});
 

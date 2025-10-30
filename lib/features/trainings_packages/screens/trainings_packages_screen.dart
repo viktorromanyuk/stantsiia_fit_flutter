@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
 import '../widgets/widgets.dart';
 
+@RoutePage()
 class TrainingsPackagesScreen extends StatefulWidget {
   const TrainingsPackagesScreen({super.key});
 

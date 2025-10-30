@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
 
+@RoutePage()
 class ScheduleScreen extends StatelessWidget {
   const ScheduleScreen({super.key});
 

@@ -1,59 +1,28 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:stantsiia_fit_flutter/router/router.gr.dart';
 
-import 'package:stantsiia_fit_flutter/layouts/default_layout.dart';
+@AutoRouterConfig(replaceInRouteName: 'Screen|Page,Route')
+class AppRouter extends RootStackRouter {
+  @override
+  RouteType get defaultRouteType => RouteType.adaptive(); // .cupertino, .material ..etc
 
-import 'package:stantsiia_fit_flutter/features/schedule/screens/screens.dart';
-import 'package:stantsiia_fit_flutter/features/trainings/screens/screens.dart';
-import 'package:stantsiia_fit_flutter/features/trainings_packages/screens/screens.dart';
-import 'package:stantsiia_fit_flutter/features/account/screens/screens.dart';
-
-final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
-
-final router = GoRouter(
-  navigatorKey: _rootNavigatorKey,
-  initialLocation: '/schedule',
-  routes: [
-    StatefulShellRoute.indexedStack(
-      builder: (context, state, navigationShell) => DefaultLayout(navigationShell: navigationShell),
-      branches: [
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              name: 'schedule',
-              path: '/schedule',
-              builder: (context, state) => const ScheduleScreen(),
-            ),
-          ],
-        ),
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              name: 'trainings',
-              path: '/trainings',
-              builder: (context, state) => const TrainingsScreen(),
-            ),
-          ],
-        ),
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              name: 'trainings-packages',
-              path: '/trainings-packages',
-              builder: (context, state) => const TrainingsPackagesScreen(),
-            ),
-          ],
-        ),
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              name: 'account',
-              path: '/account',
-              builder: (context, state) => const AccountScreen(),
-            ),
-          ],
-        ),
+  @override
+  List<AutoRoute> get routes => [
+    AutoRoute(
+      page: DefaultLayoutRoute.page,
+      path: '/',
+      initial: true,
+      children: [
+        AutoRoute(page: ScheduleRoute.page, path: 'schedule'),
+        AutoRoute(page: TrainingsRoute.page, path: 'trainings'),
+        AutoRoute(page: TrainingsPackagesRoute.page, path: 'trainings-packages'),
+        AutoRoute(page: AccountRoute.page, path: 'account'),
       ],
     ),
-  ],
-);
+  ];
+
+  @override
+  List<AutoRouteGuard> get guards => [
+    // optionally add root guards here
+  ];
+}

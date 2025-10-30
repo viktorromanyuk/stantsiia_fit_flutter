@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-
+import 'package:auto_route/auto_route.dart';
 import 'package:stantsiia_fit_flutter/gen/assets.gen.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
 import 'package:stantsiia_fit_flutter/styles/styles.dart';
 
 class AppNavigationBar extends StatelessWidget {
-  const AppNavigationBar({super.key, required this.navigationShell});
-  final StatefulNavigationShell navigationShell;
+  const AppNavigationBar({super.key, required this.tabsRouter});
+  final TabsRouter tabsRouter;
 
   Color _getColor(Set<WidgetState> states) {
     return states.contains(WidgetState.selected) ? AppStyles.colors.orange100 : AppStyles.colors.whiteMilk;
@@ -38,8 +37,8 @@ class AppNavigationBar extends StatelessWidget {
         child: NavigationBar(
           backgroundColor: AppStyles.colors.grayDark,
           overlayColor: WidgetStateProperty.all(Colors.transparent),
-          selectedIndex: navigationShell.currentIndex,
-          onDestinationSelected: (index) => navigationShell.goBranch(index, initialLocation: true),
+          selectedIndex: tabsRouter.activeIndex,
+          onDestinationSelected: (index) => tabsRouter.setActiveIndex(index),
           destinations: [
             NavigationDestination(
               icon: AppIcon(Assets.icons.schedule),
