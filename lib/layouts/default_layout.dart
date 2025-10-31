@@ -11,25 +11,35 @@ class DefaultLayoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AutoTabsScaffold(
-      backgroundColor: AppStyles.colors.grayDark,
+    return AutoTabsRouter(
       routes: const [
         ScheduleRoute(),
         TrainingsRoute(),
         TrainingsPackagesRoute(),
         AccountRoute(),
       ],
+      builder: (context, child) {
+        final tabsRouter = AutoTabsRouter.of(context);
+        final activeIndex = tabsRouter.activeIndex;
+        final previousIndex = tabsRouter.previousIndex;
+
+        final backgroundColor = previousIndex != null && previousIndex >= 2 && activeIndex >= 2
+            ? AppStyles.colors.whiteMilk
+            : AppStyles.colors.grayDark;
+
+        return Scaffold(
+          backgroundColor: backgroundColor,
+          body: child,
+          bottomNavigationBar: AppNavigationBar(
+            tabsRouter: tabsRouter,
+          ),
+        );
+      },
       transitionBuilder: (context, child, animation) => FadeTransition(
         opacity: CurvedAnimation(parent: animation, curve: Curves.easeInOutCubicEmphasized),
         child: child,
       ),
-
-      animationDuration: const Duration(milliseconds: 400),
-      bottomNavigationBuilder: (_, tabsRouter) {
-        return AppNavigationBar(
-          tabsRouter: tabsRouter,
-        );
-      },
+      duration: const Duration(milliseconds: 400),
     );
   }
 }
