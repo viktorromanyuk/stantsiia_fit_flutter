@@ -12,6 +12,13 @@ class AppNavigationBar extends StatelessWidget {
     return states.contains(WidgetState.selected) ? AppStyles.colors.orange100 : AppStyles.colors.whiteMilk;
   }
 
+  static final List<({String title, SvgGenImage icon})> _navDestinations = [
+    (title: 'Розклад', icon: Assets.icons.schedule),
+    (title: 'Тренування', icon: Assets.icons.trainings),
+    (title: 'Абонементи', icon: Assets.icons.trainingPackage),
+    (title: 'Мій акаунт', icon: Assets.icons.user),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return NavigationBarTheme(
@@ -39,24 +46,14 @@ class AppNavigationBar extends StatelessWidget {
           overlayColor: WidgetStateProperty.all(Colors.transparent),
           selectedIndex: tabsRouter.activeIndex,
           onDestinationSelected: (index) => tabsRouter.setActiveIndex(index),
-          destinations: [
-            NavigationDestination(
-              icon: AppIcon(Assets.icons.schedule),
-              label: 'Розклад',
-            ),
-            NavigationDestination(
-              icon: AppIcon(Assets.icons.trainings, height: 24),
-              label: 'Тренування',
-            ),
-            NavigationDestination(
-              icon: AppIcon(Assets.icons.trainingPackage),
-              label: 'Абонементи',
-            ),
-            NavigationDestination(
-              icon: AppIcon(Assets.icons.user),
-              label: 'Мій акаунт',
-            ),
-          ],
+          destinations: _navDestinations
+              .map(
+                (destination) => NavigationDestination(
+                  icon: AppIcon(destination.icon),
+                  label: destination.title,
+                ),
+              )
+              .toList(),
         ),
       ),
     );

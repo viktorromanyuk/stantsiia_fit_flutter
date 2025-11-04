@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stantsiia_fit_flutter/core/enums.dart';
 import 'package:stantsiia_fit_flutter/styles/styles.dart';
+import 'package:stantsiia_fit_flutter/gen/assets.gen.dart';
+import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
 
 class TrainingCard extends StatelessWidget {
   const TrainingCard({
@@ -53,8 +55,9 @@ class TrainingCard extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(AppStyles.borderRadius.xl4),
               ),
-              child: Image.asset(
-                'assets/images/${config.image}.png',
+              child: FadeInImage(
+                placeholder: Assets.images.relax.provider(),
+                image: AssetImage('assets/images/${config.image}.png'),
                 fit: BoxFit.cover,
               ),
             ),

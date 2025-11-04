@@ -36,61 +36,47 @@ class _TrainingsPackagesScreenState extends State<TrainingsPackagesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // todo: refactor indicator
-    return RefreshIndicator(
-      onRefresh: _refresh,
-      edgeOffset: 90,
-      // If your list can be shorter than the viewport, keeping pull-to-refresh
-      // usable everywhere:
-      notificationPredicate: (notification) => notification.depth == 0,
-      child: AppScaffold(
-        theme: ThemeMode.light,
-        appBar: AppSliverAppBar(
-          title: 'Абонементи',
-        ),
-        // AppScaffold builds a CustomScrollView with these slivers.
-        children: [
-          FutureBuilder<List<Map<String, dynamic>>>(
-            future: _packagesFuture,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return TrainingsPackageSliverLoader();
-              }
+    // TODO: add types
+    return FutureBuilder<List<Map<String, dynamic>>>(
+      future: _packagesFuture,
+      builder: (context, snapshot) {
+        final trainingsPackages = snapshot.data;
+        final isEmpty = trainingsPackages == null || trainingsPackages.isEmpty;
+        final isLoading = snapshot.connectionState == ConnectionState.waiting;
 
-              if (snapshot.hasError) {
-                return SliverFillRemaining(
-                  child: Center(
-                    child: Text('Помилка завантаження: ${snapshot.error}'),
-                  ),
-                );
-              }
-
-              final data = snapshot.data;
-              final isEmpty = data == null || data.isEmpty;
-
-              if (isEmpty) {
-                // Ensure the scroll view is always scrollable for the pull gesture by
-                // giving at least one sliver that can stretch.
-                return const SliverFillRemaining(
-                  hasScrollBody: false,
-                  child: Empty(description: 'Немає абонементів'),
-                );
-              }
-
-              final trainingsPackages = data;
-
-              return SliverPadding(
+        return AppScaffold(
+          theme: ThemeMode.light,
+          scrollable: !isLoading && !isEmpty,
+          onRefresh: _refresh,
+          appBar: AppSliverAppBar(
+            title: 'Абонементи',
+          ),
+          children: [
+            if (isLoading)
+              TrainingsPackageSliverLoader()
+            else if (snapshot.hasError)
+              SliverFillRemaining(
+                child: Center(
+                  child: Text('Помилка завантаження: ${snapshot.error}'),
+                ),
+              )
+            else if (isEmpty)
+              const SliverFillRemaining(
+                hasScrollBody: false,
+                child: Empty(description: 'Немає абонементів'),
+              )
+            else
+              SliverPadding(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
                 sliver: SliverList.separated(
                   itemBuilder: (BuildContext context, int index) => TrainingsPackage(data: trainingsPackages[index]),
                   separatorBuilder: (BuildContext context, int index) => const SizedBox(height: 20),
                   itemCount: trainingsPackages.length,
                 ),
-              );
-            },
-          ),
-        ],
-      ),
+              ),
+          ],
+        );
+      },
     );
   }
 }

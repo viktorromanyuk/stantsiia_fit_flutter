@@ -9,11 +9,15 @@ class AppScaffold extends StatelessWidget {
     required this.appBar,
     this.theme = ThemeMode.light,
     this.children = const [],
+    this.scrollable = true,
+    this.onRefresh,
   });
 
   final ThemeMode theme;
   final AppSliverAppBar appBar;
   final List<Widget> children;
+  final bool scrollable;
+  final RefreshCallback? onRefresh;
 
   bool get isLightTheme => theme == ThemeMode.light;
 
@@ -22,6 +26,14 @@ class AppScaffold extends StatelessWidget {
     final textColor = isLightTheme ? AppStyles.colors.grayDark : AppStyles.colors.whiteMilk;
     final backgroundColor = isLightTheme ? AppStyles.colors.whiteMilk : AppStyles.colors.grayDark;
     final brightness = isLightTheme ? Brightness.light : Brightness.dark;
+
+    final mainView = CustomScrollView(
+      physics: scrollable ? null : NeverScrollableScrollPhysics(),
+      slivers: [
+        appBar,
+        ...children,
+      ],
+    );
 
     return Theme(
       data: ThemeData(
@@ -33,18 +45,27 @@ class AppScaffold extends StatelessWidget {
           onSurface: textColor,
           brightness: brightness,
         ),
+        dividerTheme: DividerThemeData(
+          radius: BorderRadius.all(AppStyles.borderRadius.full),
+          color: AppStyles.colors.grayLight,
+        ),
         listTileTheme: ListTileThemeData(
           textColor: textColor,
           iconColor: textColor,
         ),
       ),
       child: Scaffold(
-        body: CustomScrollView(
-          slivers: [
-            appBar,
-            ...children,
-          ],
-        ),
+        body: onRefresh == null
+            ? mainView
+            : RefreshIndicator(
+                elevation: 1,
+                edgeOffset: 130,
+                displacement: 0,
+                triggerMode: RefreshIndicatorTriggerMode.onEdge,
+                notificationPredicate: (notification) => notification.depth == 0,
+                onRefresh: onRefresh!,
+                child: mainView,
+              ),
       ),
     );
   }

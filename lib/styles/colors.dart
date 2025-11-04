@@ -10,6 +10,7 @@ abstract final class AppColors {
 
     // Grays
     Color gray,
+    Color grayMilk,
     Color grayDark,
     Color grayLight,
 
@@ -33,26 +34,27 @@ abstract final class AppColors {
     transparent: Colors.transparent,
     black: Colors.black,
     white: Colors.white,
-    whiteMilk: Color.fromARGB(255, 255, 255, 245),
+    whiteMilk: Color(0xFFFFFFF5),
 
     // Grays
-    gray: Color.fromARGB(255, 101, 113, 137),
-    grayDark: Color.fromARGB(255, 31, 33, 44),
-    grayLight: Color.fromARGB(255, 217, 217, 217),
+    gray: Color(0xFF657189),
+    grayMilk: Color(0xFFF1F1E9),
+    grayDark: Color(0xFF1F212C),
+    grayLight: Color(0xFFD9D9D9),
 
     // Orange
-    orange50: Color.fromARGB(255, 255, 170, 140),
-    orange100: Color.fromARGB(255, 255, 130, 115),
-    orange200: Color.fromARGB(255, 255, 110, 90),
+    orange50: Color(0xFFFFAA8C),
+    orange100: Color(0xFFFF8273),
+    orange200: Color(0xFFFF6E5A),
 
     // Purple
-    purple100: Color.fromARGB(255, 126, 113, 244),
-    purple200: Color.fromARGB(255, 132, 74, 255),
-    purple300: Color.fromARGB(255, 83, 39, 177),
+    purple100: Color(0xFF7E71F4),
+    purple200: Color(0xFF844AFF),
+    purple300: Color(0xFF5327B1),
 
     // Green
-    green100: Color.fromARGB(255, 61, 166, 137),
-    green200: Color.fromARGB(255, 0, 135, 92),
-    green300: Color.fromARGB(255, 0, 90, 62),
+    green100: Color(0xFF3DA689),
+    green200: Color(0xFF00875C),
+    green300: Color(0xFF005A3E),
   );
 }

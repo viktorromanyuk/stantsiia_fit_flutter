@@ -21,6 +21,14 @@ class ScheduleScreen extends StatelessWidget {
             text: 'Записатись',
           ),
         ),
+        SliverToBoxAdapter(
+          child: CalendarDatePicker(
+            initialDate: DateTime.now(),
+            firstDate: DateTime.now(),
+            lastDate: DateTime.now().add(const Duration(days: 365)),
+            onDateChanged: (date) {},
+          ),
+        ),
       ],
     );
   }
