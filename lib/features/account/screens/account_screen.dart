@@ -49,7 +49,7 @@ class AccountScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                ).toList(),
+                ).toList(growable: false),
               ),
             ),
           ),

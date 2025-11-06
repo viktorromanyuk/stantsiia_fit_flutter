@@ -5,5 +5,7 @@ export 'app_button.dart';
 export 'shimmer/app_shimmer.dart';
 export 'shimmer/app_shimmer_item.dart';
 
+export 'dialogs/dialogs.dart';
 export 'entity_check_mark.dart';
 export 'empty.dart';
+export 'api_error.dart';

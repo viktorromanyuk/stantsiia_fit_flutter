@@ -28,6 +28,9 @@ abstract final class AppColors {
     Color green100,
     Color green200,
     Color green300,
+
+    // Error
+    Color error,
   })
   values = (
     // Base
@@ -56,5 +59,8 @@ abstract final class AppColors {
     green100: Color(0xFF3DA689),
     green200: Color(0xFF00875C),
     green300: Color(0xFF005A3E),
+
+    // Error
+    error: Color(0xFFf56c6c),
   );
 }

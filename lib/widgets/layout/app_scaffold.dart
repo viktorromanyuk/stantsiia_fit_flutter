@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart' as ios;
 import 'package:flutter/material.dart';
 import 'package:stantsiia_fit_flutter/styles/styles.dart';
 
@@ -31,10 +34,15 @@ class AppScaffold extends StatelessWidget {
       physics: scrollable ? null : NeverScrollableScrollPhysics(),
       slivers: [
         appBar,
+        if (Platform.isIOS && onRefresh != null)
+          ios.CupertinoSliverRefreshControl(
+            onRefresh: onRefresh,
+          ),
         ...children,
       ],
     );
 
+    // TODO: move theme to separate file
     return Theme(
       data: ThemeData(
         brightness: brightness,
@@ -53,9 +61,18 @@ class AppScaffold extends StatelessWidget {
           textColor: textColor,
           iconColor: textColor,
         ),
+        bottomSheetTheme: BottomSheetThemeData(
+          dragHandleColor: textColor,
+          modalBackgroundColor: backgroundColor,
+          modalBarrierColor: AppStyles.colors.black.withValues(alpha: 0.7),
+          modalElevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: AppStyles.borderRadius.xl4),
+          ),
+        ),
       ),
       child: Scaffold(
-        body: onRefresh == null
+        body: onRefresh == null || Platform.isIOS
             ? mainView
             : RefreshIndicator(
                 elevation: 1,

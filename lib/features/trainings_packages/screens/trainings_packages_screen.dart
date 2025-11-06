@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
+
 import '../widgets/widgets.dart';
 
 @RoutePage()
@@ -31,47 +31,52 @@ class _TrainingsPackagesScreenState extends State<TrainingsPackagesScreen> {
   @override
   void initState() {
     super.initState();
-    _packagesFuture = _fetchPackages();
+    _refresh();
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: add types
     return FutureBuilder<List<Map<String, dynamic>>>(
       future: _packagesFuture,
       builder: (context, snapshot) {
-        final trainingsPackages = snapshot.data;
-        final isEmpty = trainingsPackages == null || trainingsPackages.isEmpty;
         final isLoading = snapshot.connectionState == ConnectionState.waiting;
+        final data = snapshot.data;
+        final isEmpty = data == null || data.isEmpty;
 
         return AppScaffold(
           theme: ThemeMode.light,
           scrollable: !isLoading && !isEmpty,
           onRefresh: _refresh,
-          appBar: AppSliverAppBar(
-            title: 'Абонементи',
-          ),
+          appBar: const AppSliverAppBar(title: 'Абонементи'),
           children: [
             if (isLoading)
-              TrainingsPackageSliverLoader()
+              SliverPadding(
+                // TODO: move padding to be reusable
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
+                sliver: const TrainingsPackageSliverLoader(),
+              )
             else if (snapshot.hasError)
               SliverFillRemaining(
-                child: Center(
-                  child: Text('Помилка завантаження: ${snapshot.error}'),
-                ),
+                child: ApiError(onRefresh: _refresh),
               )
             else if (isEmpty)
               const SliverFillRemaining(
-                hasScrollBody: false,
                 child: Empty(description: 'Немає абонементів'),
               )
             else
               SliverPadding(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
                 sliver: SliverList.separated(
-                  itemBuilder: (BuildContext context, int index) => TrainingsPackage(data: trainingsPackages[index]),
-                  separatorBuilder: (BuildContext context, int index) => const SizedBox(height: 20),
-                  itemCount: trainingsPackages.length,
+                  itemBuilder: (context, index) => GestureDetector(
+                    onTap: () => showModalBottomSheet(
+                      context: context,
+                      showDragHandle: true,
+                      builder: (context) => TrainingsPackagePurchaseDialog(data: data[index]),
+                    ),
+                    child: TrainingsPackage(data: data[index]),
+                  ),
+                  separatorBuilder: (_, __) => const SizedBox(height: 20),
+                  itemCount: data.length,
                 ),
               ),
           ],

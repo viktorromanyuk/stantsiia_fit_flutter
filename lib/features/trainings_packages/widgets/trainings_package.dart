@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:stantsiia_fit_flutter/core/extensions/extensions.dart';
 import 'package:stantsiia_fit_flutter/styles/styles.dart';
+import 'package:stantsiia_fit_flutter/core/utils/utils.dart';
 
 class TrainingsPackage extends StatelessWidget {
   const TrainingsPackage({super.key, required this.data});
@@ -51,7 +53,8 @@ class TrainingsPackage extends StatelessWidget {
           const SizedBox(height: 16),
 
           Text(
-            'Термін дії - ${data['duration']} місяць',
+            'Термін дії - ${numberToWord(data['duration'], ['місяць', 'місяці', 'місяців', 'місяця'])}',
+
             style: (context.breakpoints.maxMd ? AppStyles.fontSize.md : AppStyles.fontSize.lg).copyWith(
               fontWeight: FontWeight.w500,
               color: AppStyles.colors.whiteMilk,

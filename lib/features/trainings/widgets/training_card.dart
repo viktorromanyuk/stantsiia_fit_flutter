@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:stantsiia_fit_flutter/core/enums.dart';
 import 'package:stantsiia_fit_flutter/styles/styles.dart';
 import 'package:stantsiia_fit_flutter/gen/assets.gen.dart';
-import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
 
 class TrainingCard extends StatelessWidget {
   const TrainingCard({
