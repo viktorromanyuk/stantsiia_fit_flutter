@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'package:stantsiia_fit_flutter/core/enums.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
 
-import '../widgets/training_screen_card.dart';
+import '../widgets/widgets.dart';
 
 @RoutePage()
 class TrainingsScreen extends StatefulWidget {
@@ -33,7 +32,7 @@ class _TrainingsScreenState extends State<TrainingsScreen> {
   @override
   void initState() {
     super.initState();
-    _trainingsFuture = _fetchTrainings();
+    _refresh();
   }
 
   @override
@@ -51,8 +50,8 @@ class _TrainingsScreenState extends State<TrainingsScreen> {
           onRefresh: _refresh,
           appBar: AppSliverAppBar(title: 'Тренування'),
           children: [
-            if (isLoading)
-              SliverToBoxAdapter(child: const Text('Loading...'))
+            if (isLoading && isEmpty)
+              const TrainingsSliverLoader()
             else if (snapshot.hasError)
               SliverFillRemaining(
                 child: ApiError(onRefresh: _refresh),
@@ -65,11 +64,20 @@ class _TrainingsScreenState extends State<TrainingsScreen> {
               SliverPadding(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
                 sliver: SliverList.separated(
-                  itemBuilder: (BuildContext context, int index) => TrainingScreenCard(
-                    type: [EntityType.fitness, EntityType.dance, EntityType.photo][index % 3],
+                  itemBuilder: (BuildContext context, int index) => GestureDetector(
+                    onTap: () => showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      showDragHandle: true,
+                      builder: (context) => SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.7,
+                        child: TrainingInfoDialog(data: trainings[index]),
+                      ),
+                    ),
+                    child: TrainingScreenCard(data: trainings[index]),
                   ),
                   separatorBuilder: (BuildContext context, int index) => const SizedBox(height: 32),
-                  itemCount: 10,
+                  itemCount: trainings.length,
                 ),
               ),
           ],

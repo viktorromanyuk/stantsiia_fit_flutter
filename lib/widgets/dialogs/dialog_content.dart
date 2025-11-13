@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stantsiia_fit_flutter/styles/styles.dart';
 
 class DialogContent extends StatelessWidget {
   const DialogContent({super.key, required this.body, this.header, this.footer});
@@ -17,15 +18,19 @@ class DialogContent extends StatelessWidget {
           Divider(),
         ],
 
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: body,
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: body,
+          ),
         ),
 
         if (footer != null) ...[
-          Divider(),
-          Padding(
+          Container(
             padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              border: Border(top: BorderSide(color: AppStyles.colors.grayLight)),
+            ),
             child: footer!,
           ),
         ],

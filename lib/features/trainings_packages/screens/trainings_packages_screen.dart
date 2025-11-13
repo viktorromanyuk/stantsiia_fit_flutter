@@ -49,12 +49,8 @@ class _TrainingsPackagesScreenState extends State<TrainingsPackagesScreen> {
           onRefresh: _refresh,
           appBar: const AppSliverAppBar(title: 'Абонементи'),
           children: [
-            if (isLoading)
-              SliverPadding(
-                // TODO: move padding to be reusable
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
-                sliver: const TrainingsPackageSliverLoader(),
-              )
+            if (isLoading && isEmpty)
+              const TrainingsPackageSliverLoader()
             else if (snapshot.hasError)
               SliverFillRemaining(
                 child: ApiError(onRefresh: _refresh),

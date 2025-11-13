@@ -16,7 +16,7 @@ part 'decoration/border_radius.dart';
 abstract final class AppStyles {
   static const colors = AppColors.values;
   static const fontSize = AppFontSize.values;
-  static const boxShadow = AppBoxShadow.values;
+  static final boxShadow = AppBoxShadow.values;
   static const borderRadius = AppBorderRadius.values;
   static const lineHeight = AppLineHeight.values;
 }

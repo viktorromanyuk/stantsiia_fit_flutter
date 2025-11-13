@@ -6,10 +6,16 @@ class TrainingsPackageSliverLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverList.separated(
-      itemBuilder: (BuildContext context, int index) => TrainingsPackageShimmer(),
-      separatorBuilder: (BuildContext context, int index) => const SizedBox(height: 20),
-      itemCount: 4,
+    return SliverPadding(
+      // TODO: move padding to be reusable
+      // TODO create sliver loader widget
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
+
+      sliver: SliverList.separated(
+        itemBuilder: (BuildContext context, int index) => TrainingsPackageShimmer(),
+        separatorBuilder: (BuildContext context, int index) => const SizedBox(height: 20),
+        itemCount: 4,
+      ),
     );
   }
 }

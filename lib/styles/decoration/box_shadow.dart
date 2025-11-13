@@ -1,7 +1,7 @@
 part of '../styles.dart';
 
 abstract final class AppBoxShadow {
-  static const ({
+  static final ({
     List<BoxShadow> dark,
     List<BoxShadow> light,
     List<BoxShadow> sm,
@@ -11,6 +11,7 @@ abstract final class AppBoxShadow {
     List<BoxShadow> xl,
     List<BoxShadow> xxl,
     List<BoxShadow> inner,
+    List<BoxShadow> Function(Color) glow,
   })
   values = (
     dark: [
@@ -102,6 +103,18 @@ abstract final class AppBoxShadow {
         color: Color.fromRGBO(0, 0, 0, 0.05),
         blurRadius: 4,
         offset: Offset(0, 2),
+      ),
+    ],
+    glow: (Color color) => [
+      BoxShadow(
+        color: color.withValues(alpha: 0.7),
+        blurRadius: 30,
+        spreadRadius: -4,
+      ),
+      BoxShadow(
+        color: color.withValues(alpha: 0.7),
+        blurRadius: 0,
+        spreadRadius: 1.5,
       ),
     ],
   );

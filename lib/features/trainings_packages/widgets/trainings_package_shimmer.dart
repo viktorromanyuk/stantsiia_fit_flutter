@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
+import 'package:stantsiia_fit_flutter/styles/styles.dart';
 
 class TrainingsPackageShimmer extends StatelessWidget {
   const TrainingsPackageShimmer({super.key});
@@ -11,7 +12,7 @@ class TrainingsPackageShimmer extends StatelessWidget {
         Positioned.fill(
           child: AppShimmer(
             theme: ThemeMode.dark,
-            borderRadius: 30,
+            borderRadius: AppStyles.borderRadius.xl4.x,
           ),
         ),
         AppShimmer.builder(
