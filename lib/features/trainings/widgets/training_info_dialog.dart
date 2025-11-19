@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:stantsiia_fit_flutter/core/enums.dart';
 import 'package:stantsiia_fit_flutter/core/utils/utils.dart';
+import 'package:stantsiia_fit_flutter/models/models.dart';
 import 'package:stantsiia_fit_flutter/router/router.gr.dart';
 import 'package:stantsiia_fit_flutter/styles/styles.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
@@ -12,16 +13,15 @@ import 'training_card_header.dart';
 class TrainingInfoDialog extends StatelessWidget {
   const TrainingInfoDialog({
     super.key,
-    required this.data,
+    required this.training,
   });
 
-  // TODO: refactor this
-  final Map<String, dynamic> data;
+  final TrainingModel training;
 
   ({String title, String value}) get trainingLevelInfo => getTrainingLevelText(level, type);
 
-  EntityType get type => EntityType.fromString(data['type']);
-  TrainingLevel get level => TrainingLevel.fromString(data['level']);
+  EntityType get type => EntityType.fromString(training.type.value);
+  TrainingLevel get level => training.level;
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +36,11 @@ class TrainingInfoDialog extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TrainingCardHeader(level: level, type: type, duration: data['duration']),
+                TrainingCardHeader(level: level, type: type, duration: training.duration),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
                   child: Text(
-                    data['label'] ?? '',
+                    training.label,
                     style: AppStyles.fontSize.xl4.copyWith(
                       fontWeight: FontWeight.w600,
                       fontFamily: FontFamily.unbounded,
@@ -56,7 +56,7 @@ class TrainingInfoDialog extends StatelessWidget {
           Expanded(
             child: SingleChildScrollView(
               child: Text(
-                data['description'] ?? '',
+                training.description,
                 style: AppStyles.fontSize.md.copyWith(
                   color: AppStyles.colors.whiteMilk,
                 ),

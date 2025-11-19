@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
+import 'package:stantsiia_fit_flutter/models/models.dart';
 
 import './trainings_package.dart';
 
 class TrainingsPackagePurchaseDialog extends StatelessWidget {
-  const TrainingsPackagePurchaseDialog({super.key, required this.data});
+  const TrainingsPackagePurchaseDialog({super.key, required this.package});
 
-  // TODO: add models
-  final Map<String, dynamic> data;
+  final TrainingsPackageModel package;
 
   @override
   Widget build(BuildContext context) {
     return IntrinsicHeight(
       child: DialogContent(
-        body: TrainingsPackage(data: data),
+        body: TrainingsPackage(package: package),
         footer: Column(
           spacing: 16,
           children: [

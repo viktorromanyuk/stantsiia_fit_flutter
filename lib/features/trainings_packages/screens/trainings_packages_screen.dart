@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
+import 'package:stantsiia_fit_flutter/models/models.dart';
 
 import '../widgets/widgets.dart';
 
@@ -14,11 +15,16 @@ class TrainingsPackagesScreen extends StatefulWidget {
 }
 
 class _TrainingsPackagesScreenState extends State<TrainingsPackagesScreen> {
-  late Future<List<Map<String, dynamic>>> _packagesFuture;
+  late Future<List<TrainingsPackageModel>> _packagesFuture;
 
-  Future<List<Map<String, dynamic>>> _fetchPackages() async {
+  Future<List<TrainingsPackageModel>> _fetchPackages() async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return Supabase.instance.client.from('fit_trainings_packages').select('*');
+    return Supabase.instance.client
+        .from('fit_trainings_packages')
+        .select('*')
+        .withConverter(
+          (data) => data.map(TrainingsPackageModel.fromJson).toList(),
+        );
   }
 
   Future<void> _refresh() async {
@@ -36,7 +42,7 @@ class _TrainingsPackagesScreenState extends State<TrainingsPackagesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Map<String, dynamic>>>(
+    return FutureBuilder<List<TrainingsPackageModel>>(
       future: _packagesFuture,
       builder: (context, snapshot) {
         final isLoading = snapshot.connectionState == ConnectionState.waiting;
@@ -67,9 +73,9 @@ class _TrainingsPackagesScreenState extends State<TrainingsPackagesScreen> {
                     onTap: () => showModalBottomSheet(
                       context: context,
                       showDragHandle: true,
-                      builder: (context) => TrainingsPackagePurchaseDialog(data: data[index]),
+                      builder: (context) => TrainingsPackagePurchaseDialog(package: data[index]),
                     ),
-                    child: TrainingsPackage(data: data[index]),
+                    child: TrainingsPackage(package: data[index]),
                   ),
                   separatorBuilder: (_, __) => const SizedBox(height: 20),
                   itemCount: data.length,

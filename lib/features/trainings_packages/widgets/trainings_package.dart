@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:stantsiia_fit_flutter/core/extensions/extensions.dart';
 import 'package:stantsiia_fit_flutter/styles/styles.dart';
 import 'package:stantsiia_fit_flutter/core/utils/utils.dart';
+import 'package:stantsiia_fit_flutter/models/models.dart';
 
 class TrainingsPackage extends StatelessWidget {
-  const TrainingsPackage({super.key, required this.data});
+  const TrainingsPackage({super.key, required this.package});
 
-  // TODO: add models
-  final Map<String, dynamic> data;
+  final TrainingsPackageModel package;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class TrainingsPackage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            data['name'],
+            package.name ?? '',
             style: (context.breakpoints.maxMd ? AppStyles.fontSize.xl : AppStyles.fontSize.xl2).copyWith(
               fontFamily: FontFamily.unbounded,
               color: AppStyles.colors.whiteMilk,
@@ -39,7 +39,7 @@ class TrainingsPackage extends StatelessWidget {
               ),
               children: [
                 TextSpan(
-                  text: data['price'].toString(),
+                  text: package.price.toStringAsFixed(0),
                   style: TextStyle(fontFamily: FontFamily.unbounded),
                 ),
                 TextSpan(
@@ -53,7 +53,7 @@ class TrainingsPackage extends StatelessWidget {
           const SizedBox(height: 16),
 
           Text(
-            'Термін дії - ${numberToWord(data['duration'], ['місяць', 'місяці', 'місяців', 'місяця'])}',
+            'Термін дії - ${numberToWord(package.duration, ['місяць', 'місяці', 'місяців', 'місяця'])}',
 
             style: (context.breakpoints.maxMd ? AppStyles.fontSize.md : AppStyles.fontSize.lg).copyWith(
               fontWeight: FontWeight.w500,

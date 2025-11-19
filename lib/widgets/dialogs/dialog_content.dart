@@ -2,9 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:stantsiia_fit_flutter/styles/styles.dart';
 
 class DialogContent extends StatelessWidget {
-  const DialogContent({super.key, required this.body, this.header, this.footer});
+  const DialogContent({
+    super.key,
+    this.header,
+    this.title,
+    required this.body,
+    this.footer,
+  });
 
   final Widget? header;
+  final String? title;
   final Widget body;
   final Widget? footer;
 
@@ -15,6 +22,19 @@ class DialogContent extends StatelessWidget {
       children: [
         if (header != null) ...[
           Padding(padding: const EdgeInsets.all(16), child: header!),
+          Divider(),
+        ] else if (title != null) ...[
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+            child: Text(
+              title!,
+              style: AppStyles.fontSize.lg.copyWith(
+                fontFamily: FontFamily.unbounded,
+                color: AppStyles.colors.whiteMilk,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
           Divider(),
         ],
 

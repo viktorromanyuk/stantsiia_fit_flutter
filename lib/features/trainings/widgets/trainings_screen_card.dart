@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stantsiia_fit_flutter/core/enums.dart';
+import 'package:stantsiia_fit_flutter/models/models.dart';
 import 'package:stantsiia_fit_flutter/styles/styles.dart';
 
 import 'training_card.dart';
@@ -8,14 +9,13 @@ import 'training_card_header.dart';
 class TrainingScreenCard extends StatelessWidget {
   const TrainingScreenCard({
     super.key,
-    required this.data,
+    required this.training,
   });
 
-  // TODO: add models
-  final Map<String, dynamic> data;
+  final TrainingModel training;
 
-  EntityType get type => EntityType.fromString(data['type']);
-  TrainingLevel get level => TrainingLevel.fromString(data['level']);
+  EntityType get type => EntityType.fromString(training.type.value);
+  TrainingLevel get level => training.level;
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +26,11 @@ class TrainingScreenCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          TrainingCardHeader(level: level, type: type, duration: data['duration']),
+          TrainingCardHeader(level: level, type: type, duration: training.duration),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
             child: Text(
-              data['label'] ?? '',
+              training.label,
               style: AppStyles.fontSize.xl4.copyWith(
                 fontWeight: FontWeight.w600,
                 fontFamily: FontFamily.unbounded,

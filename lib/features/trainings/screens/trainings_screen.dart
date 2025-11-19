@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'package:stantsiia_fit_flutter/core/enums.dart';
+import 'package:stantsiia_fit_flutter/models/models.dart';
+import 'package:stantsiia_fit_flutter/styles/styles.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
 
 import '../widgets/widgets.dart';
@@ -15,11 +18,25 @@ class TrainingsScreen extends StatefulWidget {
 }
 
 class _TrainingsScreenState extends State<TrainingsScreen> {
-  late Future<List<Map<String, dynamic>>> _trainingsFuture;
+  TrainingType? selectedFilter;
+  late Future<List<TrainingModel>> _trainingsFuture;
+  List<TrainingModel> _trainings = [];
 
-  Future<List<Map<String, dynamic>>> _fetchTrainings() async {
+  List<TrainingModel> get filteredTrainings {
+    return _trainings.where((training) {
+      if (selectedFilter == null) return true;
+      return selectedFilter == training.type;
+    }).toList();
+  }
+
+  Future<List<TrainingModel>> _fetchTrainings() async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return Supabase.instance.client.from('fit_trainings').select('*');
+    return Supabase.instance.client
+        .from('fit_trainings')
+        .select('*')
+        .withConverter(
+          (data) => data.map(TrainingModel.fromJson).toList(),
+        );
   }
 
   Future<void> _refresh() async {
@@ -35,20 +52,47 @@ class _TrainingsScreenState extends State<TrainingsScreen> {
     _refresh();
   }
 
+  void _showFilterBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      showDragHandle: true,
+      backgroundColor: AppStyles.colors.grayDark,
+      builder: (context) => TrainingsFilterDialog(
+        selectedFilter: selectedFilter,
+        onChanged: (value) {
+          setState(() {
+            selectedFilter = value;
+          });
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Map<String, dynamic>>>(
+    return FutureBuilder<List<TrainingModel>>(
       future: _trainingsFuture,
       builder: (context, snapshot) {
-        final trainings = snapshot.data;
-        final isEmpty = trainings == null || trainings.isEmpty;
+        if (snapshot.hasData) {
+          _trainings = snapshot.data ?? [];
+        }
+
+        final isEmpty = filteredTrainings.isEmpty;
         final isLoading = snapshot.connectionState == ConnectionState.waiting;
 
         return AppScaffold(
           theme: ThemeMode.dark,
           scrollable: !isLoading && !isEmpty,
           onRefresh: _refresh,
-          appBar: AppSliverAppBar(title: 'Тренування'),
+          appBar: AppSliverAppBar(
+            title: 'Тренування',
+            actionsBuilder: (context, tColor) => [
+              PingingFilterButton(
+                isActive: selectedFilter != null,
+                onPressed: () => _showFilterBottomSheet(context),
+              ),
+            ],
+          ),
           children: [
             if (isLoading && isEmpty)
               const TrainingsSliverLoader()
@@ -71,13 +115,13 @@ class _TrainingsScreenState extends State<TrainingsScreen> {
                       showDragHandle: true,
                       builder: (context) => SizedBox(
                         height: MediaQuery.of(context).size.height * 0.7,
-                        child: TrainingInfoDialog(data: trainings[index]),
+                        child: TrainingInfoDialog(training: filteredTrainings[index]),
                       ),
                     ),
-                    child: TrainingScreenCard(data: trainings[index]),
+                    child: TrainingScreenCard(training: filteredTrainings[index]),
                   ),
                   separatorBuilder: (BuildContext context, int index) => const SizedBox(height: 32),
-                  itemCount: trainings.length,
+                  itemCount: filteredTrainings.length,
                 ),
               ),
           ],

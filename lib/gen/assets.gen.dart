@@ -55,6 +55,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/facebook.svg
   SvgGenImage get facebook => const SvgGenImage('assets/icons/facebook.svg');
 
+  /// File path: assets/icons/filter.svg
+  SvgGenImage get filter => const SvgGenImage('assets/icons/filter.svg');
+
   /// File path: assets/icons/google.svg
   SvgGenImage get google => const SvgGenImage('assets/icons/google.svg');
 
@@ -106,6 +109,7 @@ class $AssetsIconsGen {
     close,
     empty,
     facebook,
+    filter,
     google,
     infoFilled,
     info,
