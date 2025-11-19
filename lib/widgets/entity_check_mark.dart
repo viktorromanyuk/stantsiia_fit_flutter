@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:stantsiia_fit_flutter/gen/assets.gen.dart';
 
-import 'package:stantsiia_fit_flutter/core/enums.dart';
+import 'package:stantsiia_fit_flutter/core/enums/enums.dart';
 import 'package:stantsiia_fit_flutter/core/extensions/extensions.dart';
 
 import 'package:stantsiia_fit_flutter/styles/styles.dart';
@@ -11,16 +11,16 @@ import 'package:stantsiia_fit_flutter/widgets/app_icon.dart';
 class EntityCheckMark extends StatelessWidget {
   const EntityCheckMark({
     super.key,
-    this.type = EntityType.unset,
+    this.type = EntityTypeEnum.unset,
   });
 
-  final EntityType type;
+  final EntityTypeEnum type;
 
-  static final Map<EntityType, Color> _borderConfig = {
-    EntityType.fitness: AppStyles.colors.orange100,
-    EntityType.dance: AppStyles.colors.purple100,
-    EntityType.photo: AppStyles.colors.green100,
-    EntityType.unset: AppStyles.colors.whiteMilk,
+  static final Map<EntityTypeEnum, Color> _borderConfig = {
+    EntityTypeEnum.fitness: AppStyles.colors.orange100,
+    EntityTypeEnum.dance: AppStyles.colors.purple100,
+    EntityTypeEnum.photo: AppStyles.colors.green100,
+    EntityTypeEnum.unset: AppStyles.colors.whiteMilk,
   };
 
   Color get currentBorderColor => _borderConfig[type]!;

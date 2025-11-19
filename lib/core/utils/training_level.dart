@@ -1,17 +1,17 @@
-import 'package:stantsiia_fit_flutter/core/enums.dart';
+import 'package:stantsiia_fit_flutter/core/enums/enums.dart';
 
 ({String title, String value}) getTrainingLevelText(
-  TrainingLevel level,
-  EntityType type,
+  TrainingLevelEnum level,
+  TrainingTypeEnum type,
 ) {
-  final isDance = type == EntityType.dance;
+  final isDance = type == TrainingTypeEnum.dance;
 
   final title = isDance ? 'Рівень' : 'Інтенсивність';
 
   final value = switch (level) {
-    TrainingLevel.low => isDance ? 'Початковий' : 'Низька',
-    TrainingLevel.medium => isDance ? 'Середній' : 'Середня',
-    TrainingLevel.high => isDance ? 'Pro' : 'Висока',
+    TrainingLevelEnum.low => isDance ? 'Початковий' : 'Низька',
+    TrainingLevelEnum.medium => isDance ? 'Середній' : 'Середня',
+    TrainingLevelEnum.high => isDance ? 'Pro' : 'Висока',
   };
 
   return (title: title, value: value);

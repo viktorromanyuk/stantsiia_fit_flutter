@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
-import 'package:stantsiia_fit_flutter/models/models.dart';
+import 'package:stantsiia_fit_flutter/core/models/models.dart';
 
 import './trainings_package.dart';
 

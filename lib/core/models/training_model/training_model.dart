@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:stantsiia_fit_flutter/core/enums.dart';
+import 'package:stantsiia_fit_flutter/core/enums/enums.dart';
 
 part 'training_model.freezed.dart';
 part 'training_model.g.dart';
@@ -14,10 +14,8 @@ sealed class TrainingModel with _$TrainingModel {
     required int duration,
     required int maxAttendees,
     required DateTime createdAt,
-
-    // Enums
-    required TrainingLevel level,
-    required TrainingType type,
+    required TrainingLevelEnum level,
+    required TrainingTypeEnum type,
   }) = _TrainingModel;
 
   factory TrainingModel.fromJson(Map<String, Object?> json) => _$TrainingModelFromJson(json);

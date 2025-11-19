@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stantsiia_fit_flutter/core/enums.dart';
+import 'package:stantsiia_fit_flutter/core/enums/enums.dart';
 import 'package:stantsiia_fit_flutter/core/utils/utils.dart';
 import 'package:stantsiia_fit_flutter/styles/styles.dart';
 
@@ -11,8 +11,8 @@ class TrainingCardHeader extends StatelessWidget {
     required this.duration,
   });
 
-  final TrainingLevel level;
-  final EntityType type;
+  final TrainingLevelEnum level;
+  final TrainingTypeEnum type;
   final int duration;
 
   ({String title, String value}) get trainingLevelInfo => getTrainingLevelText(level, type);

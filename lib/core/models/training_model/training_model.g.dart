@@ -15,8 +15,8 @@ _TrainingModel _$TrainingModelFromJson(Map<String, dynamic> json) =>
       duration: (json['duration'] as num).toInt(),
       maxAttendees: (json['maxAttendees'] as num).toInt(),
       createdAt: DateTime.parse(json['createdAt'] as String),
-      level: $enumDecode(_$TrainingLevelEnumMap, json['level']),
-      type: $enumDecode(_$TrainingTypeEnumMap, json['type']),
+      level: $enumDecode(_$TrainingLevelEnumEnumMap, json['level']),
+      type: $enumDecode(_$TrainingTypeEnumEnumMap, json['type']),
     );
 
 Map<String, dynamic> _$TrainingModelToJson(_TrainingModel instance) =>
@@ -28,18 +28,18 @@ Map<String, dynamic> _$TrainingModelToJson(_TrainingModel instance) =>
       'duration': instance.duration,
       'maxAttendees': instance.maxAttendees,
       'createdAt': instance.createdAt.toIso8601String(),
-      'level': _$TrainingLevelEnumMap[instance.level]!,
-      'type': _$TrainingTypeEnumMap[instance.type]!,
+      'level': _$TrainingLevelEnumEnumMap[instance.level]!,
+      'type': _$TrainingTypeEnumEnumMap[instance.type]!,
     };
 
-const _$TrainingLevelEnumMap = {
-  TrainingLevel.low: 'low',
-  TrainingLevel.medium: 'medium',
-  TrainingLevel.high: 'high',
+const _$TrainingLevelEnumEnumMap = {
+  TrainingLevelEnum.low: 'low',
+  TrainingLevelEnum.medium: 'medium',
+  TrainingLevelEnum.high: 'high',
 };
 
-const _$TrainingTypeEnumMap = {
-  TrainingType.train: 'train',
-  TrainingType.dance: 'dance',
-  TrainingType.relax: 'relax',
+const _$TrainingTypeEnumEnumMap = {
+  TrainingTypeEnum.train: 'train',
+  TrainingTypeEnum.dance: 'dance',
+  TrainingTypeEnum.relax: 'relax',
 };

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:stantsiia_fit_flutter/core/extensions/extensions.dart';
 import 'package:stantsiia_fit_flutter/styles/styles.dart';
 import 'package:stantsiia_fit_flutter/core/utils/utils.dart';
-import 'package:stantsiia_fit_flutter/models/models.dart';
+import 'package:stantsiia_fit_flutter/core/models/models.dart';
 
 class TrainingsPackage extends StatelessWidget {
   const TrainingsPackage({super.key, required this.package});

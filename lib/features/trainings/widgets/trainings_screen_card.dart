@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stantsiia_fit_flutter/core/enums.dart';
-import 'package:stantsiia_fit_flutter/models/models.dart';
+import 'package:stantsiia_fit_flutter/core/enums/enums.dart';
+import 'package:stantsiia_fit_flutter/core/models/models.dart';
 import 'package:stantsiia_fit_flutter/styles/styles.dart';
 
 import 'training_card.dart';
@@ -14,8 +14,8 @@ class TrainingScreenCard extends StatelessWidget {
 
   final TrainingModel training;
 
-  EntityType get type => EntityType.fromString(training.type.value);
-  TrainingLevel get level => training.level;
+  TrainingTypeEnum get type => TrainingTypeEnum.fromString(training.type.value);
+  TrainingLevelEnum get level => training.level;
 
   @override
   Widget build(BuildContext context) {

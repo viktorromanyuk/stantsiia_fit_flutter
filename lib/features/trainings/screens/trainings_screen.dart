@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'package:stantsiia_fit_flutter/core/enums.dart';
-import 'package:stantsiia_fit_flutter/models/models.dart';
+import 'package:stantsiia_fit_flutter/core/enums/enums.dart';
+import 'package:stantsiia_fit_flutter/core/models/models.dart';
 import 'package:stantsiia_fit_flutter/styles/styles.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
 
@@ -18,16 +18,8 @@ class TrainingsScreen extends StatefulWidget {
 }
 
 class _TrainingsScreenState extends State<TrainingsScreen> {
-  TrainingType? selectedFilter;
+  TrainingTypeEnum? selectedFilter;
   late Future<List<TrainingModel>> _trainingsFuture;
-  List<TrainingModel> _trainings = [];
-
-  List<TrainingModel> get filteredTrainings {
-    return _trainings.where((training) {
-      if (selectedFilter == null) return true;
-      return selectedFilter == training.type;
-    }).toList();
-  }
 
   Future<List<TrainingModel>> _fetchTrainings() async {
     await Future.delayed(const Duration(milliseconds: 500));
@@ -73,11 +65,11 @@ class _TrainingsScreenState extends State<TrainingsScreen> {
     return FutureBuilder<List<TrainingModel>>(
       future: _trainingsFuture,
       builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          _trainings = snapshot.data ?? [];
-        }
+        List<TrainingModel> trainings = selectedFilter == null
+            ? snapshot.data?.toList() ?? []
+            : snapshot.data?.where((training) => selectedFilter == training.type).toList() ?? [];
 
-        final isEmpty = filteredTrainings.isEmpty;
+        final isEmpty = trainings.isEmpty;
         final isLoading = snapshot.connectionState == ConnectionState.waiting;
 
         return AppScaffold(
@@ -115,13 +107,13 @@ class _TrainingsScreenState extends State<TrainingsScreen> {
                       showDragHandle: true,
                       builder: (context) => SizedBox(
                         height: MediaQuery.of(context).size.height * 0.7,
-                        child: TrainingInfoDialog(training: filteredTrainings[index]),
+                        child: TrainingInfoDialog(training: trainings[index]),
                       ),
                     ),
-                    child: TrainingScreenCard(training: filteredTrainings[index]),
+                    child: TrainingScreenCard(training: trainings[index]),
                   ),
                   separatorBuilder: (BuildContext context, int index) => const SizedBox(height: 32),
-                  itemCount: filteredTrainings.length,
+                  itemCount: trainings.length,
                 ),
               ),
           ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stantsiia_fit_flutter/core/enums.dart';
+import 'package:stantsiia_fit_flutter/core/enums/enums.dart';
 import 'package:stantsiia_fit_flutter/styles/styles.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
 
@@ -10,23 +10,23 @@ class TrainingsFilterDialog extends StatelessWidget {
     required this.onChanged,
   });
 
-  final TrainingType? selectedFilter;
-  final ValueChanged<TrainingType?> onChanged;
+  final TrainingTypeEnum? selectedFilter;
+  final ValueChanged<TrainingTypeEnum?> onChanged;
 
   @override
   Widget build(BuildContext context) {
-    final filters = <TrainingType?, ({String label, Color color})>{
+    final filters = <TrainingTypeEnum?, ({String label, Color color})>{
       null: (label: 'Усі', color: AppStyles.colors.grayLight),
-      TrainingType.train: (label: 'Тренуватись', color: AppStyles.colors.orange100),
-      TrainingType.dance: (label: 'Танцювати', color: AppStyles.colors.purple100),
-      TrainingType.relax: (label: 'Розслаблятись', color: AppStyles.colors.orange100),
+      TrainingTypeEnum.train: (label: 'Тренуватись', color: AppStyles.colors.orange100),
+      TrainingTypeEnum.dance: (label: 'Танцювати', color: AppStyles.colors.purple100),
+      TrainingTypeEnum.relax: (label: 'Розслаблятись', color: AppStyles.colors.orange100),
     };
 
     return DialogContent(
       title: 'Фільтр тренувань',
-      body: RadioGroup<TrainingType?>(
+      body: RadioGroup<TrainingTypeEnum?>(
         groupValue: selectedFilter,
-        onChanged: (TrainingType? value) {
+        onChanged: (TrainingTypeEnum? value) {
           onChanged(value);
           Navigator.of(context).pop();
         },
@@ -55,7 +55,7 @@ class TrainingsFilterDialog extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      Radio<TrainingType?>(
+                      Radio<TrainingTypeEnum?>(
                         value: entry.key,
                         activeColor: entry.value.color,
                       ),

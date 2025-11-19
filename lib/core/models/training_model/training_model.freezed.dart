@@ -15,8 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TrainingModel {
 
- int get id; String get name; String get description; String get label; int get duration; int get maxAttendees; DateTime get createdAt;// Enums
- TrainingLevel get level; TrainingType get type;
+ int get id; String get name; String get description; String get label; int get duration; int get maxAttendees; DateTime get createdAt; TrainingLevelEnum get level; TrainingTypeEnum get type;
 /// Create a copy of TrainingModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +48,7 @@ abstract mixin class $TrainingModelCopyWith<$Res>  {
   factory $TrainingModelCopyWith(TrainingModel value, $Res Function(TrainingModel) _then) = _$TrainingModelCopyWithImpl;
 @useResult
 $Res call({
- int id, String name, String description, String label, int duration, int maxAttendees, DateTime createdAt, TrainingLevel level, TrainingType type
+ int id, String name, String description, String label, int duration, int maxAttendees, DateTime createdAt, TrainingLevelEnum level, TrainingTypeEnum type
 });
 
 
@@ -76,8 +75,8 @@ as String,duration: null == duration ? _self.duration : duration // ignore: cast
 as int,maxAttendees: null == maxAttendees ? _self.maxAttendees : maxAttendees // ignore: cast_nullable_to_non_nullable
 as int,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,level: null == level ? _self.level : level // ignore: cast_nullable_to_non_nullable
-as TrainingLevel,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
-as TrainingType,
+as TrainingLevelEnum,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as TrainingTypeEnum,
   ));
 }
 
@@ -159,7 +158,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name,  String description,  String label,  int duration,  int maxAttendees,  DateTime createdAt,  TrainingLevel level,  TrainingType type)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name,  String description,  String label,  int duration,  int maxAttendees,  DateTime createdAt,  TrainingLevelEnum level,  TrainingTypeEnum type)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TrainingModel() when $default != null:
 return $default(_that.id,_that.name,_that.description,_that.label,_that.duration,_that.maxAttendees,_that.createdAt,_that.level,_that.type);case _:
@@ -180,7 +179,7 @@ return $default(_that.id,_that.name,_that.description,_that.label,_that.duration
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name,  String description,  String label,  int duration,  int maxAttendees,  DateTime createdAt,  TrainingLevel level,  TrainingType type)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name,  String description,  String label,  int duration,  int maxAttendees,  DateTime createdAt,  TrainingLevelEnum level,  TrainingTypeEnum type)  $default,) {final _that = this;
 switch (_that) {
 case _TrainingModel():
 return $default(_that.id,_that.name,_that.description,_that.label,_that.duration,_that.maxAttendees,_that.createdAt,_that.level,_that.type);}
@@ -197,7 +196,7 @@ return $default(_that.id,_that.name,_that.description,_that.label,_that.duration
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name,  String description,  String label,  int duration,  int maxAttendees,  DateTime createdAt,  TrainingLevel level,  TrainingType type)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name,  String description,  String label,  int duration,  int maxAttendees,  DateTime createdAt,  TrainingLevelEnum level,  TrainingTypeEnum type)?  $default,) {final _that = this;
 switch (_that) {
 case _TrainingModel() when $default != null:
 return $default(_that.id,_that.name,_that.description,_that.label,_that.duration,_that.maxAttendees,_that.createdAt,_that.level,_that.type);case _:
@@ -222,9 +221,8 @@ class _TrainingModel implements TrainingModel {
 @override final  int duration;
 @override final  int maxAttendees;
 @override final  DateTime createdAt;
-// Enums
-@override final  TrainingLevel level;
-@override final  TrainingType type;
+@override final  TrainingLevelEnum level;
+@override final  TrainingTypeEnum type;
 
 /// Create a copy of TrainingModel
 /// with the given fields replaced by the non-null parameter values.
@@ -259,7 +257,7 @@ abstract mixin class _$TrainingModelCopyWith<$Res> implements $TrainingModelCopy
   factory _$TrainingModelCopyWith(_TrainingModel value, $Res Function(_TrainingModel) _then) = __$TrainingModelCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String name, String description, String label, int duration, int maxAttendees, DateTime createdAt, TrainingLevel level, TrainingType type
+ int id, String name, String description, String label, int duration, int maxAttendees, DateTime createdAt, TrainingLevelEnum level, TrainingTypeEnum type
 });
 
 
@@ -286,8 +284,8 @@ as String,duration: null == duration ? _self.duration : duration // ignore: cast
 as int,maxAttendees: null == maxAttendees ? _self.maxAttendees : maxAttendees // ignore: cast_nullable_to_non_nullable
 as int,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,level: null == level ? _self.level : level // ignore: cast_nullable_to_non_nullable
-as TrainingLevel,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
-as TrainingType,
+as TrainingLevelEnum,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as TrainingTypeEnum,
   ));
 }
 

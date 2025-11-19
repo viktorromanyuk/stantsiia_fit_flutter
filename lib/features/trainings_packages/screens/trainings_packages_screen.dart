@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
-import 'package:stantsiia_fit_flutter/models/models.dart';
+import 'package:stantsiia_fit_flutter/core/models/models.dart';
 
 import '../widgets/widgets.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stantsiia_fit_flutter/core/enums.dart';
+import 'package:stantsiia_fit_flutter/core/enums/enums.dart';
 import 'package:stantsiia_fit_flutter/gen/assets.gen.dart';
 import 'package:stantsiia_fit_flutter/styles/styles.dart';
 
@@ -13,18 +13,17 @@ class TrainingCard extends StatelessWidget {
     required this.height,
   });
 
-  final EntityType type;
+  final TrainingTypeEnum type;
   final Widget child;
   final double height;
 
-  static final Map<EntityType, TrainingCardConfig> _cardConfig = {
-    EntityType.fitness: (color: AppStyles.colors.orange100.withValues(alpha: 0.7), image: Assets.images.train),
-    EntityType.dance: (color: AppStyles.colors.purple100.withValues(alpha: 0.7), image: Assets.images.dance),
-    EntityType.photo: (color: AppStyles.colors.orange100.withValues(alpha: 0.7), image: Assets.images.relax),
-    EntityType.unset: (color: AppStyles.colors.orange100.withValues(alpha: 0.7), image: Assets.images.train),
+  static final Map<TrainingTypeEnum, TrainingCardConfig> _cardConfig = {
+    TrainingTypeEnum.train: (color: AppStyles.colors.orange100.withValues(alpha: 0.7), image: Assets.images.train),
+    TrainingTypeEnum.dance: (color: AppStyles.colors.purple100.withValues(alpha: 0.7), image: Assets.images.dance),
+    TrainingTypeEnum.relax: (color: AppStyles.colors.orange100.withValues(alpha: 0.7), image: Assets.images.train),
   };
 
-  TrainingCardConfig get currentConfig => _cardConfig[type] ?? _cardConfig[EntityType.unset]!;
+  TrainingCardConfig get currentConfig => _cardConfig[type]!;
 
   @override
   Widget build(BuildContext context) {

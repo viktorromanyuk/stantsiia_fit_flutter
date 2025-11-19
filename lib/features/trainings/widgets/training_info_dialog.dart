@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:stantsiia_fit_flutter/core/enums.dart';
+import 'package:stantsiia_fit_flutter/core/enums/enums.dart';
 import 'package:stantsiia_fit_flutter/core/utils/utils.dart';
-import 'package:stantsiia_fit_flutter/models/models.dart';
+import 'package:stantsiia_fit_flutter/core/models/models.dart';
 import 'package:stantsiia_fit_flutter/router/router.gr.dart';
 import 'package:stantsiia_fit_flutter/styles/styles.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
@@ -20,8 +20,8 @@ class TrainingInfoDialog extends StatelessWidget {
 
   ({String title, String value}) get trainingLevelInfo => getTrainingLevelText(level, type);
 
-  EntityType get type => EntityType.fromString(training.type.value);
-  TrainingLevel get level => training.level;
+  TrainingTypeEnum get type => TrainingTypeEnum.fromString(training.type.value);
+  TrainingLevelEnum get level => training.level;
 
   @override
   Widget build(BuildContext context) {
