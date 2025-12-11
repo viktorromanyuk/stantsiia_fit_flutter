@@ -10,6 +10,7 @@ abstract final class AppBorderRadius {
     Radius xl2,
     Radius xl3,
     Radius xl4,
+    Radius xl5,
     Radius full,
   })
   values = (
@@ -21,6 +22,7 @@ abstract final class AppBorderRadius {
     xl2: Radius.circular(12),
     xl3: Radius.circular(16),
     xl4: Radius.circular(24),
+    xl5: Radius.circular(30),
     full: Radius.circular(9999),
   );
 }

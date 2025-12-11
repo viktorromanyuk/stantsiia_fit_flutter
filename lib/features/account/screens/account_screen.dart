@@ -22,7 +22,7 @@ class AccountScreen extends StatelessWidget {
       scrollable: false,
       children: [
         SliverPadding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
+          padding: const EdgeInsets.all(16),
           sliver: SliverToBoxAdapter(
             child: Container(
               decoration: BoxDecoration(

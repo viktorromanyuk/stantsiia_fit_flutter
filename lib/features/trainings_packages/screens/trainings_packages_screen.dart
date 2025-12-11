@@ -67,7 +67,7 @@ class _TrainingsPackagesScreenState extends State<TrainingsPackagesScreen> {
               )
             else
               SliverPadding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
+                padding: const EdgeInsets.all(16),
                 sliver: SliverList.separated(
                   itemBuilder: (context, index) => GestureDetector(
                     onTap: () => showModalBottomSheet(

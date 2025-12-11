@@ -78,7 +78,7 @@ class _TrainingsScreenState extends State<TrainingsScreen> {
           onRefresh: _refresh,
           appBar: AppSliverAppBar(
             title: 'Тренування',
-            actionsBuilder: (context, tColor) => [
+            actionsBuilder: (context, constraints, tColor) => [
               PingingFilterButton(
                 isActive: selectedFilter != null,
                 onPressed: () => _showFilterBottomSheet(context),
@@ -98,7 +98,7 @@ class _TrainingsScreenState extends State<TrainingsScreen> {
               )
             else
               SliverPadding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 36),
                 sliver: SliverList.separated(
                   itemBuilder: (BuildContext context, int index) => GestureDetector(
                     onTap: () => showModalBottomSheet(

@@ -12,7 +12,7 @@ class TrainingsPackageShimmer extends StatelessWidget {
         Positioned.fill(
           child: AppShimmer(
             theme: ThemeMode.dark,
-            borderRadius: AppStyles.borderRadius.xl4.x,
+            borderRadius: AppStyles.borderRadius.xl5.x,
           ),
         ),
         AppShimmer.builder(

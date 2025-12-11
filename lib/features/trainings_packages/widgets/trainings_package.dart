@@ -17,7 +17,7 @@ class TrainingsPackage extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: AppStyles.colors.grayDark,
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.all(AppStyles.borderRadius.xl5),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

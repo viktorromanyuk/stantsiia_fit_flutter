@@ -10,7 +10,7 @@ class TrainingsCardShimmer extends StatelessWidget {
     return Container(
       height: 400,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(AppStyles.borderRadius.xl4),
+        borderRadius: BorderRadius.all(AppStyles.borderRadius.xl5),
         boxShadow: AppStyles.boxShadow.glow(AppStyles.colors.grayLight),
       ),
       child: Stack(
@@ -18,7 +18,7 @@ class TrainingsCardShimmer extends StatelessWidget {
           Positioned.fill(
             child: AppShimmer(
               theme: ThemeMode.dark,
-              borderRadius: AppStyles.borderRadius.xl4.x,
+              borderRadius: AppStyles.borderRadius.xl5.x,
             ),
           ),
 

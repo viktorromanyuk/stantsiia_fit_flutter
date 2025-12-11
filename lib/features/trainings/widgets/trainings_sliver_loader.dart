@@ -7,9 +7,7 @@ class TrainingsSliverLoader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      // TODO: move padding to be reusable
-      // TODO create sliver loader widget
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 36),
       sliver: SliverList.separated(
         itemBuilder: (BuildContext context, int index) => TrainingsCardShimmer(),
         separatorBuilder: (BuildContext context, int index) => const SizedBox(height: 32),
