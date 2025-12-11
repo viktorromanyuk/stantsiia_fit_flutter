@@ -24,33 +24,38 @@ class AccountScreen extends StatelessWidget {
         SliverPadding(
           padding: const EdgeInsets.all(16),
           sliver: SliverToBoxAdapter(
-            child: Container(
-              decoration: BoxDecoration(
-                color: AppStyles.colors.grayMilk,
-                boxShadow: AppStyles.boxShadow.md,
-                borderRadius: BorderRadius.all(AppStyles.borderRadius.xl4),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: ListTile.divideTiles(
-                  color: AppStyles.colors.grayLight,
-                  context: context,
-                  tiles: _navTiles.map(
-                    (tile) => ListTile(
-                      leading: SizedBox(
-                        width: 24,
-                        child: Center(
-                          child: AppIcon(tile.icon),
-                        ),
-                      ),
-                      title: Text(
-                        tile.title,
-                        style: TextStyle(fontWeight: FontWeight.w500),
-                      ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              spacing: 3,
+              children: _navTiles.indexed.map((tile) {
+                final i = tile.$1;
+                final data = tile.$2;
+
+                final isFirst = i == 0;
+                final isLast = i == _navTiles.length - 1;
+
+                return DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: AppStyles.colors.grayMilk,
+                    border: Border.all(color: AppStyles.colors.grayLight.withValues(alpha: 0.7)),
+                    borderRadius: BorderRadius.vertical(
+                      top: isFirst ? AppStyles.borderRadius.xl5 : AppStyles.borderRadius.lg,
+                      bottom: isLast ? AppStyles.borderRadius.xl5 : AppStyles.borderRadius.lg,
                     ),
                   ),
-                ).toList(growable: false),
-              ),
+                  child: ListTile(
+                    horizontalTitleGap: 12,
+                    leading: SizedBox(
+                      width: 24,
+                      child: Center(child: AppIcon(data.icon)),
+                    ),
+                    title: Text(
+                      data.title,
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                );
+              }).toList(),
             ),
           ),
         ),

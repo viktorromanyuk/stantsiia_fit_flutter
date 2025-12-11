@@ -177,27 +177,43 @@ class AppSliverAppBar extends StatelessWidget {
     required String? flexibleSpaceTitle,
   }) {
     return RepaintBoundary(
-      child: ClipRRect(
+      child: PhysicalModel(
+        color: Colors.transparent,
+        clipBehavior: Clip.antiAlias,
         borderRadius: withBorderRadius
             ? BorderRadius.vertical(bottom: Radius.circular(_kBorderRadius))
             : BorderRadius.zero,
-        clipBehavior: Clip.antiAlias,
+
+        // 🚀 PhysicalModel replaces ClipRRect → NO saveLayer penalty
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: _kBlurSigma, sigmaY: _kBlurSigma),
+          filter: ImageFilter.blur(
+            sigmaX: _kBlurSigma,
+            sigmaY: _kBlurSigma,
+          ),
+
+          // IMPORTANT: BackdropFilter must wrap the decorated container
           child: DecoratedBox(
             decoration: BoxDecoration(
               color: AppStyles.colors.grayDark.withValues(alpha: isLightTheme ? 0.9 : 0.5),
+
+              // Only *one* radius now — Unified clipping + decoration
               borderRadius: withBorderRadius
                   ? BorderRadius.vertical(bottom: Radius.circular(_kBorderRadius))
                   : BorderRadius.zero,
+
               border: Border(
-                bottom: BorderSide(color: colors.borderColor, width: withBorderRadius ? 0.7 : 0.5),
+                bottom: BorderSide(
+                  color: colors.borderColor,
+                  width: withBorderRadius ? 0.7 : 0.5,
+                ),
               ),
             ),
+
             child: FlexibleSpaceBar(
               centerTitle: false,
               titlePadding: titlePadding,
               expandedTitleScale: 1,
+
               title: Transform.translate(
                 offset: Offset(0, appBarState.collapsed * _kTitleTranslateY),
                 child: Opacity(
@@ -213,7 +229,10 @@ class AppSliverAppBar extends StatelessWidget {
                   ),
                 ),
               ),
-              background: ColoredBox(color: colors.flexibleBackgroundColor),
+
+              background: ColoredBox(
+                color: colors.flexibleBackgroundColor,
+              ),
             ),
           ),
         ),
