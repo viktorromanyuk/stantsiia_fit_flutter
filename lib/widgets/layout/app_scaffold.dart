@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart' as ios;
 import 'package:flutter/material.dart';
 import 'package:stantsiia_fit_flutter/styles/styles.dart';
 
 import 'app_sliver_app/app_sliver_app_bar.dart';
+import '../refresh_control.dart';
 
 class AppScaffold extends StatelessWidget {
   const AppScaffold({
@@ -35,8 +35,8 @@ class AppScaffold extends StatelessWidget {
       slivers: [
         if (appBar != null) appBar!,
         if (Platform.isIOS && onRefresh != null)
-          ios.CupertinoSliverRefreshControl(
-            onRefresh: onRefresh,
+          RefreshControl(
+            onRefresh: onRefresh!,
           ),
         ...children,
       ],
