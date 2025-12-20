@@ -6,6 +6,7 @@ import 'package:stantsiia_fit_flutter/core/enums/enums.dart';
 import 'package:stantsiia_fit_flutter/core/models/models.dart';
 import 'package:stantsiia_fit_flutter/styles/styles.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
+import 'package:stantsiia_fit_flutter/core/extensions/extensions.dart';
 
 import '../widgets/widgets.dart';
 
@@ -18,10 +19,10 @@ class TrainingsScreen extends StatefulWidget {
 }
 
 class _TrainingsScreenState extends State<TrainingsScreen> {
-  TrainingTypeEnum? selectedFilter;
+  TrainingTypeEnum? _selectedFilter;
   late Future<List<TrainingModel>> _trainingsFuture;
 
-  Future<List<TrainingModel>> _fetchTrainings() async {
+  Future<List<TrainingModel>> _getTrainings() async {
     await Future.delayed(const Duration(milliseconds: 500));
     return Supabase.instance.client
         .from('fit_trainings')
@@ -33,7 +34,7 @@ class _TrainingsScreenState extends State<TrainingsScreen> {
 
   Future<void> _refresh() async {
     setState(() {
-      _trainingsFuture = _fetchTrainings();
+      _trainingsFuture = _getTrainings();
     });
     await _trainingsFuture;
   }
@@ -44,81 +45,73 @@ class _TrainingsScreenState extends State<TrainingsScreen> {
     _refresh();
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<TrainingModel>>(
+      future: _trainingsFuture,
+      builder: (context, snapshot) {
+        List<TrainingModel> data = _selectedFilter == null
+            ? snapshot.data?.toList() ?? []
+            : snapshot.data?.where((training) => _selectedFilter == training.type).toList() ?? [];
+
+        return AppScaffold(
+          theme: ThemeMode.dark,
+          scrollable: !snapshot.isWaiting || data.isEmpty,
+          onRefresh: _refresh,
+          appBar: AppSliverAppBar(
+            title: 'Тренування',
+            actionsBuilder: (context, constraints, tColor) => [
+              PingingFilterButton(
+                isActive: _selectedFilter != null,
+                onPressed: () => _showFilterBottomSheet(context),
+              ),
+            ],
+          ),
+          children: [
+            AppSliverFutureState(
+              isEmpty: data.isEmpty,
+              isWaiting: snapshot.isWaiting,
+              hasError: snapshot.hasError,
+              loader: const TrainingsLoader(),
+              onRefresh: _refresh,
+              emptyText: 'Немає тренувань',
+              content: TrainingsList(
+                trainings: data,
+                onItemTap: (training) => _showTrainingInfoDialog(context, training),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void _showFilterBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
       showDragHandle: true,
       backgroundColor: AppStyles.colors.grayDark,
       builder: (context) => TrainingsFilterDialog(
-        selectedFilter: selectedFilter,
+        selectedFilter: _selectedFilter,
         onChanged: (value) {
           setState(() {
-            selectedFilter = value;
+            _selectedFilter = value;
           });
         },
       ),
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<List<TrainingModel>>(
-      future: _trainingsFuture,
-      builder: (context, snapshot) {
-        List<TrainingModel> trainings = selectedFilter == null
-            ? snapshot.data?.toList() ?? []
-            : snapshot.data?.where((training) => selectedFilter == training.type).toList() ?? [];
-
-        final isEmpty = trainings.isEmpty;
-        final isLoading = snapshot.connectionState == ConnectionState.waiting;
-
-        return AppScaffold(
-          theme: ThemeMode.dark,
-          scrollable: !isLoading && !isEmpty,
-          onRefresh: _refresh,
-          appBar: AppSliverAppBar(
-            title: 'Тренування',
-            actionsBuilder: (context, constraints, tColor) => [
-              PingingFilterButton(
-                isActive: selectedFilter != null,
-                onPressed: () => _showFilterBottomSheet(context),
-              ),
-            ],
-          ),
-          children: [
-            if (isLoading && isEmpty)
-              const TrainingsSliverLoader()
-            else if (snapshot.hasError)
-              SliverFillRemaining(
-                child: ApiError(onRefresh: _refresh),
-              )
-            else if (isEmpty)
-              const SliverFillRemaining(
-                child: Empty(description: 'Немає абонементів'),
-              )
-            else
-              SliverPadding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 36),
-                sliver: SliverList.separated(
-                  itemBuilder: (BuildContext context, int index) => GestureDetector(
-                    onTap: () => showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      showDragHandle: true,
-                      builder: (context) => SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.7,
-                        child: TrainingInfoDialog(training: trainings[index]),
-                      ),
-                    ),
-                    child: TrainingScreenCard(training: trainings[index]),
-                  ),
-                  separatorBuilder: (BuildContext context, int index) => const SizedBox(height: 32),
-                  itemCount: trainings.length,
-                ),
-              ),
-          ],
-        );
-      },
+  void _showTrainingInfoDialog(BuildContext context, TrainingModel training) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: AppStyles.colors.grayDark,
+      isScrollControlled: true,
+      showDragHandle: true,
+      builder: (context) => SizedBox(
+        height: MediaQuery.of(context).size.height * 0.7,
+        child: TrainingInfoDialog(training: training),
+      ),
     );
   }
 }

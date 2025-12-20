@@ -42,6 +42,7 @@ class TrainingInfoDialog extends StatelessWidget {
                   child: Text(
                     training.label,
                     style: AppStyles.fontSize.xl4.copyWith(
+                      color: AppStyles.colors.whiteMilk,
                       fontWeight: FontWeight.w600,
                       fontFamily: FontFamily.unbounded,
                     ),

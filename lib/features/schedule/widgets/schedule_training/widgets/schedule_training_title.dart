@@ -1,7 +1,8 @@
-part of 'schedule_trainings_list.dart';
+import 'package:flutter/material.dart';
+import 'package:stantsiia_fit_flutter/styles/styles.dart';
 
-class ScheduleTrainingsSectionTitle extends StatelessWidget {
-  const ScheduleTrainingsSectionTitle({super.key, required this.title});
+class ScheduleTrainingTitle extends StatelessWidget {
+  const ScheduleTrainingTitle({super.key, required this.title});
 
   final String title;
 
@@ -10,7 +11,7 @@ class ScheduleTrainingsSectionTitle extends StatelessWidget {
     return SizedBox(
       height: 20,
       child: Text(
-        title,
+        title.toUpperCase(),
         style: AppStyles.fontSize.md.copyWith(
           fontFamily: FontFamily.unbounded,
           height: AppStyles.lineHeight.condensed,

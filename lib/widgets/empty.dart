@@ -3,6 +3,8 @@ import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
 import 'package:stantsiia_fit_flutter/gen/assets.gen.dart';
 import 'package:stantsiia_fit_flutter/styles/styles.dart';
 
+import 'package:stantsiia_fit_flutter/core/extensions/extensions.dart';
+
 class Empty extends StatelessWidget {
   const Empty({super.key, this.description = 'Немає даних'});
 
@@ -19,8 +21,9 @@ class Empty extends StatelessWidget {
           Text(
             description,
             style: AppStyles.fontSize.sm.copyWith(
+              fontFamily: FontFamily.unbounded,
               fontWeight: FontWeight.w500,
-              color: AppStyles.colors.gray,
+              color: context.theme.isLight ? AppStyles.colors.grayDark : AppStyles.colors.whiteMilk,
             ),
           ),
         ],

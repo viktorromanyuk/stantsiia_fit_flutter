@@ -1,7 +1,5 @@
 export 'invoice_model/invoice_model.dart';
 export 'schedule_event_attendees_count_model/schedule_event_attendees_count_model.dart';
-export 'schedule_event_mapped_model/schedule_event_mapped_model.dart';
-export 'schedule_event_mapped_with_date_model/schedule_event_mapped_with_date_model.dart';
 export 'schedule_event_model/schedule_event_model.dart';
 export 'schedule_model/schedule_model.dart';
 export 'trainer_model/trainer_model.dart';

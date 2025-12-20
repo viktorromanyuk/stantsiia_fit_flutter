@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ScheduleEventModel {
 
- int get id; String get startTime; int get weekDay; TrainerModel get trainers; TrainingModel get trainings;
+ int get id; String get startTime; int get weekDay; TrainerModel get trainer; TrainingModel get training; DateTime? get date;
 /// Create a copy of ScheduleEventModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $ScheduleEventModelCopyWith<ScheduleEventModel> get copyWith => _$ScheduleEventM
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScheduleEventModel&&(identical(other.id, id) || other.id == id)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.weekDay, weekDay) || other.weekDay == weekDay)&&(identical(other.trainers, trainers) || other.trainers == trainers)&&(identical(other.trainings, trainings) || other.trainings == trainings));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScheduleEventModel&&(identical(other.id, id) || other.id == id)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.weekDay, weekDay) || other.weekDay == weekDay)&&(identical(other.trainer, trainer) || other.trainer == trainer)&&(identical(other.training, training) || other.training == training)&&(identical(other.date, date) || other.date == date));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,startTime,weekDay,trainers,trainings);
+int get hashCode => Object.hash(runtimeType,id,startTime,weekDay,trainer,training,date);
 
 @override
 String toString() {
-  return 'ScheduleEventModel(id: $id, startTime: $startTime, weekDay: $weekDay, trainers: $trainers, trainings: $trainings)';
+  return 'ScheduleEventModel(id: $id, startTime: $startTime, weekDay: $weekDay, trainer: $trainer, training: $training, date: $date)';
 }
 
 
@@ -48,11 +48,11 @@ abstract mixin class $ScheduleEventModelCopyWith<$Res>  {
   factory $ScheduleEventModelCopyWith(ScheduleEventModel value, $Res Function(ScheduleEventModel) _then) = _$ScheduleEventModelCopyWithImpl;
 @useResult
 $Res call({
- int id, String startTime, int weekDay, TrainerModel trainers, TrainingModel trainings
+ int id, String startTime, int weekDay, TrainerModel trainer, TrainingModel training, DateTime? date
 });
 
 
-$TrainerModelCopyWith<$Res> get trainers;$TrainingModelCopyWith<$Res> get trainings;
+$TrainerModelCopyWith<$Res> get trainer;$TrainingModelCopyWith<$Res> get training;
 
 }
 /// @nodoc
@@ -65,33 +65,34 @@ class _$ScheduleEventModelCopyWithImpl<$Res>
 
 /// Create a copy of ScheduleEventModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? startTime = null,Object? weekDay = null,Object? trainers = null,Object? trainings = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? startTime = null,Object? weekDay = null,Object? trainer = null,Object? training = null,Object? date = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,startTime: null == startTime ? _self.startTime : startTime // ignore: cast_nullable_to_non_nullable
 as String,weekDay: null == weekDay ? _self.weekDay : weekDay // ignore: cast_nullable_to_non_nullable
-as int,trainers: null == trainers ? _self.trainers : trainers // ignore: cast_nullable_to_non_nullable
-as TrainerModel,trainings: null == trainings ? _self.trainings : trainings // ignore: cast_nullable_to_non_nullable
-as TrainingModel,
+as int,trainer: null == trainer ? _self.trainer : trainer // ignore: cast_nullable_to_non_nullable
+as TrainerModel,training: null == training ? _self.training : training // ignore: cast_nullable_to_non_nullable
+as TrainingModel,date: freezed == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
+as DateTime?,
   ));
 }
 /// Create a copy of ScheduleEventModel
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$TrainerModelCopyWith<$Res> get trainers {
+$TrainerModelCopyWith<$Res> get trainer {
   
-  return $TrainerModelCopyWith<$Res>(_self.trainers, (value) {
-    return _then(_self.copyWith(trainers: value));
+  return $TrainerModelCopyWith<$Res>(_self.trainer, (value) {
+    return _then(_self.copyWith(trainer: value));
   });
 }/// Create a copy of ScheduleEventModel
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$TrainingModelCopyWith<$Res> get trainings {
+$TrainingModelCopyWith<$Res> get training {
   
-  return $TrainingModelCopyWith<$Res>(_self.trainings, (value) {
-    return _then(_self.copyWith(trainings: value));
+  return $TrainingModelCopyWith<$Res>(_self.training, (value) {
+    return _then(_self.copyWith(training: value));
   });
 }
 }
@@ -172,10 +173,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String startTime,  int weekDay,  TrainerModel trainers,  TrainingModel trainings)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String startTime,  int weekDay,  TrainerModel trainer,  TrainingModel training,  DateTime? date)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ScheduleEventModel() when $default != null:
-return $default(_that.id,_that.startTime,_that.weekDay,_that.trainers,_that.trainings);case _:
+return $default(_that.id,_that.startTime,_that.weekDay,_that.trainer,_that.training,_that.date);case _:
   return orElse();
 
 }
@@ -193,10 +194,10 @@ return $default(_that.id,_that.startTime,_that.weekDay,_that.trainers,_that.trai
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String startTime,  int weekDay,  TrainerModel trainers,  TrainingModel trainings)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String startTime,  int weekDay,  TrainerModel trainer,  TrainingModel training,  DateTime? date)  $default,) {final _that = this;
 switch (_that) {
 case _ScheduleEventModel():
-return $default(_that.id,_that.startTime,_that.weekDay,_that.trainers,_that.trainings);}
+return $default(_that.id,_that.startTime,_that.weekDay,_that.trainer,_that.training,_that.date);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -210,10 +211,10 @@ return $default(_that.id,_that.startTime,_that.weekDay,_that.trainers,_that.trai
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String startTime,  int weekDay,  TrainerModel trainers,  TrainingModel trainings)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String startTime,  int weekDay,  TrainerModel trainer,  TrainingModel training,  DateTime? date)?  $default,) {final _that = this;
 switch (_that) {
 case _ScheduleEventModel() when $default != null:
-return $default(_that.id,_that.startTime,_that.weekDay,_that.trainers,_that.trainings);case _:
+return $default(_that.id,_that.startTime,_that.weekDay,_that.trainer,_that.training,_that.date);case _:
   return null;
 
 }
@@ -225,14 +226,15 @@ return $default(_that.id,_that.startTime,_that.weekDay,_that.trainers,_that.trai
 @JsonSerializable()
 
 class _ScheduleEventModel implements ScheduleEventModel {
-  const _ScheduleEventModel({required this.id, required this.startTime, required this.weekDay, required this.trainers, required this.trainings});
+  const _ScheduleEventModel({required this.id, required this.startTime, required this.weekDay, required this.trainer, required this.training, this.date});
   factory _ScheduleEventModel.fromJson(Map<String, dynamic> json) => _$ScheduleEventModelFromJson(json);
 
 @override final  int id;
 @override final  String startTime;
 @override final  int weekDay;
-@override final  TrainerModel trainers;
-@override final  TrainingModel trainings;
+@override final  TrainerModel trainer;
+@override final  TrainingModel training;
+@override final  DateTime? date;
 
 /// Create a copy of ScheduleEventModel
 /// with the given fields replaced by the non-null parameter values.
@@ -247,16 +249,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ScheduleEventModel&&(identical(other.id, id) || other.id == id)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.weekDay, weekDay) || other.weekDay == weekDay)&&(identical(other.trainers, trainers) || other.trainers == trainers)&&(identical(other.trainings, trainings) || other.trainings == trainings));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ScheduleEventModel&&(identical(other.id, id) || other.id == id)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.weekDay, weekDay) || other.weekDay == weekDay)&&(identical(other.trainer, trainer) || other.trainer == trainer)&&(identical(other.training, training) || other.training == training)&&(identical(other.date, date) || other.date == date));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,startTime,weekDay,trainers,trainings);
+int get hashCode => Object.hash(runtimeType,id,startTime,weekDay,trainer,training,date);
 
 @override
 String toString() {
-  return 'ScheduleEventModel(id: $id, startTime: $startTime, weekDay: $weekDay, trainers: $trainers, trainings: $trainings)';
+  return 'ScheduleEventModel(id: $id, startTime: $startTime, weekDay: $weekDay, trainer: $trainer, training: $training, date: $date)';
 }
 
 
@@ -267,11 +269,11 @@ abstract mixin class _$ScheduleEventModelCopyWith<$Res> implements $ScheduleEven
   factory _$ScheduleEventModelCopyWith(_ScheduleEventModel value, $Res Function(_ScheduleEventModel) _then) = __$ScheduleEventModelCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String startTime, int weekDay, TrainerModel trainers, TrainingModel trainings
+ int id, String startTime, int weekDay, TrainerModel trainer, TrainingModel training, DateTime? date
 });
 
 
-@override $TrainerModelCopyWith<$Res> get trainers;@override $TrainingModelCopyWith<$Res> get trainings;
+@override $TrainerModelCopyWith<$Res> get trainer;@override $TrainingModelCopyWith<$Res> get training;
 
 }
 /// @nodoc
@@ -284,14 +286,15 @@ class __$ScheduleEventModelCopyWithImpl<$Res>
 
 /// Create a copy of ScheduleEventModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? startTime = null,Object? weekDay = null,Object? trainers = null,Object? trainings = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? startTime = null,Object? weekDay = null,Object? trainer = null,Object? training = null,Object? date = freezed,}) {
   return _then(_ScheduleEventModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,startTime: null == startTime ? _self.startTime : startTime // ignore: cast_nullable_to_non_nullable
 as String,weekDay: null == weekDay ? _self.weekDay : weekDay // ignore: cast_nullable_to_non_nullable
-as int,trainers: null == trainers ? _self.trainers : trainers // ignore: cast_nullable_to_non_nullable
-as TrainerModel,trainings: null == trainings ? _self.trainings : trainings // ignore: cast_nullable_to_non_nullable
-as TrainingModel,
+as int,trainer: null == trainer ? _self.trainer : trainer // ignore: cast_nullable_to_non_nullable
+as TrainerModel,training: null == training ? _self.training : training // ignore: cast_nullable_to_non_nullable
+as TrainingModel,date: freezed == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
+as DateTime?,
   ));
 }
 
@@ -299,19 +302,19 @@ as TrainingModel,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$TrainerModelCopyWith<$Res> get trainers {
+$TrainerModelCopyWith<$Res> get trainer {
   
-  return $TrainerModelCopyWith<$Res>(_self.trainers, (value) {
-    return _then(_self.copyWith(trainers: value));
+  return $TrainerModelCopyWith<$Res>(_self.trainer, (value) {
+    return _then(_self.copyWith(trainer: value));
   });
 }/// Create a copy of ScheduleEventModel
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$TrainingModelCopyWith<$Res> get trainings {
+$TrainingModelCopyWith<$Res> get training {
   
-  return $TrainingModelCopyWith<$Res>(_self.trainings, (value) {
-    return _then(_self.copyWith(trainings: value));
+  return $TrainingModelCopyWith<$Res>(_self.training, (value) {
+    return _then(_self.copyWith(training: value));
   });
 }
 }

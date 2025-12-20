@@ -3,6 +3,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
 import 'package:stantsiia_fit_flutter/core/models/models.dart';
+import 'package:stantsiia_fit_flutter/styles/styles.dart';
+import 'package:stantsiia_fit_flutter/core/extensions/extensions.dart';
 
 import '../widgets/widgets.dart';
 
@@ -17,23 +19,6 @@ class TrainingsPackagesScreen extends StatefulWidget {
 class _TrainingsPackagesScreenState extends State<TrainingsPackagesScreen> {
   late Future<List<TrainingsPackageModel>> _packagesFuture;
 
-  Future<List<TrainingsPackageModel>> _fetchPackages() async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    return Supabase.instance.client
-        .from('fit_trainings_packages')
-        .select('*')
-        .withConverter(
-          (data) => data.map(TrainingsPackageModel.fromJson).toList(),
-        );
-  }
-
-  Future<void> _refresh() async {
-    setState(() {
-      _packagesFuture = _fetchPackages();
-    });
-    await _packagesFuture;
-  }
-
   @override
   void initState() {
     super.initState();
@@ -45,45 +30,55 @@ class _TrainingsPackagesScreenState extends State<TrainingsPackagesScreen> {
     return FutureBuilder<List<TrainingsPackageModel>>(
       future: _packagesFuture,
       builder: (context, snapshot) {
-        final isLoading = snapshot.connectionState == ConnectionState.waiting;
-        final data = snapshot.data;
-        final isEmpty = data == null || data.isEmpty;
+        final data = snapshot.data ?? [];
 
         return AppScaffold(
           theme: ThemeMode.light,
-          scrollable: !isLoading && !isEmpty,
+          scrollable: !snapshot.isWaiting || data.isEmpty,
           onRefresh: _refresh,
           appBar: const AppSliverAppBar(title: 'Абонементи'),
           children: [
-            if (isLoading && isEmpty)
-              const TrainingsPackageSliverLoader()
-            else if (snapshot.hasError)
-              SliverFillRemaining(
-                child: ApiError(onRefresh: _refresh),
-              )
-            else if (isEmpty)
-              const SliverFillRemaining(
-                child: Empty(description: 'Немає абонементів'),
-              )
-            else
-              SliverPadding(
-                padding: const EdgeInsets.all(16),
-                sliver: SliverList.separated(
-                  itemBuilder: (context, index) => GestureDetector(
-                    onTap: () => showModalBottomSheet(
-                      context: context,
-                      showDragHandle: true,
-                      builder: (context) => TrainingsPackagePurchaseDialog(package: data[index]),
-                    ),
-                    child: TrainingsPackage(package: data[index]),
-                  ),
-                  separatorBuilder: (_, __) => const SizedBox(height: 20),
-                  itemCount: data.length,
-                ),
+            AppSliverFutureState(
+              isEmpty: data.isEmpty,
+              isWaiting: snapshot.isWaiting,
+              hasError: snapshot.hasError,
+              loader: const TrainingsPackagesLoader(),
+              onRefresh: _refresh,
+              emptyText: 'Немає абонементів',
+              content: TrainingsPackagesList(
+                packages: data,
+                onItemTap: (package) => _showTrainingsPackagePurchaseDialog(context, package),
               ),
+            ),
           ],
         );
       },
+    );
+  }
+
+  Future<List<TrainingsPackageModel>> _getTrainingsPackages() async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    return Supabase.instance.client
+        .from('fit_trainings_packages')
+        .select('*')
+        .withConverter(
+          (data) => data.map(TrainingsPackageModel.fromJson).toList(),
+        );
+  }
+
+  Future<void> _refresh() async {
+    setState(() {
+      _packagesFuture = _getTrainingsPackages();
+    });
+    await _packagesFuture;
+  }
+
+  void _showTrainingsPackagePurchaseDialog(BuildContext context, TrainingsPackageModel package) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: AppStyles.colors.whiteMilk,
+      showDragHandle: true,
+      builder: (context) => TrainingsPackagePurchaseDialog(package: package),
     );
   }
 }

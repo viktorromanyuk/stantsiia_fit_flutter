@@ -1,4 +1,5 @@
-part of 'schedule_trainings_list.dart';
+import 'package:flutter/material.dart';
+import 'package:stantsiia_fit_flutter/styles/styles.dart';
 
 class ScheduleTrainingTime extends StatelessWidget {
   const ScheduleTrainingTime({super.key, required this.time, required this.duration});
