@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'package:stantsiia_fit_flutter/core/extensions/extensions.dart';
 import 'package:stantsiia_fit_flutter/core/utils/utils.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
 import 'package:stantsiia_fit_flutter/core/models/models.dart';
+import 'package:stantsiia_fit_flutter/features/schedule/services/services.dart';
 
 import '../widgets/widgets.dart';
 
@@ -21,6 +21,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   DateTime _selectedDate = DateTime.now();
   late Future<List<ScheduleEventModel>> _scheduleFuture;
   late Future<Map<int, int>> _attendeesFuture;
+  late final ScheduleService _scheduleService = const ScheduleService();
 
   String get activeMonth => formatDate(_selectedDate, AppDateFormats.monthLong).toCapitalCase();
 
@@ -29,8 +30,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   @override
   void initState() {
     super.initState();
-    _scheduleFuture = _getSchedule();
-    _attendeesFuture = _getAttendeesCount(_selectedDate);
+    _scheduleFuture = _scheduleService.getSchedule();
+    _attendeesFuture = _scheduleService.getAttendeesCount(_selectedDate);
   }
 
   @override
@@ -44,7 +45,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           future: _attendeesFuture,
           builder: (context, attendeesSnapshot) {
             final attendeesCount = attendeesSnapshot.data ?? const <int, int>{};
-            final filteredSchedule = _filteredSchedule(schedule);
+            final filteredSchedule = _scheduleService.filterSchedule(schedule, _selectedDate);
 
             return AppScaffold(
               theme: ThemeMode.dark,
@@ -86,83 +87,10 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     );
   }
 
-  List<ScheduleEventModel> _filteredSchedule(
-    List<ScheduleEventModel> schedule,
-  ) {
-    final now = DateTime.now();
-
-    return schedule.where((event) {
-      final parts = event.startTime.split(':');
-      final hours = parts.isNotEmpty ? int.tryParse(parts[0]) ?? 0 : 0;
-      final minutes = parts.length > 1 ? int.tryParse(parts[1]) ?? 0 : 0;
-
-      final eventDate = _selectedDate.copyWith(
-        hour: hours,
-        minute: minutes,
-        second: 0,
-      );
-
-      return event.weekDay == _selectedDate.weekday % 7 && !eventDate.isBefore(now);
-    }).toList();
-  }
-
-  Future<List<ScheduleEventModel>> _getSchedule() async {
-    await Future.delayed(const Duration(milliseconds: 500));
-
-    return Supabase.instance.client
-        .from('fit_schedule')
-        .select(
-          'id, weekDay, startTime, '
-          'training:fit_trainings(*), '
-          'trainer:fit_trainers(*)',
-        )
-        .eq('hidden', false)
-        .order('startTime', ascending: true)
-        .withConverter(
-          (data) => data.map(ScheduleEventModel.fromJson).toList(),
-        );
-  }
-
-  Future<Map<int, int>> _getAttendeesCount(DateTime date) async {
-    try {
-      final formattedDate = formatDate(date, AppDateFormats.monthDayYearWithDash);
-      final response = await Supabase.instance.client.functions.invoke(
-        'fit-get-schedule-event-attendees-count',
-        body: {
-          'start': formattedDate,
-          'end': formattedDate,
-        },
-      );
-
-      final data = response.data;
-
-      if (data is Map && data.isNotEmpty) {
-        final firstValue = data.values.first;
-
-        if (firstValue is Map) {
-          final attendeesCount = <int, int>{};
-
-          firstValue.forEach((key, value) {
-            final eventId = int.tryParse('$key');
-            final count = (value as num?)?.toInt() ?? 0;
-
-            if (eventId != null) {
-              attendeesCount[eventId] = count;
-            }
-          });
-
-          return attendeesCount;
-        }
-      }
-    } catch (_) {}
-
-    return {};
-  }
-
   Future<void> _refresh() async {
     setState(() {
-      _scheduleFuture = _getSchedule();
-      _attendeesFuture = _getAttendeesCount(_selectedDate);
+      _scheduleFuture = _scheduleService.getSchedule();
+      _attendeesFuture = _scheduleService.getAttendeesCount(_selectedDate);
     });
 
     await Future.wait([_scheduleFuture, _attendeesFuture]);
@@ -171,12 +99,9 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   Future<void> _refreshAttendees(DateTime date) async {
     setState(() {
       _selectedDate = date;
-      _attendeesFuture = _getAttendeesCount(date);
+      _attendeesFuture = _scheduleService.getAttendeesCount(date);
     });
 
     await _attendeesFuture;
   }
 }
-
-
-// TODO: add api services, refactor schedule screen
