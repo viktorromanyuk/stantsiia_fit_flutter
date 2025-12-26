@@ -6,7 +6,9 @@ import 'package:stantsiia_fit_flutter/core/utils/utils.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
 import 'package:stantsiia_fit_flutter/core/models/models.dart';
 import 'package:stantsiia_fit_flutter/features/schedule/services/services.dart';
+import 'package:stantsiia_fit_flutter/core/enums/enums.dart';
 
+import 'package:stantsiia_fit_flutter/features/trainings/widgets/widgets.dart';
 import '../widgets/widgets.dart';
 
 @RoutePage()
@@ -18,9 +20,12 @@ class ScheduleScreen extends StatefulWidget {
 }
 
 class _ScheduleScreenState extends State<ScheduleScreen> {
+  TrainingTypeEnum? _selectedFilter;
   DateTime _selectedDate = DateTime.now();
+
   late Future<List<ScheduleEventModel>> _scheduleFuture;
   late Future<Map<int, int>> _attendeesFuture;
+
   late final ScheduleService _scheduleService = const ScheduleService();
 
   String get activeMonth => formatDate(_selectedDate, AppDateFormats.monthLong).toCapitalCase();
@@ -45,7 +50,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           future: _attendeesFuture,
           builder: (context, attendeesSnapshot) {
             final attendeesCount = attendeesSnapshot.data ?? const <int, int>{};
-            final filteredSchedule = _scheduleService.filterSchedule(schedule, _selectedDate);
+            final filteredSchedule = _scheduleService.filterSchedule(schedule, _selectedDate, _selectedFilter);
 
             return AppScaffold(
               theme: ThemeMode.dark,
@@ -65,6 +70,16 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                     ),
                   ),
                 ),
+                actionsBuilder: (scaffoldContext, _, _) => [
+                  PingingFilterButton(
+                    isActive: _selectedFilter != null,
+                    onPressed: () => showTrainingsFilterBottomSheet(
+                      context: scaffoldContext,
+                      selectedFilter: _selectedFilter,
+                      onChanged: (value) => setState(() => _selectedFilter = value),
+                    ),
+                  ),
+                ],
               ),
               children: (context) => [
                 AppSliverFutureState(

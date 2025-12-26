@@ -1,6 +1,7 @@
 import 'package:stantsiia_fit_flutter/core/models/models.dart';
 import 'package:stantsiia_fit_flutter/core/supabase/supabase.dart';
 import 'package:stantsiia_fit_flutter/core/utils/utils.dart';
+import 'package:stantsiia_fit_flutter/core/enums/enums.dart';
 
 class ScheduleService {
   const ScheduleService();
@@ -8,22 +9,26 @@ class ScheduleService {
   List<ScheduleEventModel> filterSchedule(
     List<ScheduleEventModel> schedule,
     DateTime date,
+    TrainingTypeEnum? filter,
   ) {
     final now = DateTime.now();
 
-    return schedule.where((event) {
-      final parts = event.startTime.split(':');
-      final hours = parts.isNotEmpty ? int.tryParse(parts[0]) ?? 0 : 0;
-      final minutes = parts.length > 1 ? int.tryParse(parts[1]) ?? 0 : 0;
+    return schedule
+        .where((event) {
+          final parts = event.startTime.split(':');
+          final hours = parts.isNotEmpty ? int.tryParse(parts[0]) ?? 0 : 0;
+          final minutes = parts.length > 1 ? int.tryParse(parts[1]) ?? 0 : 0;
 
-      final eventDate = date.copyWith(
-        hour: hours,
-        minute: minutes,
-        second: 0,
-      );
+          final eventDate = date.copyWith(
+            hour: hours,
+            minute: minutes,
+            second: 0,
+          );
 
-      return event.weekDay == date.weekday % 7 && !eventDate.isBefore(now);
-    }).toList();
+          return event.weekDay == date.weekday % 7 && !eventDate.isBefore(now);
+        })
+        .where((event) => filter == null || event.training.type == filter)
+        .toList();
   }
 
   Future<List<ScheduleEventModel>> getSchedule() async {
