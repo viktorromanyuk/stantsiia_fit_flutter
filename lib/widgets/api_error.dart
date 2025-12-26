@@ -18,7 +18,7 @@ class ApiError extends StatelessWidget {
           children: [
             Text(
               'Помилка завантаження',
-              style: AppStyles.fontSize.lg.copyWith(
+              style: AppStyles.fontSize.fs18.copyWith(
                 fontWeight: FontWeight.w500,
               ),
             ),

@@ -31,14 +31,14 @@ class TrainingCardHeader extends StatelessWidget {
             children: [
               Text(
                 trainingLevelInfo.title,
-                style: AppStyles.fontSize.md.copyWith(
+                style: AppStyles.fontSize.fs16.copyWith(
                   color: AppStyles.colors.whiteMilk,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               Text(
                 trainingLevelInfo.value,
-                style: AppStyles.fontSize.lg.copyWith(
+                style: AppStyles.fontSize.fs18.copyWith(
                   color: AppStyles.colors.whiteMilk,
                 ),
               ),
@@ -50,14 +50,14 @@ class TrainingCardHeader extends StatelessWidget {
             children: [
               Text(
                 'Тривалість',
-                style: AppStyles.fontSize.md.copyWith(
+                style: AppStyles.fontSize.fs16.copyWith(
                   color: AppStyles.colors.whiteMilk,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               Text(
                 '$duration хвилин',
-                style: AppStyles.fontSize.lg.copyWith(
+                style: AppStyles.fontSize.fs18.copyWith(
                   color: AppStyles.colors.whiteMilk,
                 ),
               ),

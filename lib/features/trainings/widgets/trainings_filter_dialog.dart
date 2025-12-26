@@ -61,7 +61,7 @@ class TrainingsFilterDialog extends StatelessWidget {
                       ),
                       Text(
                         entry.value.label,
-                        style: AppStyles.fontSize.md.copyWith(
+                        style: AppStyles.fontSize.fs16.copyWith(
                           color: AppStyles.colors.whiteMilk,
                           fontWeight: FontWeight.w500,
                         ),

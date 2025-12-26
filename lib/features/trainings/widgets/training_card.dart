@@ -32,7 +32,7 @@ class TrainingCard extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
         color: AppStyles.colors.grayDark,
-        borderRadius: BorderRadius.all(AppStyles.borderRadius.xl5),
+        borderRadius: BorderRadius.all(AppStyles.borderRadius.r30),
         boxShadow: AppStyles.boxShadow.glow(currentConfig.color),
       ),
       child: Stack(
@@ -43,7 +43,7 @@ class TrainingCard extends StatelessWidget {
             child: Container(
               clipBehavior: Clip.hardEdge,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(AppStyles.borderRadius.xl5),
+                borderRadius: BorderRadius.all(AppStyles.borderRadius.r30),
               ),
               child: currentConfig.image.image(
                 fit: BoxFit.cover,
@@ -55,7 +55,7 @@ class TrainingCard extends StatelessWidget {
           Positioned.fill(
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(AppStyles.borderRadius.xl5),
+                borderRadius: BorderRadius.all(AppStyles.borderRadius.r30),
                 gradient: LinearGradient(
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,

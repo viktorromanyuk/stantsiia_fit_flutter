@@ -13,7 +13,7 @@ class TrainingsLoader extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) => Container(
           height: 400,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(AppStyles.borderRadius.xl5),
+            borderRadius: BorderRadius.all(AppStyles.borderRadius.r30),
             boxShadow: AppStyles.boxShadow.glow(AppStyles.colors.grayLight),
           ),
           child: Stack(
@@ -21,7 +21,7 @@ class TrainingsLoader extends StatelessWidget {
               Positioned.fill(
                 child: AppShimmer(
                   theme: ThemeMode.dark,
-                  borderRadius: AppStyles.borderRadius.xl5.x,
+                  borderRadius: AppStyles.borderRadius.r30.x,
                 ),
               ),
 

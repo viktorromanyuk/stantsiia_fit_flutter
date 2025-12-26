@@ -54,7 +54,7 @@ class CalendarWeekDayButton extends StatelessWidget {
         ),
         alignment: Alignment.center,
         child: DefaultTextStyle(
-          style: AppStyles.fontSize.xs.copyWith(
+          style: AppStyles.fontSize.fs12.copyWith(
             color: textColor,
             height: 1,
           ),

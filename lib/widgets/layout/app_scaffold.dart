@@ -67,11 +67,12 @@ class AppScaffold extends StatelessWidget {
           modalBarrierColor: AppStyles.colors.black.withValues(alpha: 0.7),
           modalElevation: 0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: AppStyles.borderRadius.xl4),
+            borderRadius: BorderRadius.vertical(top: AppStyles.borderRadius.r24),
           ),
         ),
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: onRefresh == null || Platform.isIOS
             ? mainView
             : RefreshIndicator(

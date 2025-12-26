@@ -12,7 +12,7 @@ class ScheduleTrainingTitle extends StatelessWidget {
       height: 20,
       child: Text(
         title.toUpperCase(),
-        style: AppStyles.fontSize.md.copyWith(
+        style: AppStyles.fontSize.fs16.copyWith(
           fontFamily: FontFamily.unbounded,
           height: AppStyles.lineHeight.condensed,
         ),

@@ -3,19 +3,40 @@ import 'package:auto_route/auto_route.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
 import 'package:stantsiia_fit_flutter/styles/styles.dart';
 import 'package:stantsiia_fit_flutter/gen/assets.gen.dart';
+import 'package:stantsiia_fit_flutter/router/router.gr.dart';
 
 @RoutePage()
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
 
-  static final List<List<({String title, SvgGenImage icon, VoidCallback? action})>> _navTiles = [
+  static final List<List<({String title, SvgGenImage icon, PageRouteInfo? route, VoidCallback? action})>> _navTiles = [
     [
-      (title: 'Мій профіль', icon: Assets.icons.user, action: null),
-      (title: 'Мій розклад', icon: Assets.icons.schedule, action: null),
-      (title: 'Мої абонементи', icon: Assets.icons.trainingPackage, action: null),
+      (
+        title: 'Мій профіль',
+        icon: Assets.icons.user,
+        route: const AccountProfileRoute(),
+        action: null,
+      ),
+      (
+        title: 'Мій розклад',
+        icon: Assets.icons.schedule,
+        route: const AccountScheduleRoute(),
+        action: null,
+      ),
+      (
+        title: 'Мої абонементи',
+        icon: Assets.icons.trainingPackage,
+        route: const AccountTrainingsPackagesRoute(),
+        action: null,
+      ),
     ],
     [
-      (title: 'Вийти', icon: Assets.icons.logout, action: () => print('logout')),
+      (
+        title: 'Вийти',
+        icon: Assets.icons.logout,
+        route: null,
+        action: () => print('logout'),
+      ),
     ],
   ];
 
@@ -40,7 +61,7 @@ class AccountScreen extends StatelessWidget {
                         radius: 48,
                         child: Text(
                           'ВР',
-                          style: AppStyles.fontSize.xl2.copyWith(
+                          style: AppStyles.fontSize.fs20.copyWith(
                             fontFamily: FontFamily.unbounded,
                           ),
                         ),
@@ -48,7 +69,7 @@ class AccountScreen extends StatelessWidget {
 
                       Text(
                         'Віктор Романюк',
-                        style: AppStyles.fontSize.xl2.copyWith(
+                        style: AppStyles.fontSize.fs20.copyWith(
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -68,28 +89,49 @@ class AccountScreen extends StatelessWidget {
 
                         final isFirstInGroup = itemIndex == 0;
                         final isLastInGroup = itemIndex == items.length - 1;
+                        final borderRadius = BorderRadius.vertical(
+                          top: isFirstInGroup ? AppStyles.borderRadius.r30 : AppStyles.borderRadius.r6,
+                          bottom: isLastInGroup ? AppStyles.borderRadius.r30 : AppStyles.borderRadius.r6,
+                        );
 
-                        return DecoratedBox(
-                          decoration: BoxDecoration(
-                            color: AppStyles.colors.grayMilk,
-                            border: Border.all(color: AppStyles.colors.grayLight.withValues(alpha: 0.7)),
-                            borderRadius: BorderRadius.vertical(
-                              top: isFirstInGroup ? AppStyles.borderRadius.xl5 : AppStyles.borderRadius.lg,
-                              bottom: isLastInGroup ? AppStyles.borderRadius.xl5 : AppStyles.borderRadius.lg,
+                        return Material(
+                          color: Colors.transparent,
+                          shape: RoundedRectangleBorder(borderRadius: borderRadius),
+                          clipBehavior: Clip.antiAlias,
+                          child: Ink(
+                            decoration: BoxDecoration(
+                              color: AppStyles.colors.grayMilk,
+                              border: Border.all(color: AppStyles.colors.grayLight.withValues(alpha: 0.7)),
+                              borderRadius: borderRadius,
                             ),
-                          ),
-                          child: ListTile(
-                            horizontalTitleGap: 12,
-                            trailing: data.action == null ? AppIcon(Assets.icons.caretRight, height: 12) : null,
-                            leading: SizedBox(
-                              width: 24,
-                              child: Center(child: AppIcon(data.icon)),
+                            child: InkResponse(
+                              splashFactory: InkSparkle.splashFactory,
+                              containedInkWell: true,
+                              highlightShape: BoxShape.rectangle,
+                              borderRadius: borderRadius,
+                              onTap: data.action != null
+                                  ? data.action!
+                                  : data.route != null
+                                  ? () => context.router.push(data.route!)
+                                  : null,
+                              child: ListTile(
+                                horizontalTitleGap: 12,
+                                trailing: data.action == null ? AppIcon(Assets.icons.caretRight, height: 12) : null,
+                                leading: SizedBox(
+                                  width: 24,
+                                  child: Center(child: AppIcon(data.icon)),
+                                ),
+                                title: Text(
+                                  data.title,
+                                  style: TextStyle(fontWeight: FontWeight.w500),
+                                ),
+                                onTap: data.action != null
+                                    ? data.action!
+                                    : data.route != null
+                                    ? () => context.router.push(data.route!)
+                                    : null,
+                              ),
                             ),
-                            title: Text(
-                              data.title,
-                              style: TextStyle(fontWeight: FontWeight.w500),
-                            ),
-                            onTap: data.action,
                           ),
                         );
                       }).toList();

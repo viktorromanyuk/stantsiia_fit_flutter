@@ -31,6 +31,9 @@ abstract final class AppColors {
 
     // Error
     Color error,
+    Color disabledBg,
+    Color disabledText,
+    Color placeholder,
   })
   values = (
     // Base
@@ -60,7 +63,10 @@ abstract final class AppColors {
     green200: Color(0xFF00875C),
     green300: Color(0xFF005A3E),
 
-    // Error
+    // Form
     error: Color(0xFFf56c6c),
+    disabledBg: Color(0xFFf5f7fa),
+    disabledText: Color(0xFFc0c4cc),
+    placeholder: Color(0xFFa8abb2),
   );
 }

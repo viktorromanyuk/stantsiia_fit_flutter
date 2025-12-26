@@ -15,7 +15,7 @@ class ScheduleTrainingTime extends StatelessWidget {
       children: [
         Text(
           time,
-          style: AppStyles.fontSize.sm.copyWith(
+          style: AppStyles.fontSize.fs14.copyWith(
             fontFamily: FontFamily.unbounded,
             height: AppStyles.lineHeight.condensed,
           ),
@@ -24,7 +24,7 @@ class ScheduleTrainingTime extends StatelessWidget {
           opacity: 0.6,
           child: Text(
             '($duration хв.)',
-            style: AppStyles.fontSize.sm.copyWith(
+            style: AppStyles.fontSize.fs14.copyWith(
               fontWeight: FontWeight.w500,
               height: AppStyles.lineHeight.none,
             ),

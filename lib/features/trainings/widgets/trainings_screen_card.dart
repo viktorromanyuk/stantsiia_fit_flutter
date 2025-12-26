@@ -31,7 +31,7 @@ class TrainingScreenCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
             child: Text(
               training.label,
-              style: AppStyles.fontSize.xl4.copyWith(
+              style: AppStyles.fontSize.fs20.copyWith(
                 fontWeight: FontWeight.w600,
                 fontFamily: FontFamily.unbounded,
               ),

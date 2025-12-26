@@ -31,7 +31,7 @@ class AppNavigationBar extends StatelessWidget {
           (states) => IconThemeData(color: _getColor(states)),
         ),
         labelTextStyle: WidgetStateProperty.resolveWith(
-          (states) => AppStyles.fontSize.xs.copyWith(
+          (states) => AppStyles.fontSize.fs12.copyWith(
             color: _getColor(states),
             fontWeight: FontWeight.w500,
           ),

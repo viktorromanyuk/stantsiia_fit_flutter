@@ -22,7 +22,17 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: ScheduleRoute.page, path: 'schedule'),
         AutoRoute(page: TrainingsRoute.page, path: 'trainings'),
         AutoRoute(page: TrainingsPackagesRoute.page, path: 'trainings-packages'),
-        AutoRoute(page: AccountRoute.page, path: 'account'),
+        AutoRoute(
+          page: ShellRoute.page,
+          path: 'account',
+          maintainState: false,
+          children: [
+            AutoRoute(page: AccountRoute.page, path: '', initial: true),
+            AutoRoute(page: AccountProfileRoute.page, path: 'profile'),
+            AutoRoute(page: AccountScheduleRoute.page, path: 'schedule'),
+            AutoRoute(page: AccountTrainingsPackagesRoute.page, path: 'trainings-packages'),
+          ],
+        ),
       ],
     ),
   ];

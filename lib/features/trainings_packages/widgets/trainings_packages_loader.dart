@@ -16,7 +16,7 @@ class TrainingsPackagesLoader extends StatelessWidget {
             Positioned.fill(
               child: AppShimmer(
                 theme: ThemeMode.dark,
-                borderRadius: AppStyles.borderRadius.xl5.x,
+                borderRadius: AppStyles.borderRadius.r30.x,
               ),
             ),
             AppShimmer.builder(

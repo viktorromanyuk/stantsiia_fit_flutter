@@ -143,7 +143,7 @@ class AppSliverAppBar extends StatelessWidget {
           foregroundColor: colors.toolbarForeground,
           title: Text(
             title,
-            style: AppStyles.fontSize.xl.copyWith(
+            style: AppStyles.fontSize.fs20.copyWith(
               height: AppStyles.lineHeight.none,
               fontFamily: FontFamily.unbounded,
               color: colors.toolbarForeground,

@@ -36,7 +36,7 @@ class AppButton extends StatelessWidget {
           side: BorderSide(color: config.contrastColor, width: 2),
           backgroundColor: config.mainColor,
           foregroundColor: config.contrastColor,
-          textStyle: AppStyles.fontSize.lg.copyWith(fontFamily: FontFamily.unbounded),
+          textStyle: AppStyles.fontSize.fs18.copyWith(fontFamily: FontFamily.unbounded),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(AppStyles.borderRadius.full),
           ),

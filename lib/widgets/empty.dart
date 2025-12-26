@@ -20,7 +20,7 @@ class Empty extends StatelessWidget {
           AppIcon(Assets.icons.empty, width: 160),
           Text(
             description,
-            style: AppStyles.fontSize.sm.copyWith(
+            style: AppStyles.fontSize.fs14.copyWith(
               fontFamily: FontFamily.unbounded,
               fontWeight: FontWeight.w500,
               color: context.theme.isLight ? AppStyles.colors.grayDark : AppStyles.colors.whiteMilk,

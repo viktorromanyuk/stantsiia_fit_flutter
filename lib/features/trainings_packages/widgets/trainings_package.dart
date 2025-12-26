@@ -17,14 +17,14 @@ class TrainingsPackage extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: AppStyles.colors.grayDark,
-        borderRadius: BorderRadius.all(AppStyles.borderRadius.xl5),
+        borderRadius: BorderRadius.all(AppStyles.borderRadius.r30),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             package.name ?? '',
-            style: (context.breakpoints.maxMd ? AppStyles.fontSize.xl : AppStyles.fontSize.xl2).copyWith(
+            style: (context.breakpoints.maxMd ? AppStyles.fontSize.fs20 : AppStyles.fontSize.fs20).copyWith(
               fontFamily: FontFamily.unbounded,
               color: AppStyles.colors.whiteMilk,
             ),
@@ -34,7 +34,7 @@ class TrainingsPackage extends StatelessWidget {
 
           RichText(
             text: TextSpan(
-              style: (context.breakpoints.maxMd ? AppStyles.fontSize.xl : AppStyles.fontSize.xl2).copyWith(
+              style: (context.breakpoints.maxMd ? AppStyles.fontSize.fs20 : AppStyles.fontSize.fs20).copyWith(
                 color: AppStyles.colors.purple100,
               ),
               children: [
@@ -55,7 +55,7 @@ class TrainingsPackage extends StatelessWidget {
           Text(
             'Термін дії - ${numberToWord(package.duration, ['місяць', 'місяці', 'місяців', 'місяця'])}',
 
-            style: (context.breakpoints.maxMd ? AppStyles.fontSize.md : AppStyles.fontSize.lg).copyWith(
+            style: (context.breakpoints.maxMd ? AppStyles.fontSize.fs16 : AppStyles.fontSize.fs18).copyWith(
               fontWeight: FontWeight.w500,
               color: AppStyles.colors.whiteMilk,
             ),
