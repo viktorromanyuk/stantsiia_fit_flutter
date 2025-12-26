@@ -4,7 +4,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'package:stantsiia_fit_flutter/core/enums/enums.dart';
 import 'package:stantsiia_fit_flutter/core/models/models.dart';
-import 'package:stantsiia_fit_flutter/styles/styles.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
 import 'package:stantsiia_fit_flutter/core/extensions/extensions.dart';
 
@@ -49,7 +48,7 @@ class _TrainingsScreenState extends State<TrainingsScreen> {
   Widget build(BuildContext context) {
     return FutureBuilder<List<TrainingModel>>(
       future: _trainingsFuture,
-      builder: (context, snapshot) {
+      builder: (_, snapshot) {
         List<TrainingModel> data = _selectedFilter == null
             ? snapshot.data?.toList() ?? []
             : snapshot.data?.where((training) => _selectedFilter == training.type).toList() ?? [];
@@ -60,14 +59,18 @@ class _TrainingsScreenState extends State<TrainingsScreen> {
           onRefresh: _refresh,
           appBar: AppSliverAppBar(
             title: 'Тренування',
-            actionsBuilder: (context, constraints, tColor) => [
+            actionsBuilder: (scaffoldContext, _, _) => [
               PingingFilterButton(
                 isActive: _selectedFilter != null,
-                onPressed: () => _showFilterBottomSheet(context),
+                onPressed: () => showTrainingsFilterBottomSheet(
+                  context: scaffoldContext,
+                  selectedFilter: _selectedFilter,
+                  onChanged: (value) => setState(() => _selectedFilter = value),
+                ),
               ),
             ],
           ),
-          children: [
+          children: (scaffoldContext) => [
             AppSliverFutureState(
               isEmpty: data.isEmpty,
               isWaiting: snapshot.isWaiting,
@@ -77,41 +80,15 @@ class _TrainingsScreenState extends State<TrainingsScreen> {
               emptyText: 'Немає тренувань',
               content: TrainingsList(
                 trainings: data,
-                onItemTap: (training) => _showTrainingInfoDialog(context, training),
+                onItemTap: (training) => showTrainingInfoDialog(
+                  context: scaffoldContext,
+                  training: training,
+                ),
               ),
             ),
           ],
         );
       },
-    );
-  }
-
-  void _showFilterBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      showDragHandle: true,
-      backgroundColor: AppStyles.colors.grayDark,
-      builder: (context) => TrainingsFilterDialog(
-        selectedFilter: _selectedFilter,
-        onChanged: (value) {
-          setState(() {
-            _selectedFilter = value;
-          });
-        },
-      ),
-    );
-  }
-
-  void _showTrainingInfoDialog(BuildContext context, TrainingModel training) {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: AppStyles.colors.grayDark,
-      isScrollControlled: true,
-      showDragHandle: true,
-      builder: (context) => SizedBox(
-        height: MediaQuery.of(context).size.height * 0.7,
-        child: TrainingInfoDialog(training: training),
-      ),
     );
   }
 }

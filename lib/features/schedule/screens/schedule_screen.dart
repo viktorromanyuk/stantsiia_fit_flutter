@@ -66,7 +66,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   ),
                 ),
               ),
-              children: [
+              children: (context) => [
                 AppSliverFutureState(
                   isWaiting: scheduleSnapshot.isWaiting,
                   isEmpty: filteredSchedule.isEmpty,

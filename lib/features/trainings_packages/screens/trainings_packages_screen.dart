@@ -3,7 +3,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
 import 'package:stantsiia_fit_flutter/core/models/models.dart';
-import 'package:stantsiia_fit_flutter/styles/styles.dart';
 import 'package:stantsiia_fit_flutter/core/extensions/extensions.dart';
 
 import '../widgets/widgets.dart';
@@ -37,7 +36,7 @@ class _TrainingsPackagesScreenState extends State<TrainingsPackagesScreen> {
           scrollable: !snapshot.isWaiting || data.isEmpty,
           onRefresh: _refresh,
           appBar: const AppSliverAppBar(title: 'Абонементи'),
-          children: [
+          children: (context) => [
             AppSliverFutureState(
               isEmpty: data.isEmpty,
               isWaiting: snapshot.isWaiting,
@@ -47,7 +46,7 @@ class _TrainingsPackagesScreenState extends State<TrainingsPackagesScreen> {
               emptyText: 'Немає абонементів',
               content: TrainingsPackagesList(
                 packages: data,
-                onItemTap: (package) => _showTrainingsPackagePurchaseDialog(context, package),
+                onItemTap: (package) => showTrainingsPackagePurchaseDialog(context, package),
               ),
             ),
           ],
@@ -71,14 +70,5 @@ class _TrainingsPackagesScreenState extends State<TrainingsPackagesScreen> {
       _packagesFuture = _getTrainingsPackages();
     });
     await _packagesFuture;
-  }
-
-  void _showTrainingsPackagePurchaseDialog(BuildContext context, TrainingsPackageModel package) {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: AppStyles.colors.whiteMilk,
-      showDragHandle: true,
-      builder: (context) => TrainingsPackagePurchaseDialog(package: package),
-    );
   }
 }

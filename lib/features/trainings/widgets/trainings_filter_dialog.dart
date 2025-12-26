@@ -77,3 +77,18 @@ class TrainingsFilterDialog extends StatelessWidget {
     );
   }
 }
+
+void showTrainingsFilterBottomSheet({
+  required BuildContext context,
+  required TrainingTypeEnum? selectedFilter,
+  required ValueChanged<TrainingTypeEnum?> onChanged,
+}) {
+  showModalBottomSheet(
+    context: context,
+    showDragHandle: true,
+    builder: (_) => TrainingsFilterDialog(
+      selectedFilter: selectedFilter,
+      onChanged: onChanged,
+    ),
+  );
+}

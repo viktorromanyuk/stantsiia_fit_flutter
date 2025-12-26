@@ -36,7 +36,7 @@ class _AccountProfileScreenState extends State<AccountProfileScreen> {
         title: 'Мій профіль',
       ),
 
-      children: [
+      children: (context) => [
         SliverPadding(
           padding: const EdgeInsets.all(16),
           sliver: SliverToBoxAdapter(

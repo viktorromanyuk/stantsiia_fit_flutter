@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
 import 'package:stantsiia_fit_flutter/core/models/models.dart';
+import 'package:stantsiia_fit_flutter/styles/styles.dart';
 
 import './trainings_package.dart';
 
@@ -32,4 +33,13 @@ class TrainingsPackagePurchaseDialog extends StatelessWidget {
       ),
     );
   }
+}
+
+void showTrainingsPackagePurchaseDialog(BuildContext context, TrainingsPackageModel package) {
+  showModalBottomSheet(
+    context: context,
+    backgroundColor: AppStyles.colors.whiteMilk,
+    showDragHandle: true,
+    builder: (_) => TrainingsPackagePurchaseDialog(package: package),
+  );
 }

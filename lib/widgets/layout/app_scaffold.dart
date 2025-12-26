@@ -11,14 +11,14 @@ class AppScaffold extends StatelessWidget {
     super.key,
     this.appBar,
     this.theme = ThemeMode.light,
-    this.children = const [],
+    this.children,
     this.scrollable = true,
     this.onRefresh,
   });
 
   final ThemeMode theme;
   final AppSliverAppBar? appBar;
-  final List<Widget> children;
+  final List<Widget> Function(BuildContext context)? children;
   final bool scrollable;
   final RefreshCallback? onRefresh;
 
@@ -29,18 +29,6 @@ class AppScaffold extends StatelessWidget {
     final textColor = isLightTheme ? AppStyles.colors.grayDark : AppStyles.colors.whiteMilk;
     final backgroundColor = isLightTheme ? AppStyles.colors.whiteMilk : AppStyles.colors.grayDark;
     final brightness = isLightTheme ? Brightness.light : Brightness.dark;
-
-    final mainView = CustomScrollView(
-      physics: scrollable ? null : NeverScrollableScrollPhysics(),
-      slivers: [
-        if (appBar != null) appBar!,
-        if (Platform.isIOS && onRefresh != null)
-          RefreshControl(
-            onRefresh: onRefresh!,
-          ),
-        ...children,
-      ],
-    );
 
     // TODO: move theme to separate file
     return Theme(
@@ -71,19 +59,36 @@ class AppScaffold extends StatelessWidget {
           ),
         ),
       ),
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: onRefresh == null || Platform.isIOS
-            ? mainView
-            : RefreshIndicator(
-                elevation: 1,
-                edgeOffset: 130,
-                displacement: 0,
-                triggerMode: RefreshIndicatorTriggerMode.onEdge,
-                notificationPredicate: (notification) => notification.depth == 0,
-                onRefresh: onRefresh!,
-                child: mainView,
-              ),
+      // Builder provides a context inside this Theme so descendants inherit it
+      child: Builder(
+        builder: (themedContext) {
+          final mainView = CustomScrollView(
+            physics: scrollable ? null : NeverScrollableScrollPhysics(),
+            slivers: [
+              if (appBar != null) appBar!,
+              if (Platform.isIOS && onRefresh != null)
+                RefreshControl(
+                  onRefresh: onRefresh!,
+                ),
+              ...children?.call(themedContext) ?? [],
+            ],
+          );
+
+          return Scaffold(
+            resizeToAvoidBottomInset: false,
+            body: onRefresh == null || Platform.isIOS
+                ? mainView
+                : RefreshIndicator(
+                    elevation: 1,
+                    edgeOffset: 130,
+                    displacement: 0,
+                    triggerMode: RefreshIndicatorTriggerMode.onEdge,
+                    notificationPredicate: (notification) => notification.depth == 0,
+                    onRefresh: onRefresh!,
+                    child: mainView,
+                  ),
+          );
+        },
       ),
     );
   }

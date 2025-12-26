@@ -45,7 +45,7 @@ class AccountScreen extends StatelessWidget {
     return AppScaffold(
       theme: ThemeMode.light,
       scrollable: false,
-      children: [
+      children: (context) => [
         SliverToBoxAdapter(
           child: SafeArea(
             child: Padding(

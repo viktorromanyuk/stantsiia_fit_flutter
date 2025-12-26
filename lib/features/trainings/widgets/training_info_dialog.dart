@@ -81,3 +81,21 @@ class TrainingInfoDialog extends StatelessWidget {
     );
   }
 }
+
+void showTrainingInfoDialog({
+  required BuildContext context,
+  required TrainingModel training,
+}) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    showDragHandle: true,
+    builder: (_) {
+      final height = MediaQuery.of(context).size.height * 0.7;
+      return SizedBox(
+        height: height,
+        child: TrainingInfoDialog(training: training),
+      );
+    },
+  );
+}
