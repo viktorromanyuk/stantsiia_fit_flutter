@@ -18,6 +18,16 @@ class _AccountProfileScreenState extends State<AccountProfileScreen> {
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController(text: 'viktoraromanyuk@gmail.com');
 
+  bool _isLoading = false;
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _phoneController.dispose();
+    _emailController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
@@ -40,6 +50,7 @@ class _AccountProfileScreenState extends State<AccountProfileScreen> {
                     hint: 'Введіть ім\'я та прізвище',
                     controller: _nameController,
                     required: true,
+                    enabled: !_isLoading,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         print('error');
@@ -56,6 +67,7 @@ class _AccountProfileScreenState extends State<AccountProfileScreen> {
                     controller: _phoneController,
                     inputFormatters: [AppInputFormatters.phone],
                     required: true,
+                    enabled: !_isLoading,
                     validator: (value) {
                       final phone = value?.trim() ?? '';
 
@@ -79,9 +91,19 @@ class _AccountProfileScreenState extends State<AccountProfileScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 14),
                     child: AppButton(
-                      onPressed: () {
-                        print('validate');
-                        _formKey.currentState?.validate();
+                      isLoading: _isLoading,
+                      onPressed: () async {
+                        if (_formKey.currentState?.validate() ?? false) {
+                          if (mounted) {
+                            setState(() => _isLoading = true);
+                          }
+
+                          await Future.delayed(const Duration(seconds: 2));
+
+                          if (mounted) {
+                            setState(() => _isLoading = false);
+                          }
+                        }
                       },
                       text: 'Зберегти',
                     ),

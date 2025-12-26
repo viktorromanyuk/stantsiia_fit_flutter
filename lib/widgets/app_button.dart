@@ -11,6 +11,7 @@ class AppButton extends StatelessWidget {
     this.height = 64,
     this.theme = ThemeMode.light,
     this.showArrow = false,
+    this.isLoading = false,
   });
 
   final VoidCallback onPressed;
@@ -18,7 +19,7 @@ class AppButton extends StatelessWidget {
   final double height;
   final bool showArrow;
   final ThemeMode theme;
-
+  final bool isLoading;
   bool get isLight => theme == ThemeMode.light;
 
   ({Color mainColor, Color contrastColor}) get config => (
@@ -41,20 +42,40 @@ class AppButton extends StatelessWidget {
             borderRadius: BorderRadius.all(AppStyles.borderRadius.full),
           ),
         ),
-        onPressed: onPressed,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          spacing: 12,
+        onPressed: isLoading ? null : onPressed,
+        child: Stack(
           children: [
-            Text(text),
-            if (showArrow)
-              Padding(
-                padding: const EdgeInsets.only(top: 5),
-                child: AppIcon(
-                  Assets.icons.arrowRight,
-                  width: 20,
-                  color: config.contrastColor,
+            Positioned.fill(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                spacing: 12,
+                children: [
+                  AnimatedOpacity(
+                    opacity: isLoading ? 0.3 : 1,
+                    duration: Duration(milliseconds: 300),
+                    child: Text(text),
+                  ),
+                  if (showArrow)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5),
+                      child: AppIcon(
+                        Assets.icons.arrowRight,
+                        width: 20,
+                        color: config.contrastColor,
+                      ),
+                    ),
+                ],
+              ),
+            ),
+
+            if (isLoading)
+              Positioned.fill(
+                child: Center(
+                  child: CircularProgressIndicator(
+                    color: config.contrastColor,
+                    strokeWidth: 2,
+                  ),
                 ),
               ),
           ],
