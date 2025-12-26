@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-
 import 'package:stantsiia_fit_flutter/core/enums/enums.dart';
 import 'package:stantsiia_fit_flutter/core/models/models.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
 import 'package:stantsiia_fit_flutter/core/extensions/extensions.dart';
 
+import '../services/services.dart';
 import '../widgets/widgets.dart';
 
 @RoutePage()
@@ -18,25 +17,10 @@ class TrainingsScreen extends StatefulWidget {
 }
 
 class _TrainingsScreenState extends State<TrainingsScreen> {
+  final _trainingsService = const TrainingsService();
+
   TrainingTypeEnum? _selectedFilter;
   late Future<List<TrainingModel>> _trainingsFuture;
-
-  Future<List<TrainingModel>> _getTrainings() async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    return Supabase.instance.client
-        .from('fit_trainings')
-        .select('*')
-        .withConverter(
-          (data) => data.map(TrainingModel.fromJson).toList(),
-        );
-  }
-
-  Future<void> _refresh() async {
-    setState(() {
-      _trainingsFuture = _getTrainings();
-    });
-    await _trainingsFuture;
-  }
 
   @override
   void initState() {
@@ -49,9 +33,8 @@ class _TrainingsScreenState extends State<TrainingsScreen> {
     return FutureBuilder<List<TrainingModel>>(
       future: _trainingsFuture,
       builder: (_, snapshot) {
-        List<TrainingModel> data = _selectedFilter == null
-            ? snapshot.data?.toList() ?? []
-            : snapshot.data?.where((training) => _selectedFilter == training.type).toList() ?? [];
+        final trainings = snapshot.data ?? [];
+        final data = _trainingsService.filterByType(trainings, _selectedFilter);
 
         return AppScaffold(
           theme: ThemeMode.dark,
@@ -90,5 +73,12 @@ class _TrainingsScreenState extends State<TrainingsScreen> {
         );
       },
     );
+  }
+
+  Future<void> _refresh() async {
+    setState(() {
+      _trainingsFuture = _trainingsService.getTrainings();
+    });
+    await _trainingsFuture;
   }
 }

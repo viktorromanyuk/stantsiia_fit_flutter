@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
 import 'package:stantsiia_fit_flutter/core/models/models.dart';
 import 'package:stantsiia_fit_flutter/core/extensions/extensions.dart';
 
+import '../services/services.dart';
 import '../widgets/widgets.dart';
 
 @RoutePage()
@@ -16,6 +16,8 @@ class TrainingsPackagesScreen extends StatefulWidget {
 }
 
 class _TrainingsPackagesScreenState extends State<TrainingsPackagesScreen> {
+  final _trainingsPackagesService = const TrainingsPackagesService();
+
   late Future<List<TrainingsPackageModel>> _packagesFuture;
 
   @override
@@ -55,19 +57,9 @@ class _TrainingsPackagesScreenState extends State<TrainingsPackagesScreen> {
     );
   }
 
-  Future<List<TrainingsPackageModel>> _getTrainingsPackages() async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    return Supabase.instance.client
-        .from('fit_trainings_packages')
-        .select('*')
-        .withConverter(
-          (data) => data.map(TrainingsPackageModel.fromJson).toList(),
-        );
-  }
-
   Future<void> _refresh() async {
     setState(() {
-      _packagesFuture = _getTrainingsPackages();
+      _packagesFuture = _trainingsPackagesService.getPackages();
     });
     await _packagesFuture;
   }
