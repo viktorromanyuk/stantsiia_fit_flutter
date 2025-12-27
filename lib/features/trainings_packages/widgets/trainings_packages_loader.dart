@@ -8,7 +8,7 @@ class TrainingsPackagesLoader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
 
       sliver: SliverList.separated(
         itemBuilder: (BuildContext context, int index) => Container(

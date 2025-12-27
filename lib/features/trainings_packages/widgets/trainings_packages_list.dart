@@ -15,7 +15,7 @@ class TrainingsPackagesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
       sliver: SliverList.separated(
         itemBuilder: (context, index) => GestureDetector(
           onTap: () => onItemTap(packages[index]),

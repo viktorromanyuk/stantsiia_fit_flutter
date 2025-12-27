@@ -10,7 +10,6 @@ class AppSliverAppBar extends StatelessWidget {
   const AppSliverAppBar({
     super.key,
     required this.title,
-    this.withBorder = true,
     this.withBorderRadius = false,
     this.flexibleSpaceTitle,
     this.leading,
@@ -20,7 +19,6 @@ class AppSliverAppBar extends StatelessWidget {
   });
 
   final String title;
-  final bool withBorder;
   final bool withBorderRadius;
   final String? flexibleSpaceTitle;
   final Widget? leading;
@@ -57,6 +55,10 @@ class AppSliverAppBar extends StatelessWidget {
 
     return SliverLayoutBuilder(
       builder: (context, constraints) {
+        final bottomHeight = bottom?.preferredSize.height ?? 0.0;
+        final double collapsedHeight = toolbarHeight.collapsed + bottomHeight;
+        final double expandedHeight = toolbarHeight.expanded + bottomHeight;
+
         final appBarState = _getAppBarState(
           offset: constraints.scrollOffset,
           min: kToolbarHeight,
@@ -68,10 +70,6 @@ class AppSliverAppBar extends StatelessWidget {
           AppStyles.colors.whiteMilk,
           appBarState.collapsed,
         )!;
-
-        final bottomHeight = bottom?.preferredSize.height ?? 0.0;
-        final double collapsedHeight = toolbarHeight.collapsed + bottomHeight;
-        final double expandedHeight = toolbarHeight.expanded + bottomHeight + (bottomHeight > 0 ? 16 : 0);
 
         final titlePadding = EdgeInsets.fromLTRB(
           _kTitleHorizontalPadding,
@@ -115,6 +113,7 @@ class AppSliverAppBar extends StatelessWidget {
   Widget _buildFlexibleSpace({
     required BuildContext context,
     required Color borderColor,
+
     required EdgeInsets titlePadding,
     required AppBarState appBarState,
     required String title,

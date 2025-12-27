@@ -33,9 +33,7 @@ class CalendarWeekDayButton extends StatelessWidget {
       onPressed: isDisabled ? null : () => onPressed(day),
       style: TextButton.styleFrom(
         padding: EdgeInsets.zero,
-        minimumSize: const Size(40, 40),
         shape: const CircleBorder(),
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 150),

@@ -109,17 +109,15 @@ class _CalendarWeekState extends State<CalendarWeek> {
       child: Row(
         spacing: 4,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: week
             .map(
               (day) => Expanded(
-                child: Align(
-                  alignment: Alignment.center,
-                  child: CalendarWeekDayButton(
-                    day: day,
-                    isSelected: day.dateRaw.isSameDay(widget.value),
-                    isToday: day.dateRaw.isSameDay(today),
-                    onPressed: (selectedDay) => widget.onChanged(selectedDay.dateRaw),
-                  ),
+                child: CalendarWeekDayButton(
+                  day: day,
+                  isSelected: day.dateRaw.isSameDay(widget.value),
+                  isToday: day.dateRaw.isSameDay(today),
+                  onPressed: (selectedDay) => widget.onChanged(selectedDay.dateRaw),
                 ),
               ),
             )
@@ -142,7 +140,7 @@ class _CalendarWeekState extends State<CalendarWeek> {
       widget.onChanged(nextDay);
 
       final shouldGoToNextWeek =
-          nextDay.weekday == DateTime.sunday &&
+          nextDay.weekday == DateTime.monday &&
           _activeWeekIndex < _availableWeeks.length - 1 &&
           _pageViewController.hasClients;
 

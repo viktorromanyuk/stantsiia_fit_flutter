@@ -8,7 +8,7 @@ class ScheduleLoader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),
       sliver: SliverList.separated(
         itemCount: 4,
         itemBuilder: (context, index) {

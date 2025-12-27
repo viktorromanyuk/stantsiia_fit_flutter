@@ -51,13 +51,11 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           builder: (context, attendeesSnapshot) {
             final attendeesCount = attendeesSnapshot.data ?? const <int, int>{};
             final filteredSchedule = _scheduleService.filterSchedule(schedule, _selectedDate, _selectedFilter);
-            print('filteredSchedule: $filteredSchedule');
 
             return AppScaffold(
               scrollable: !scheduleSnapshot.isWaiting && filteredSchedule.isNotEmpty,
               onRefresh: _refresh,
               appBar: AppSliverAppBar(
-                withBorder: true,
                 withBorderRadius: true,
                 title: '$activeMonth $activeYear',
                 bottom: PreferredSize(
