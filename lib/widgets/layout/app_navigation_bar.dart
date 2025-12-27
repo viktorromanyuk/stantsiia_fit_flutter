@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:stantsiia_fit_flutter/gen/assets.gen.dart';
@@ -7,6 +8,8 @@ import 'package:stantsiia_fit_flutter/styles/styles.dart';
 class AppNavigationBar extends StatelessWidget {
   const AppNavigationBar({super.key, required this.tabsRouter});
   final TabsRouter tabsRouter;
+
+  static const double _kBlurSigma = 7.0;
 
   Color _getColor(Set<WidgetState> states) {
     return states.contains(WidgetState.selected) ? AppStyles.colors.orange100 : AppStyles.colors.whiteMilk;
@@ -37,23 +40,35 @@ class AppNavigationBar extends StatelessWidget {
           ),
         ),
       ),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border(top: BorderSide(color: AppStyles.colors.grayLight, width: 0.5)),
-        ),
-        child: NavigationBar(
-          backgroundColor: AppStyles.colors.grayDark,
-          overlayColor: WidgetStateProperty.all(Colors.transparent),
-          selectedIndex: tabsRouter.activeIndex,
-          onDestinationSelected: (index) => tabsRouter.setActiveIndex(index),
-          destinations: _navDestinations
-              .map(
-                (destination) => NavigationDestination(
-                  icon: AppIcon(destination.icon),
-                  label: destination.title,
-                ),
-              )
-              .toList(),
+      child: RepaintBoundary(
+        child: PhysicalModel(
+          color: Colors.transparent,
+          clipBehavior: Clip.antiAlias,
+          child: BackdropFilter(
+            filter: ImageFilter.blur(
+              sigmaX: _kBlurSigma,
+              sigmaY: _kBlurSigma,
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border(top: BorderSide(color: AppStyles.colors.whiteMilk, width: 0.3)),
+              ),
+              child: NavigationBar(
+                backgroundColor: AppStyles.colors.grayDark.withValues(alpha: 0.5),
+                overlayColor: WidgetStateProperty.all(Colors.transparent),
+                selectedIndex: tabsRouter.activeIndex,
+                onDestinationSelected: (index) => tabsRouter.setActiveIndex(index),
+                destinations: _navDestinations
+                    .map(
+                      (destination) => NavigationDestination(
+                        icon: AppIcon(destination.icon),
+                        label: destination.title,
+                      ),
+                    )
+                    .toList(),
+              ),
+            ),
+          ),
         ),
       ),
     );

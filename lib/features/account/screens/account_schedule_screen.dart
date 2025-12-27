@@ -9,7 +9,6 @@ class AccountScheduleScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      theme: ThemeMode.light,
       appBar: AppSliverAppBar(
         title: 'Мій розклад',
       ),

@@ -9,7 +9,6 @@ class AppButton extends StatelessWidget {
     required this.onPressed,
     required this.text,
     this.height = 64,
-    this.theme = ThemeMode.light,
     this.showArrow = false,
     this.isLoading = false,
   });
@@ -18,14 +17,7 @@ class AppButton extends StatelessWidget {
   final String text;
   final double height;
   final bool showArrow;
-  final ThemeMode theme;
   final bool isLoading;
-  bool get isLight => theme == ThemeMode.light;
-
-  ({Color mainColor, Color contrastColor}) get config => (
-    mainColor: isLight ? AppStyles.colors.whiteMilk : AppStyles.colors.grayDark,
-    contrastColor: isLight ? AppStyles.colors.grayDark : AppStyles.colors.whiteMilk,
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +26,9 @@ class AppButton extends StatelessWidget {
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
           splashFactory: InkSparkle.splashFactory,
-          side: BorderSide(color: config.contrastColor, width: 2),
-          backgroundColor: config.mainColor,
-          foregroundColor: config.contrastColor,
+          side: BorderSide(color: AppStyles.colors.whiteMilk, width: 1),
+          backgroundColor: AppStyles.colors.grayDarkAccent,
+          foregroundColor: AppStyles.colors.whiteMilk,
           textStyle: AppStyles.fontSize.fs18.copyWith(fontFamily: FontFamily.unbounded),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(AppStyles.borderRadius.full),
@@ -52,8 +44,8 @@ class AppButton extends StatelessWidget {
                 spacing: 12,
                 children: [
                   AnimatedOpacity(
-                    opacity: isLoading ? 0.3 : 1,
-                    duration: Duration(milliseconds: 300),
+                    opacity: isLoading ? 0 : 1,
+                    duration: Duration(milliseconds: 200),
                     child: Text(text),
                   ),
                   if (showArrow)
@@ -62,7 +54,7 @@ class AppButton extends StatelessWidget {
                       child: AppIcon(
                         Assets.icons.arrowRight,
                         width: 20,
-                        color: config.contrastColor,
+                        color: AppStyles.colors.whiteMilk,
                       ),
                     ),
                 ],
@@ -73,7 +65,7 @@ class AppButton extends StatelessWidget {
               Positioned.fill(
                 child: Center(
                   child: CircularProgressIndicator(
-                    color: config.contrastColor,
+                    color: AppStyles.colors.whiteMilk,
                     strokeWidth: 2,
                   ),
                 ),

@@ -1,25 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:stantsiia_fit_flutter/styles/styles.dart';
 import 'package:stantsiia_fit_flutter/core/extensions/extensions.dart';
 
-typedef SliverAppBarWidgetBuilder<T> =
-    T Function(
-      BuildContext context,
-      SliverConstraints constraints,
-      Color tColor,
-    );
-
 typedef AppBarState = ({double collapsed, double expanded});
-
-typedef AppBarColors = ({
-  Color toolbarForeground,
-  Color borderColor,
-  Color flexibleTitleColor,
-  Color flexibleBackgroundColor,
-});
 
 class AppSliverAppBar extends StatelessWidget {
   const AppSliverAppBar({
@@ -28,26 +13,26 @@ class AppSliverAppBar extends StatelessWidget {
     this.withBorder = true,
     this.withBorderRadius = false,
     this.flexibleSpaceTitle,
-    this.leadingBuilder,
+    this.leading,
     this.leadingWidth,
-    this.actionsBuilder,
-    this.bottomBuilder,
+    this.actions,
+    this.bottom,
   });
 
   final String title;
   final bool withBorder;
   final bool withBorderRadius;
   final String? flexibleSpaceTitle;
-  final SliverAppBarWidgetBuilder<Widget>? leadingBuilder;
+  final Widget? leading;
   final double? leadingWidth;
-  final SliverAppBarWidgetBuilder<List<Widget>>? actionsBuilder;
-  final SliverAppBarWidgetBuilder<PreferredSizeWidget>? bottomBuilder;
+  final List<Widget>? actions;
+  final PreferredSizeWidget? bottom;
 
-  static const double _kToolbarHeight = 48.0;
+  static const double kToolbarHeight = 48.0;
   static const double _kExpandedExtraHeight = 40.0;
   static const double _kTitleHorizontalPadding = 16.0;
   static const double _kBorderRadius = 32.0;
-  static const double _kBlurSigma = 6.0;
+  static const double _kBlurSigma = 7.0;
   static const double _kTitleTranslateY = -15.0;
 
   AppBarState _getAppBarState({
@@ -61,68 +46,30 @@ class AppSliverAppBar extends StatelessWidget {
     return (collapsed: collapsed, expanded: 1.0 - collapsed);
   }
 
-  AppBarColors _getColors({
-    required bool isLightTheme,
-    required AppBarState appBarState,
-  }) {
-    final baseTextColor = isLightTheme ? AppStyles.colors.grayDark : AppStyles.colors.whiteMilk;
-    final flexibleBackgroundColor = isLightTheme ? AppStyles.colors.whiteMilk : AppStyles.colors.grayDark;
-
-    final toolbarForeground = Color.lerp(
-      baseTextColor,
-      AppStyles.colors.whiteMilk,
-      appBarState.collapsed,
-    )!;
-
-    final borderColor = Color.lerp(
-      AppStyles.colors.transparent,
-      AppStyles.colors.grayLight,
-      appBarState.collapsed,
-    )!;
-
-    final flexibleTitleColor = Color.lerp(
-      baseTextColor,
-      AppStyles.colors.grayDark,
-      appBarState.collapsed,
-    )!;
-
-    return (
-      toolbarForeground: toolbarForeground,
-      borderColor: borderColor,
-      flexibleTitleColor: flexibleTitleColor,
-      flexibleBackgroundColor: flexibleBackgroundColor,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final mediaPadding = MediaQuery.paddingOf(context);
-    final isLightTheme = context.theme.isLight;
 
     final toolbarHeight = (
-      collapsed: mediaPadding.top + _kToolbarHeight,
-      expanded: _kToolbarHeight + _kExpandedExtraHeight,
+      collapsed: mediaPadding.top + kToolbarHeight,
+      expanded: kToolbarHeight + _kExpandedExtraHeight,
     );
 
     return SliverLayoutBuilder(
       builder: (context, constraints) {
         final appBarState = _getAppBarState(
           offset: constraints.scrollOffset,
-          min: _kToolbarHeight,
+          min: kToolbarHeight,
           max: toolbarHeight.expanded,
         );
 
-        final colors = _getColors(
-          isLightTheme: isLightTheme,
-          appBarState: appBarState,
-        );
+        final borderColor = Color.lerp(
+          AppStyles.colors.transparent,
+          AppStyles.colors.whiteMilk,
+          appBarState.collapsed,
+        )!;
 
-        final bottom = bottomBuilder?.call(context, constraints, colors.toolbarForeground);
         final bottomHeight = bottom?.preferredSize.height ?? 0.0;
-
-        final leading = leadingBuilder?.call(context, constraints, colors.toolbarForeground);
-        final actions = actionsBuilder?.call(context, constraints, colors.toolbarForeground);
-
         final double collapsedHeight = toolbarHeight.collapsed + bottomHeight;
         final double expandedHeight = toolbarHeight.expanded + bottomHeight + (bottomHeight > 0 ? 16 : 0);
 
@@ -136,23 +83,21 @@ class AppSliverAppBar extends StatelessWidget {
         return SliverAppBar.medium(
           pinned: true,
           backgroundColor: AppStyles.colors.transparent,
-          toolbarHeight: _kToolbarHeight,
+          toolbarHeight: kToolbarHeight,
           expandedHeight: expandedHeight,
           collapsedHeight: collapsedHeight,
           surfaceTintColor: AppStyles.colors.transparent,
-          foregroundColor: colors.toolbarForeground,
+          foregroundColor: AppStyles.colors.whiteMilk,
           title: Text(
             title,
             style: AppStyles.fontSize.fs20.copyWith(
               height: AppStyles.lineHeight.none,
               fontFamily: FontFamily.unbounded,
-              color: colors.toolbarForeground,
             ),
           ),
           flexibleSpace: _buildFlexibleSpace(
             context: context,
-            isLightTheme: isLightTheme,
-            colors: colors,
+            borderColor: borderColor,
             titlePadding: titlePadding,
             appBarState: appBarState,
             title: title,
@@ -169,8 +114,7 @@ class AppSliverAppBar extends StatelessWidget {
 
   Widget _buildFlexibleSpace({
     required BuildContext context,
-    required bool isLightTheme,
-    required AppBarColors colors,
+    required Color borderColor,
     required EdgeInsets titlePadding,
     required AppBarState appBarState,
     required String title,
@@ -184,7 +128,6 @@ class AppSliverAppBar extends StatelessWidget {
             ? BorderRadius.vertical(bottom: Radius.circular(_kBorderRadius))
             : BorderRadius.zero,
 
-        // 🚀 PhysicalModel replaces ClipRRect → NO saveLayer penalty
         child: BackdropFilter(
           filter: ImageFilter.blur(
             sigmaX: _kBlurSigma,
@@ -192,19 +135,17 @@ class AppSliverAppBar extends StatelessWidget {
           ),
 
           // IMPORTANT: BackdropFilter must wrap the decorated container
-          child: DecoratedBox(
+          child: Container(
             decoration: BoxDecoration(
-              color: AppStyles.colors.grayDark.withValues(alpha: isLightTheme ? 0.9 : 0.5),
-
-              // Only *one* radius now — Unified clipping + decoration
+              color: AppStyles.colors.grayDark.withValues(alpha: 0.35),
               borderRadius: withBorderRadius
                   ? BorderRadius.vertical(bottom: Radius.circular(_kBorderRadius))
                   : BorderRadius.zero,
 
               border: Border(
                 bottom: BorderSide(
-                  color: colors.borderColor,
-                  width: withBorderRadius ? 0.7 : 0.5,
+                  color: borderColor,
+                  width: withBorderRadius ? 0.7 : 0.3,
                 ),
               ),
             ),
@@ -224,14 +165,9 @@ class AppSliverAppBar extends StatelessWidget {
                       fontSize: context.breakpoints.minLg ? 40 : 30,
                       height: AppStyles.lineHeight.condensed,
                       fontFamily: FontFamily.unbounded,
-                      color: colors.flexibleTitleColor,
                     ),
                   ),
                 ),
-              ),
-
-              background: ColoredBox(
-                color: colors.flexibleBackgroundColor,
               ),
             ),
           ),

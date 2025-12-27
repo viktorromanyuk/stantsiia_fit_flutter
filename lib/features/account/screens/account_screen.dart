@@ -43,9 +43,8 @@ class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      theme: ThemeMode.light,
       scrollable: false,
-      children: (context) => [
+      children: [
         SliverToBoxAdapter(
           child: SafeArea(
             child: Padding(
@@ -57,12 +56,18 @@ class AccountScreen extends StatelessWidget {
                     spacing: 8,
                     children: [
                       CircleAvatar(
-                        backgroundColor: AppStyles.colors.grayLight,
-                        radius: 48,
-                        child: Text(
-                          'ВР',
-                          style: AppStyles.fontSize.fs20.copyWith(
-                            fontFamily: FontFamily.unbounded,
+                        radius: 50,
+                        backgroundColor: AppStyles.colors.gray,
+                        child: CircleAvatar(
+                          radius: 48,
+                          backgroundColor: AppStyles.colors.grayDarkAccent,
+                          child: const Text(
+                            'ВР',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),
@@ -100,8 +105,8 @@ class AccountScreen extends StatelessWidget {
                           clipBehavior: Clip.antiAlias,
                           child: Ink(
                             decoration: BoxDecoration(
-                              color: AppStyles.colors.grayMilk,
-                              border: Border.all(color: AppStyles.colors.grayLight.withValues(alpha: 0.7)),
+                              color: AppStyles.colors.grayDarkAccent,
+                              border: Border.all(color: AppStyles.colors.gray),
                               borderRadius: borderRadius,
                             ),
                             child: InkResponse(
@@ -119,11 +124,11 @@ class AccountScreen extends StatelessWidget {
                                 trailing: data.action == null ? AppIcon(Assets.icons.caretRight, height: 12) : null,
                                 leading: SizedBox(
                                   width: 24,
-                                  child: Center(child: AppIcon(data.icon)),
+                                  child: Center(child: AppIcon(data.icon, color: AppStyles.colors.whiteMilk)),
                                 ),
                                 title: Text(
                                   data.title,
-                                  style: TextStyle(fontWeight: FontWeight.w500),
+                                  style: TextStyle(fontWeight: FontWeight.w500, color: AppStyles.colors.whiteMilk),
                                 ),
                                 onTap: data.action != null
                                     ? data.action!

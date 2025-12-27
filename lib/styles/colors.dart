@@ -10,7 +10,7 @@ abstract final class AppColors {
 
     // Grays
     Color gray,
-    Color grayMilk,
+    Color grayDarkAccent,
     Color grayDark,
     Color grayLight,
 
@@ -43,10 +43,10 @@ abstract final class AppColors {
     whiteMilk: Color(0xFFFFFFF5),
 
     // Grays
-    gray: Color(0xFF657189),
-    grayMilk: Color(0xFFF1F1E9),
-    grayDark: Color(0xFF1F212C),
+    gray: Color.fromARGB(255, 121, 134, 164),
     grayLight: Color(0xFFD9D9D9),
+    grayDark: Color(0xFF1F212C),
+    grayDarkAccent: Color(0xFF1A1C25),
 
     // Orange
     orange50: Color(0xFFFFAA8C),
@@ -65,8 +65,9 @@ abstract final class AppColors {
 
     // Form
     error: Color(0xFFf56c6c),
-    disabledBg: Color(0xFFf5f7fa),
-    disabledText: Color(0xFFc0c4cc),
+
+    disabledBg: Color(0x1FFFFFF5),
+    disabledText: Color(0x61FFFFF5),
     placeholder: Color(0xFFa8abb2),
   );
 }

@@ -38,6 +38,8 @@ class AppShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
+      period: const Duration(milliseconds: 1000),
+      loop: 2,
       baseColor: currentTheme.baseColor,
       highlightColor: currentTheme.highlightColor,
       child: builder != null

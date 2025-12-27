@@ -16,7 +16,8 @@ class TrainingsPackage extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        color: AppStyles.colors.grayDark,
+        color: AppStyles.colors.grayDarkAccent,
+        border: Border.all(color: AppStyles.colors.whiteMilk),
         borderRadius: BorderRadius.all(AppStyles.borderRadius.r30),
       ),
       child: Column(

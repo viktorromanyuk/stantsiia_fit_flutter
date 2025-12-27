@@ -15,7 +15,7 @@ class ScheduleTraining extends StatelessWidget {
       height: 70,
       padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
       decoration: BoxDecoration(
-        color: AppStyles.colors.grayDark,
+        color: AppStyles.colors.grayDarkAccent,
         border: Border.all(color: AppStyles.colors.whiteMilk),
         borderRadius: BorderRadius.all(AppStyles.borderRadius.full),
       ),

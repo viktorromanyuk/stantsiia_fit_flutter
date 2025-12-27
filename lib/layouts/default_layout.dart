@@ -20,16 +20,11 @@ class DefaultLayoutScreen extends StatelessWidget {
       ],
       builder: (context, child) {
         final tabsRouter = AutoTabsRouter.of(context);
-        final activeIndex = tabsRouter.activeIndex;
-        final previousIndex = tabsRouter.previousIndex;
-
-        final backgroundColor = previousIndex != null && previousIndex >= 2 && activeIndex >= 2
-            ? AppStyles.colors.whiteMilk
-            : AppStyles.colors.grayDark;
 
         return Scaffold(
-          backgroundColor: backgroundColor,
+          backgroundColor: AppStyles.colors.grayDark,
           body: child,
+          extendBody: true,
           bottomNavigationBar: AppNavigationBar(
             tabsRouter: tabsRouter,
           ),

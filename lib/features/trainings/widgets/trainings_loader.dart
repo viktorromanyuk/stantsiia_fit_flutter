@@ -14,7 +14,7 @@ class TrainingsLoader extends StatelessWidget {
           height: 400,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(AppStyles.borderRadius.r30),
-            boxShadow: AppStyles.boxShadow.glow(AppStyles.colors.grayLight),
+            boxShadow: AppStyles.boxShadow.glow(AppStyles.colors.whiteMilk),
           ),
           child: Stack(
             children: [

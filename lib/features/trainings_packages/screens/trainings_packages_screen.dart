@@ -34,11 +34,10 @@ class _TrainingsPackagesScreenState extends State<TrainingsPackagesScreen> {
         final data = snapshot.data ?? [];
 
         return AppScaffold(
-          theme: ThemeMode.light,
-          scrollable: !snapshot.isWaiting || data.isEmpty,
+          scrollable: !snapshot.isWaiting && data.isNotEmpty,
           onRefresh: _refresh,
           appBar: const AppSliverAppBar(title: 'Абонементи'),
-          children: (context) => [
+          children: [
             AppSliverFutureState(
               isEmpty: data.isEmpty,
               isWaiting: snapshot.isWaiting,

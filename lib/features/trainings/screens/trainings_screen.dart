@@ -33,27 +33,25 @@ class _TrainingsScreenState extends State<TrainingsScreen> {
     return FutureBuilder<List<TrainingModel>>(
       future: _trainingsFuture,
       builder: (_, snapshot) {
-        final trainings = snapshot.data ?? [];
-        final data = _trainingsService.filterByType(trainings, _selectedFilter);
+        final data = _trainingsService.filterByType(snapshot.data ?? [], _selectedFilter);
 
         return AppScaffold(
-          theme: ThemeMode.dark,
-          scrollable: !snapshot.isWaiting || data.isEmpty,
+          scrollable: !snapshot.isWaiting && data.isNotEmpty,
           onRefresh: _refresh,
           appBar: AppSliverAppBar(
             title: 'Тренування',
-            actionsBuilder: (scaffoldContext, _, _) => [
+            actions: [
               PingingFilterButton(
                 isActive: _selectedFilter != null,
                 onPressed: () => showTrainingsFilterBottomSheet(
-                  context: scaffoldContext,
+                  context: context,
                   selectedFilter: _selectedFilter,
                   onChanged: (value) => setState(() => _selectedFilter = value),
                 ),
               ),
             ],
           ),
-          children: (scaffoldContext) => [
+          children: [
             AppSliverFutureState(
               isEmpty: data.isEmpty,
               isWaiting: snapshot.isWaiting,
@@ -64,7 +62,7 @@ class _TrainingsScreenState extends State<TrainingsScreen> {
               content: TrainingsList(
                 trainings: data,
                 onItemTap: (training) => showTrainingInfoDialog(
-                  context: scaffoldContext,
+                  context: context,
                   training: training,
                 ),
               ),

@@ -69,7 +69,6 @@ class TrainingInfoDialog extends StatelessWidget {
       footer: Column(
         children: [
           AppButton(
-            theme: ThemeMode.dark,
             onPressed: () {
               Navigator.of(context).pop();
               context.router.navigate(const ScheduleRoute());
@@ -88,14 +87,11 @@ void showTrainingInfoDialog({
 }) {
   showModalBottomSheet(
     context: context,
-    isScrollControlled: true,
     showDragHandle: true,
-    builder: (_) {
-      final height = MediaQuery.of(context).size.height * 0.7;
-      return SizedBox(
-        height: height,
-        child: TrainingInfoDialog(training: training),
-      );
-    },
+    isScrollControlled: true,
+    builder: (context) => SizedBox(
+      height: MediaQuery.of(context).size.height * 0.7,
+      child: TrainingInfoDialog(training: training),
+    ),
   );
 }

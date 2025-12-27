@@ -26,12 +26,12 @@ class AppSliverFutureState<T> extends StatelessWidget {
     if (isWaiting && isEmpty) {
       return loader;
     } else if (hasError) {
-      return SliverFillRemaining(
+      return AppSliverSafeFillRemaining(
         child: ApiError(onRefresh: onRefresh),
       );
     } else if (isEmpty) {
-      return SliverFillRemaining(
-        child: Empty(description: emptyText),
+      return AppSliverSafeFillRemaining(
+        child: Empty(description: emptyText, onRefresh: onRefresh),
       );
     }
 

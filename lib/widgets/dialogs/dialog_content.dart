@@ -46,12 +46,9 @@ class DialogContent extends StatelessWidget {
         ),
 
         if (footer != null) ...[
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              border: Border(top: BorderSide(color: AppStyles.colors.grayLight)),
-            ),
-            child: footer!,
+          Divider(),
+          SafeArea(
+            child: Padding(padding: const EdgeInsets.fromLTRB(16, 16, 16, 0), child: footer!),
           ),
         ],
       ],

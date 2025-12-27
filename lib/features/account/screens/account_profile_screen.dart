@@ -31,12 +31,12 @@ class _AccountProfileScreenState extends State<AccountProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      theme: ThemeMode.light,
+      scrollable: false,
       appBar: AppSliverAppBar(
         title: 'Мій профіль',
       ),
 
-      children: (context) => [
+      children: [
         SliverPadding(
           padding: const EdgeInsets.all(16),
           sliver: SliverToBoxAdapter(

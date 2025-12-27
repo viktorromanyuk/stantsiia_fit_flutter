@@ -16,7 +16,7 @@ class TrainingsFilterDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final filters = <TrainingTypeEnum?, ({String label, Color color})>{
-      null: (label: 'Усі', color: AppStyles.colors.grayLight),
+      null: (label: 'Усі', color: AppStyles.colors.whiteMilk),
       TrainingTypeEnum.train: (label: 'Тренуватись', color: AppStyles.colors.orange100),
       TrainingTypeEnum.dance: (label: 'Танцювати', color: AppStyles.colors.purple100),
       TrainingTypeEnum.relax: (label: 'Розслаблятись', color: AppStyles.colors.orange100),
@@ -44,11 +44,9 @@ class TrainingsFilterDialog extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: selectedFilter == entry.key
                         ? entry.value.color.withValues(alpha: 0.15)
-                        : AppStyles.colors.transparent,
+                        : AppStyles.colors.grayDarkAccent,
                     border: Border.all(
-                      color: selectedFilter == entry.key
-                          ? entry.value.color
-                          : AppStyles.colors.grayLight.withValues(alpha: 0.3),
+                      color: selectedFilter == entry.key ? entry.value.color : AppStyles.colors.gray,
                       width: selectedFilter == entry.key ? 2 : 1,
                     ),
                     borderRadius: BorderRadius.all(AppStyles.borderRadius.full),
@@ -86,9 +84,12 @@ void showTrainingsFilterBottomSheet({
   showModalBottomSheet(
     context: context,
     showDragHandle: true,
-    builder: (_) => TrainingsFilterDialog(
-      selectedFilter: selectedFilter,
-      onChanged: onChanged,
+    builder: (context) => SizedBox(
+      height: 400,
+      child: TrainingsFilterDialog(
+        selectedFilter: selectedFilter,
+        onChanged: onChanged,
+      ),
     ),
   );
 }

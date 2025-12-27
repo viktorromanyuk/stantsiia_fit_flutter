@@ -1,95 +1,55 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:stantsiia_fit_flutter/styles/styles.dart';
-
-import 'app_sliver_app/app_sliver_app_bar.dart';
-import '../refresh_control.dart';
+import 'package:flutter/cupertino.dart' as cupertino;
+import 'app_sliver_app_bar.dart';
 
 class AppScaffold extends StatelessWidget {
   const AppScaffold({
     super.key,
     this.appBar,
-    this.theme = ThemeMode.light,
-    this.children,
+    this.children = const [],
     this.scrollable = true,
     this.onRefresh,
   });
 
-  final ThemeMode theme;
   final AppSliverAppBar? appBar;
-  final List<Widget> Function(BuildContext context)? children;
+  final List<Widget> children;
   final bool scrollable;
   final RefreshCallback? onRefresh;
 
-  bool get isLightTheme => theme == ThemeMode.light;
-
   @override
   Widget build(BuildContext context) {
-    final textColor = isLightTheme ? AppStyles.colors.grayDark : AppStyles.colors.whiteMilk;
-    final backgroundColor = isLightTheme ? AppStyles.colors.whiteMilk : AppStyles.colors.grayDark;
-    final brightness = isLightTheme ? Brightness.light : Brightness.dark;
-
-    // TODO: move theme to separate file
-    return Theme(
-      data: ThemeData(
-        brightness: brightness,
-        fontFamily: FontFamily.fixel,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: AppStyles.colors.grayDark,
-          surface: backgroundColor,
-          onSurface: textColor,
-          brightness: brightness,
-        ),
-        dividerTheme: DividerThemeData(
-          radius: BorderRadius.all(AppStyles.borderRadius.full),
-          color: AppStyles.colors.grayLight,
-        ),
-        listTileTheme: ListTileThemeData(
-          textColor: textColor,
-          iconColor: textColor,
-        ),
-        bottomSheetTheme: BottomSheetThemeData(
-          dragHandleColor: textColor,
-          modalBackgroundColor: backgroundColor,
-          modalBarrierColor: AppStyles.colors.black.withValues(alpha: 0.7),
-          modalElevation: 0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: AppStyles.borderRadius.r24),
+    final mainView = CustomScrollView(
+      physics: scrollable ? null : NeverScrollableScrollPhysics(),
+      slivers: [
+        if (appBar != null) appBar!,
+        if (Platform.isIOS && onRefresh != null)
+          cupertino.CupertinoSliverRefreshControl(
+            onRefresh: onRefresh!,
           ),
-        ),
-      ),
-      // Builder provides a context inside this Theme so descendants inherit it
-      child: Builder(
-        builder: (themedContext) {
-          final mainView = CustomScrollView(
-            physics: scrollable ? null : NeverScrollableScrollPhysics(),
-            slivers: [
-              if (appBar != null) appBar!,
-              if (Platform.isIOS && onRefresh != null)
-                RefreshControl(
-                  onRefresh: onRefresh!,
-                ),
-              ...children?.call(themedContext) ?? [],
-            ],
-          );
+        ...children,
 
-          return Scaffold(
-            resizeToAvoidBottomInset: false,
-            body: onRefresh == null || Platform.isIOS
-                ? mainView
-                : RefreshIndicator(
-                    elevation: 1,
-                    edgeOffset: 130,
-                    displacement: 0,
-                    triggerMode: RefreshIndicatorTriggerMode.onEdge,
-                    notificationPredicate: (notification) => notification.depth == 0,
-                    onRefresh: onRefresh!,
-                    child: mainView,
-                  ),
-          );
-        },
-      ),
+        if (scrollable)
+          SliverToBoxAdapter(
+            child: SafeArea(top: false, child: SizedBox(height: 0)),
+          ),
+      ],
+    );
+
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: onRefresh == null || Platform.isIOS
+          ? mainView
+          : RefreshIndicator(
+              elevation: 1,
+              edgeOffset: 130,
+              displacement: 0,
+              triggerMode: RefreshIndicatorTriggerMode.onEdge,
+              notificationPredicate: (notification) => notification.depth == 0,
+              onRefresh: onRefresh!,
+              child: mainView,
+            ),
     );
   }
 }

@@ -51,16 +51,16 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           builder: (context, attendeesSnapshot) {
             final attendeesCount = attendeesSnapshot.data ?? const <int, int>{};
             final filteredSchedule = _scheduleService.filterSchedule(schedule, _selectedDate, _selectedFilter);
+            print('filteredSchedule: $filteredSchedule');
 
             return AppScaffold(
-              theme: ThemeMode.dark,
-              scrollable: !scheduleSnapshot.isWaiting || filteredSchedule.isEmpty,
+              scrollable: !scheduleSnapshot.isWaiting && filteredSchedule.isNotEmpty,
               onRefresh: _refresh,
               appBar: AppSliverAppBar(
                 withBorder: true,
                 withBorderRadius: true,
                 title: '$activeMonth $activeYear',
-                bottomBuilder: (context, constraints, tColor) => PreferredSize(
+                bottom: PreferredSize(
                   preferredSize: const Size.fromHeight(80),
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
@@ -70,18 +70,18 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                     ),
                   ),
                 ),
-                actionsBuilder: (scaffoldContext, _, _) => [
+                actions: [
                   PingingFilterButton(
                     isActive: _selectedFilter != null,
                     onPressed: () => showTrainingsFilterBottomSheet(
-                      context: scaffoldContext,
+                      context: context,
                       selectedFilter: _selectedFilter,
                       onChanged: (value) => setState(() => _selectedFilter = value),
                     ),
                   ),
                 ],
               ),
-              children: (context) => [
+              children: [
                 AppSliverFutureState(
                   isWaiting: scheduleSnapshot.isWaiting,
                   isEmpty: filteredSchedule.isEmpty,

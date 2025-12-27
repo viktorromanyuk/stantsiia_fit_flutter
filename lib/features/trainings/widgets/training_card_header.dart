@@ -32,7 +32,7 @@ class TrainingCardHeader extends StatelessWidget {
               Text(
                 trainingLevelInfo.title,
                 style: AppStyles.fontSize.fs16.copyWith(
-                  color: AppStyles.colors.whiteMilk,
+                  color: AppStyles.colors.whiteMilk, // TODO: make default text color whiteMilk
                   fontWeight: FontWeight.w500,
                 ),
               ),
