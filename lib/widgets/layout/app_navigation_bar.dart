@@ -12,7 +12,7 @@ class AppNavigationBar extends StatelessWidget {
   static const double _kBlurSigma = 7.0;
 
   Color _getColor(Set<WidgetState> states) {
-    return states.contains(WidgetState.selected) ? AppStyles.colors.orange100 : AppStyles.colors.whiteMilk;
+    return states.contains(WidgetState.selected) ? AppColors.orange100 : AppColors.whiteMilk;
   }
 
   static final List<({String title, SvgGenImage icon})> _navDestinations = [
@@ -34,7 +34,7 @@ class AppNavigationBar extends StatelessWidget {
           (states) => IconThemeData(color: _getColor(states)),
         ),
         labelTextStyle: WidgetStateProperty.resolveWith(
-          (states) => AppStyles.fontSize.fs12.copyWith(
+          (states) => AppFontSize.fs12.copyWith(
             color: _getColor(states),
             fontWeight: FontWeight.w500,
           ),
@@ -51,10 +51,10 @@ class AppNavigationBar extends StatelessWidget {
             ),
             child: Container(
               decoration: BoxDecoration(
-                border: Border(top: BorderSide(color: AppStyles.colors.whiteMilk, width: 0.3)),
+                border: Border(top: BorderSide(color: AppColors.whiteMilk, width: 0.3)),
               ),
               child: NavigationBar(
-                backgroundColor: AppStyles.colors.grayDark.withValues(alpha: 0.5),
+                backgroundColor: AppColors.grayDark.withValues(alpha: 0.5),
                 overlayColor: WidgetStateProperty.all(Colors.transparent),
                 selectedIndex: tabsRouter.activeIndex,
                 onDestinationSelected: (index) => tabsRouter.setActiveIndex(index),

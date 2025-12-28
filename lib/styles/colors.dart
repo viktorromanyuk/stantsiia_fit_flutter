@@ -1,73 +1,37 @@
-part of 'styles.dart';
+import 'package:flutter/material.dart';
 
 abstract final class AppColors {
-  static const ({
-    // Base
-    Color transparent,
-    Color black,
-    Color white,
-    Color whiteMilk,
+  // Base
+  static const transparent = Colors.transparent;
+  static const black = Colors.black;
+  static const white = Colors.white;
+  static const whiteMilk = Color.fromRGBO(255, 255, 245, 1);
 
-    // Grays
-    Color gray,
-    Color grayDarkAccent,
-    Color grayDark,
-    Color grayLight,
+  // Grays
+  static const gray = Color.fromRGBO(121, 134, 164, 1);
+  static const grayLight = Color.fromRGBO(217, 217, 217, 1);
+  static const grayDark = Color.fromRGBO(31, 33, 44, 1);
+  static const grayDarkAccent = Color.fromRGBO(26, 28, 37, 1);
 
-    // Orange
-    Color orange50,
-    Color orange100,
-    Color orange200,
+  // Orange
+  static const orange50 = Color.fromRGBO(255, 170, 140, 1);
+  static const orange100 = Color.fromRGBO(255, 130, 115, 1);
+  static const orange200 = Color.fromRGBO(255, 110, 90, 1);
 
-    // Purple
-    Color purple100,
-    Color purple200,
-    Color purple300,
+  // Purple
+  static const purple100 = Color.fromRGBO(126, 113, 244, 1);
+  static const purple200 = Color.fromRGBO(132, 74, 255, 1);
+  static const purple300 = Color.fromRGBO(83, 39, 177, 1);
 
-    // Green
-    Color green100,
-    Color green200,
-    Color green300,
+  // Green
+  static const green100 = Color.fromRGBO(61, 166, 137, 1);
+  static const green200 = Color.fromRGBO(0, 135, 92, 1);
+  static const green300 = Color.fromRGBO(0, 90, 62, 1);
 
-    // Error
-    Color error,
-    Color disabledBg,
-    Color disabledText,
-    Color placeholder,
-  })
-  values = (
-    // Base
-    transparent: Colors.transparent,
-    black: Colors.black,
-    white: Colors.white,
-    whiteMilk: Color(0xFFFFFFF5),
+  // Form
+  static const error = Color.fromRGBO(245, 108, 108, 1);
 
-    // Grays
-    gray: Color.fromARGB(255, 121, 134, 164),
-    grayLight: Color(0xFFD9D9D9),
-    grayDark: Color(0xFF1F212C),
-    grayDarkAccent: Color(0xFF1A1C25),
-
-    // Orange
-    orange50: Color(0xFFFFAA8C),
-    orange100: Color(0xFFFF8273),
-    orange200: Color(0xFFFF6E5A),
-
-    // Purple
-    purple100: Color(0xFF7E71F4),
-    purple200: Color(0xFF844AFF),
-    purple300: Color(0xFF5327B1),
-
-    // Green
-    green100: Color(0xFF3DA689),
-    green200: Color(0xFF00875C),
-    green300: Color(0xFF005A3E),
-
-    // Form
-    error: Color(0xFFf56c6c),
-
-    disabledBg: Color(0x1FFFFFF5),
-    disabledText: Color(0x61FFFFF5),
-    placeholder: Color(0xFFa8abb2),
-  );
+  static const disabledBg = Color.fromRGBO(255, 255, 245, 0.122);
+  static const disabledText = Color.fromRGBO(255, 255, 245, 0.38);
+  static const placeholder = Color.fromRGBO(168, 171, 178, 1);
 }

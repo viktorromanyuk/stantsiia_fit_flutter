@@ -17,10 +17,10 @@ class EntityCheckMark extends StatelessWidget {
   final EntityTypeEnum type;
 
   static final Map<EntityTypeEnum, Color> _borderConfig = {
-    EntityTypeEnum.fitness: AppStyles.colors.orange100,
-    EntityTypeEnum.dance: AppStyles.colors.purple100,
-    EntityTypeEnum.photo: AppStyles.colors.green100,
-    EntityTypeEnum.unset: AppStyles.colors.whiteMilk,
+    EntityTypeEnum.fitness: AppColors.orange100,
+    EntityTypeEnum.dance: AppColors.purple100,
+    EntityTypeEnum.photo: AppColors.green100,
+    EntityTypeEnum.unset: AppColors.whiteMilk,
   };
 
   Color get currentBorderColor => _borderConfig[type]!;
@@ -44,7 +44,7 @@ class EntityCheckMark extends StatelessWidget {
       alignment: Alignment.center,
       child: AppIcon(
         Assets.icons.checkMark,
-        color: AppStyles.colors.whiteMilk,
+        color: AppColors.whiteMilk,
         height: iconSize,
         width: iconSize,
       ),

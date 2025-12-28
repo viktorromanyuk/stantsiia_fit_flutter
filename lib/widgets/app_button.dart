@@ -26,12 +26,12 @@ class AppButton extends StatelessWidget {
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
           splashFactory: InkSparkle.splashFactory,
-          side: BorderSide(color: AppStyles.colors.whiteMilk, width: 1),
-          backgroundColor: AppStyles.colors.grayDarkAccent,
-          foregroundColor: AppStyles.colors.whiteMilk,
-          textStyle: AppStyles.fontSize.fs18.copyWith(fontFamily: FontFamily.unbounded),
+          side: BorderSide(color: AppColors.whiteMilk, width: 1),
+          backgroundColor: AppColors.grayDarkAccent,
+          foregroundColor: AppColors.whiteMilk,
+          textStyle: AppFontSize.fs18.copyWith(fontFamily: FontFamily.unbounded),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(AppStyles.borderRadius.full),
+            borderRadius: BorderRadius.all(AppBorderRadius.full),
           ),
         ),
         onPressed: isLoading ? null : onPressed,
@@ -54,7 +54,7 @@ class AppButton extends StatelessWidget {
                       child: AppIcon(
                         Assets.icons.arrowRight,
                         width: 20,
-                        color: AppStyles.colors.whiteMilk,
+                        color: AppColors.whiteMilk,
                       ),
                     ),
                 ],
@@ -62,10 +62,10 @@ class AppButton extends StatelessWidget {
             ),
 
             if (isLoading)
-              Positioned.fill(
+              const Positioned.fill(
                 child: Center(
                   child: CircularProgressIndicator(
-                    color: AppStyles.colors.whiteMilk,
+                    color: AppColors.whiteMilk,
                     strokeWidth: 2,
                   ),
                 ),

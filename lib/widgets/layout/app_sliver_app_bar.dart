@@ -66,8 +66,8 @@ class AppSliverAppBar extends StatelessWidget {
         );
 
         final borderColor = Color.lerp(
-          AppStyles.colors.transparent,
-          AppStyles.colors.whiteMilk,
+          AppColors.transparent,
+          AppColors.whiteMilk,
           appBarState.collapsed,
         )!;
 
@@ -80,16 +80,16 @@ class AppSliverAppBar extends StatelessWidget {
 
         return SliverAppBar.medium(
           pinned: true,
-          backgroundColor: AppStyles.colors.transparent,
+          backgroundColor: AppColors.transparent,
           toolbarHeight: kToolbarHeight,
           expandedHeight: expandedHeight,
           collapsedHeight: collapsedHeight,
-          surfaceTintColor: AppStyles.colors.transparent,
-          foregroundColor: AppStyles.colors.whiteMilk,
+          surfaceTintColor: AppColors.transparent,
+          foregroundColor: AppColors.whiteMilk,
           title: Text(
             title,
-            style: AppStyles.fontSize.fs20.copyWith(
-              height: AppStyles.lineHeight.none,
+            style: AppFontSize.fs20.copyWith(
+              height: AppLineHeight.none,
               fontFamily: FontFamily.unbounded,
             ),
           ),
@@ -136,7 +136,7 @@ class AppSliverAppBar extends StatelessWidget {
           // IMPORTANT: BackdropFilter must wrap the decorated container
           child: Container(
             decoration: BoxDecoration(
-              color: AppStyles.colors.grayDark.withValues(alpha: 0.35),
+              color: AppColors.grayDark.withValues(alpha: 0.35),
               borderRadius: withBorderRadius
                   ? BorderRadius.vertical(bottom: Radius.circular(_kBorderRadius))
                   : BorderRadius.zero,
@@ -162,7 +162,7 @@ class AppSliverAppBar extends StatelessWidget {
                     flexibleSpaceTitle ?? title,
                     style: TextStyle(
                       fontSize: context.breakpoints.minLg ? 40 : 30,
-                      height: AppStyles.lineHeight.condensed,
+                      height: AppLineHeight.condensed,
                       fontFamily: FontFamily.unbounded,
                     ),
                   ),

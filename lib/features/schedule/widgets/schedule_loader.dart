@@ -17,9 +17,9 @@ class ScheduleLoader extends StatelessWidget {
             child: Container(
               height: 70,
               decoration: BoxDecoration(
-                color: AppStyles.colors.grayDark,
-                border: Border.all(color: AppStyles.colors.whiteMilk),
-                borderRadius: BorderRadius.all(AppStyles.borderRadius.full),
+                color: AppColors.grayDark,
+                border: Border.all(color: AppColors.whiteMilk),
+                borderRadius: BorderRadius.all(AppBorderRadius.full),
               ),
               child: Stack(
                 children: [
@@ -27,7 +27,7 @@ class ScheduleLoader extends StatelessWidget {
                     child: AppShimmer(
                       height: 70,
                       theme: ThemeMode.dark,
-                      borderRadius: AppStyles.borderRadius.full.x,
+                      borderRadius: AppBorderRadius.full.x,
                     ),
                   ),
                   AppShimmer.builder(

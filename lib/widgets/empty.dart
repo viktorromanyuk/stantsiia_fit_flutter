@@ -21,10 +21,10 @@ class Empty extends StatelessWidget {
             AppIcon(Assets.icons.empty, width: 160),
             Text(
               description,
-              style: AppStyles.fontSize.fs14.copyWith(
+              style: AppFontSize.fs14.copyWith(
                 fontFamily: FontFamily.unbounded,
                 fontWeight: FontWeight.w500,
-                color: AppStyles.colors.whiteMilk,
+                color: AppColors.whiteMilk,
               ),
             ),
 

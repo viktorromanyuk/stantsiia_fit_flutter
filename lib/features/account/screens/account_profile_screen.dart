@@ -53,7 +53,6 @@ class _AccountProfileScreenState extends State<AccountProfileScreen> {
                     enabled: !_isLoading,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        print('error');
                         return 'Введіть ім\'я та прізвище';
                       }
                       return null;

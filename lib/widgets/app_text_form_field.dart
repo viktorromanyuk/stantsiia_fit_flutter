@@ -53,8 +53,8 @@ class AppTextFormField extends StatelessWidget {
                   children: [
                     TextSpan(
                       text: label ?? '',
-                      style: AppStyles.fontSize.fs14.copyWith(
-                        height: AppStyles.lineHeight.none,
+                      style: AppFontSize.fs14.copyWith(
+                        height: AppLineHeight.none,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -69,8 +69,8 @@ class AppTextFormField extends StatelessWidget {
                             textAlign: TextAlign.right,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: AppStyles.colors.error,
-                              height: AppStyles.lineHeight.none,
+                              color: AppColors.error,
+                              height: AppLineHeight.none,
                             ),
                           ),
                         ),
@@ -89,11 +89,11 @@ class AppTextFormField extends StatelessWidget {
             keyboardAppearance: Brightness.dark,
             inputFormatters: inputFormatters,
             decoration: InputDecoration(
-              fillColor: enabled ? AppStyles.colors.grayDarkAccent : AppStyles.colors.disabledBg,
+              fillColor: enabled ? AppColors.grayDarkAccent : AppColors.disabledBg,
 
               hintText: hint,
-              hintStyle: AppStyles.fontSize.fs16.copyWith(
-                color: enabled ? AppStyles.colors.placeholder : AppStyles.colors.disabledText,
+              hintStyle: AppFontSize.fs16.copyWith(
+                color: enabled ? AppColors.placeholder : AppColors.disabledText,
                 fontWeight: FontWeight.w500,
               ),
 
@@ -102,9 +102,9 @@ class AppTextFormField extends StatelessWidget {
                       offset: const Offset(-5, 0),
                       child: Text(
                         fieldState.errorText ?? '',
-                        style: AppStyles.fontSize.fs12.copyWith(
-                          height: AppStyles.lineHeight.none,
-                          color: AppStyles.colors.error,
+                        style: AppFontSize.fs12.copyWith(
+                          height: AppLineHeight.none,
+                          color: AppColors.error,
                           fontWeight: FontWeight.w500,
                         ),
                       ),

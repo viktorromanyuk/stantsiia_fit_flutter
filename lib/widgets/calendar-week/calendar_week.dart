@@ -64,8 +64,8 @@ class _CalendarWeekState extends State<CalendarWeek> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppStyles.colors.whiteMilk,
-        borderRadius: BorderRadius.all(AppStyles.borderRadius.full),
+        color: AppColors.whiteMilk,
+        borderRadius: BorderRadius.all(AppBorderRadius.full),
       ),
       height: 64,
       child: PageView(
@@ -140,7 +140,7 @@ class _CalendarWeekState extends State<CalendarWeek> {
       widget.onChanged(nextDay);
 
       final shouldGoToNextWeek =
-          nextDay.weekday == DateTime.monday &&
+          nextDay.weekday == DateTime.sunday &&
           _activeWeekIndex < _availableWeeks.length - 1 &&
           _pageViewController.hasClients;
 

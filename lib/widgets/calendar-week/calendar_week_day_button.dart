@@ -18,15 +18,13 @@ class CalendarWeekDayButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = AppStyles.colors;
-
     final textColor = isDisabled
-        ? colors.grayDark.withValues(alpha: 0.5)
+        ? AppColors.grayDark.withValues(alpha: 0.5)
         : isSelected
-        ? colors.whiteMilk
-        : colors.grayDark;
+        ? AppColors.whiteMilk
+        : AppColors.grayDark;
 
-    final backgroundColor = isSelected ? colors.grayDark : colors.transparent;
+    final backgroundColor = isSelected ? AppColors.grayDark : AppColors.transparent;
     final showRing = !isDisabled && isToday && !isSelected;
 
     return TextButton(
@@ -45,14 +43,14 @@ class CalendarWeekDayButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(9999),
           border: showRing
               ? Border.all(
-                  color: colors.grayDark,
+                  color: AppColors.grayDark,
                   width: 2,
                 )
               : null,
         ),
         alignment: Alignment.center,
         child: DefaultTextStyle(
-          style: AppStyles.fontSize.fs12.copyWith(
+          style: AppFontSize.fs12.copyWith(
             color: textColor,
             height: 1,
           ),

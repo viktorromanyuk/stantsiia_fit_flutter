@@ -1,22 +1,11 @@
-library;
-
-import 'package:flutter/material.dart';
 export 'package:stantsiia_fit_flutter/gen/fonts.gen.dart';
 
-part 'colors.dart';
+export 'colors.dart';
 
 // Typography
-part 'typography/font_size.dart';
-part 'typography/line_height.dart';
+export 'typography/font_size.dart';
+export 'typography/line_height.dart';
 
 // Decoration
-part 'decoration/box_shadow.dart';
-part 'decoration/border_radius.dart';
-
-abstract final class AppStyles {
-  static const colors = AppColors.values;
-  static const fontSize = AppFontSize.values;
-  static final boxShadow = AppBoxShadow.values;
-  static const borderRadius = AppBorderRadius.values;
-  static const lineHeight = AppLineHeight.values;
-}
+export 'decoration/box_shadow.dart';
+export 'decoration/border_radius.dart';

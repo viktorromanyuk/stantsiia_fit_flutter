@@ -16,10 +16,10 @@ class TrainingsFilterDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final filters = <TrainingTypeEnum?, ({String label, Color color})>{
-      null: (label: 'Усі', color: AppStyles.colors.whiteMilk),
-      TrainingTypeEnum.train: (label: 'Тренуватись', color: AppStyles.colors.orange100),
-      TrainingTypeEnum.dance: (label: 'Танцювати', color: AppStyles.colors.purple100),
-      TrainingTypeEnum.relax: (label: 'Розслаблятись', color: AppStyles.colors.orange100),
+      null: (label: 'Усі', color: AppColors.whiteMilk),
+      TrainingTypeEnum.train: (label: 'Тренуватись', color: AppColors.orange100),
+      TrainingTypeEnum.dance: (label: 'Танцювати', color: AppColors.purple100),
+      TrainingTypeEnum.relax: (label: 'Розслаблятись', color: AppColors.orange100),
     };
 
     return DialogContent(
@@ -44,12 +44,12 @@ class TrainingsFilterDialog extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: selectedFilter == entry.key
                         ? entry.value.color.withValues(alpha: 0.15)
-                        : AppStyles.colors.grayDarkAccent,
+                        : AppColors.grayDarkAccent,
                     border: Border.all(
-                      color: selectedFilter == entry.key ? entry.value.color : AppStyles.colors.gray,
+                      color: selectedFilter == entry.key ? entry.value.color : AppColors.gray,
                       width: selectedFilter == entry.key ? 2 : 1,
                     ),
-                    borderRadius: BorderRadius.all(AppStyles.borderRadius.full),
+                    borderRadius: BorderRadius.all(AppBorderRadius.full),
                   ),
                   child: Row(
                     children: [
@@ -59,8 +59,8 @@ class TrainingsFilterDialog extends StatelessWidget {
                       ),
                       Text(
                         entry.value.label,
-                        style: AppStyles.fontSize.fs16.copyWith(
-                          color: AppStyles.colors.whiteMilk,
+                        style: AppFontSize.fs16.copyWith(
+                          color: AppColors.whiteMilk,
                           fontWeight: FontWeight.w500,
                         ),
                       ),

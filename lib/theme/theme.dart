@@ -9,60 +9,60 @@ abstract final class AppTheme {
       fontFamily: FontFamily.fixel,
 
       colorScheme: ColorScheme.fromSeed(
-        seedColor: AppStyles.colors.grayDark,
-        surface: AppStyles.colors.grayDark,
-        onSurface: AppStyles.colors.whiteMilk,
+        seedColor: AppColors.grayDark,
+        surface: AppColors.grayDark,
+        onSurface: AppColors.whiteMilk,
         brightness: Brightness.dark,
       ),
 
       dividerTheme: DividerThemeData(
-        radius: BorderRadius.all(AppStyles.borderRadius.full),
-        color: AppStyles.colors.whiteMilk,
+        radius: BorderRadius.all(AppBorderRadius.full),
+        color: AppColors.whiteMilk,
       ),
 
       listTileTheme: ListTileThemeData(
-        textColor: AppStyles.colors.whiteMilk,
-        iconColor: AppStyles.colors.whiteMilk,
+        textColor: AppColors.whiteMilk,
+        iconColor: AppColors.whiteMilk,
       ),
 
       inputDecorationTheme: InputDecorationTheme(
         contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 13),
         filled: true,
 
-        hintStyle: AppStyles.fontSize.fs16.copyWith(
+        hintStyle: AppFontSize.fs16.copyWith(
           fontWeight: FontWeight.w500,
         ),
 
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(AppStyles.borderRadius.r18),
-          borderSide: BorderSide(color: AppStyles.colors.gray),
+          borderRadius: BorderRadius.all(AppBorderRadius.r18),
+          borderSide: BorderSide(color: AppColors.gray),
         ),
         disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(AppStyles.borderRadius.r18),
-          borderSide: BorderSide(color: AppStyles.colors.gray),
+          borderRadius: BorderRadius.all(AppBorderRadius.r18),
+          borderSide: BorderSide(color: AppColors.gray),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(AppStyles.borderRadius.r18),
-          borderSide: BorderSide(color: AppStyles.colors.whiteMilk),
+          borderRadius: BorderRadius.all(AppBorderRadius.r18),
+          borderSide: BorderSide(color: AppColors.whiteMilk),
         ),
 
         focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(AppStyles.borderRadius.r18),
-          borderSide: BorderSide(color: AppStyles.colors.error),
+          borderRadius: BorderRadius.all(AppBorderRadius.r18),
+          borderSide: BorderSide(color: AppColors.error),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(AppStyles.borderRadius.r18),
-          borderSide: BorderSide(color: AppStyles.colors.error),
+          borderRadius: BorderRadius.all(AppBorderRadius.r18),
+          borderSide: BorderSide(color: AppColors.error),
         ),
       ),
 
       bottomSheetTheme: BottomSheetThemeData(
-        dragHandleColor: AppStyles.colors.whiteMilk,
-        modalBackgroundColor: AppStyles.colors.grayDark,
-        modalBarrierColor: AppStyles.colors.black.withValues(alpha: 0.7),
+        dragHandleColor: AppColors.whiteMilk,
+        modalBackgroundColor: AppColors.grayDark,
+        modalBarrierColor: AppColors.black.withValues(alpha: 0.7),
         modalElevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: AppStyles.borderRadius.r30),
+          borderRadius: BorderRadius.vertical(top: AppBorderRadius.r30),
         ),
       ),
     );

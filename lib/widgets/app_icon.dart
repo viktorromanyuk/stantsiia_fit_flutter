@@ -25,7 +25,7 @@ class AppIcon extends StatelessWidget {
       child: icon.svg(
         width: width,
         height: height,
-        theme: SvgTheme(currentColor: color ?? IconTheme.of(context).color ?? AppStyles.colors.whiteMilk),
+        theme: SvgTheme(currentColor: color ?? IconTheme.of(context).color ?? AppColors.whiteMilk),
       ),
     );
   }

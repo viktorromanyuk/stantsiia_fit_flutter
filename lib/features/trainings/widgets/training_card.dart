@@ -18,9 +18,9 @@ class TrainingCard extends StatelessWidget {
   final double height;
 
   static final Map<TrainingTypeEnum, TrainingCardConfig> _cardConfig = {
-    TrainingTypeEnum.train: (color: AppStyles.colors.orange100.withValues(alpha: 0.7), image: Assets.images.train),
-    TrainingTypeEnum.dance: (color: AppStyles.colors.purple100.withValues(alpha: 0.7), image: Assets.images.dance),
-    TrainingTypeEnum.relax: (color: AppStyles.colors.orange100.withValues(alpha: 0.7), image: Assets.images.train),
+    TrainingTypeEnum.train: (color: AppColors.orange100.withValues(alpha: 0.7), image: Assets.images.train),
+    TrainingTypeEnum.dance: (color: AppColors.purple100.withValues(alpha: 0.7), image: Assets.images.dance),
+    TrainingTypeEnum.relax: (color: AppColors.orange100.withValues(alpha: 0.7), image: Assets.images.train),
   };
 
   TrainingCardConfig get currentConfig => _cardConfig[type]!;
@@ -31,9 +31,9 @@ class TrainingCard extends StatelessWidget {
       height: height,
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
-        color: AppStyles.colors.grayDark,
-        borderRadius: BorderRadius.all(AppStyles.borderRadius.r30),
-        boxShadow: AppStyles.boxShadow.glow(currentConfig.color),
+        color: AppColors.grayDark,
+        borderRadius: BorderRadius.all(AppBorderRadius.r30),
+        boxShadow: AppBoxShadow.glow(currentConfig.color),
       ),
       child: Stack(
         fit: StackFit.expand,
@@ -43,7 +43,7 @@ class TrainingCard extends StatelessWidget {
             child: Container(
               clipBehavior: Clip.hardEdge,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(AppStyles.borderRadius.r30),
+                borderRadius: BorderRadius.all(AppBorderRadius.r30),
               ),
               child: currentConfig.image.image(
                 fit: BoxFit.cover,
@@ -55,14 +55,14 @@ class TrainingCard extends StatelessWidget {
           Positioned.fill(
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(AppStyles.borderRadius.r30),
+                borderRadius: BorderRadius.all(AppBorderRadius.r30),
                 gradient: LinearGradient(
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
                   stops: const [0, 0.7],
                   colors: [
-                    AppStyles.colors.black.withValues(alpha: 0.85),
-                    AppStyles.colors.transparent,
+                    AppColors.black.withValues(alpha: 0.85),
+                    AppColors.transparent,
                   ],
                 ),
               ),

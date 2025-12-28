@@ -41,8 +41,8 @@ class TrainingInfoDialog extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
                   child: Text(
                     training.label,
-                    style: AppStyles.fontSize.fs20.copyWith(
-                      color: AppStyles.colors.whiteMilk,
+                    style: AppFontSize.fs20.copyWith(
+                      color: AppColors.whiteMilk,
                       fontWeight: FontWeight.w600,
                       fontFamily: FontFamily.unbounded,
                     ),
@@ -58,8 +58,8 @@ class TrainingInfoDialog extends StatelessWidget {
             child: SingleChildScrollView(
               child: Text(
                 training.description,
-                style: AppStyles.fontSize.fs16.copyWith(
-                  color: AppStyles.colors.whiteMilk,
+                style: AppFontSize.fs16.copyWith(
+                  color: AppColors.whiteMilk,
                 ),
               ),
             ),

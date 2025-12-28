@@ -16,18 +16,18 @@ class TrainingsPackage extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        color: AppStyles.colors.grayDarkAccent,
-        border: Border.all(color: AppStyles.colors.whiteMilk),
-        borderRadius: BorderRadius.all(AppStyles.borderRadius.r30),
+        color: AppColors.grayDarkAccent,
+        border: Border.all(color: AppColors.whiteMilk),
+        borderRadius: BorderRadius.all(AppBorderRadius.r30),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             package.name ?? '',
-            style: (context.breakpoints.maxMd ? AppStyles.fontSize.fs20 : AppStyles.fontSize.fs20).copyWith(
+            style: (context.breakpoints.maxMd ? AppFontSize.fs20 : AppFontSize.fs20).copyWith(
               fontFamily: FontFamily.unbounded,
-              color: AppStyles.colors.whiteMilk,
+              color: AppColors.whiteMilk,
             ),
           ),
 
@@ -35,8 +35,8 @@ class TrainingsPackage extends StatelessWidget {
 
           RichText(
             text: TextSpan(
-              style: (context.breakpoints.maxMd ? AppStyles.fontSize.fs20 : AppStyles.fontSize.fs20).copyWith(
-                color: AppStyles.colors.purple100,
+              style: (context.breakpoints.maxMd ? AppFontSize.fs20 : AppFontSize.fs20).copyWith(
+                color: AppColors.purple100,
               ),
               children: [
                 TextSpan(
@@ -56,9 +56,9 @@ class TrainingsPackage extends StatelessWidget {
           Text(
             'Термін дії - ${numberToWord(package.duration, ['місяць', 'місяці', 'місяців', 'місяця'])}',
 
-            style: (context.breakpoints.maxMd ? AppStyles.fontSize.fs16 : AppStyles.fontSize.fs18).copyWith(
+            style: (context.breakpoints.maxMd ? AppFontSize.fs16 : AppFontSize.fs18).copyWith(
               fontWeight: FontWeight.w500,
-              color: AppStyles.colors.whiteMilk,
+              color: AppColors.whiteMilk,
             ),
           ),
         ],

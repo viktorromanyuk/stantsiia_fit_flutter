@@ -10,8 +10,8 @@ class ScheduleTrainingTrainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       name,
-      style: AppStyles.fontSize.fs14.copyWith(
-        height: AppStyles.lineHeight.condensed,
+      style: AppFontSize.fs14.copyWith(
+        height: AppLineHeight.condensed,
         fontWeight: FontWeight.w500,
       ),
     );

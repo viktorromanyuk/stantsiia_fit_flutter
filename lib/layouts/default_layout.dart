@@ -22,7 +22,7 @@ class DefaultLayoutScreen extends StatelessWidget {
         final tabsRouter = AutoTabsRouter.of(context);
 
         return Scaffold(
-          backgroundColor: AppStyles.colors.grayDark,
+          backgroundColor: AppColors.grayDark,
           body: child,
           extendBody: true,
           bottomNavigationBar: AppNavigationBar(

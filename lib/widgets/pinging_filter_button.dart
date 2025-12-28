@@ -40,7 +40,7 @@ class PingingFilterButton extends StatelessWidget {
                         height: 10,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: AppStyles.colors.orange100.withValues(alpha: 0.6),
+                          color: AppColors.orange100.withValues(alpha: 0.6),
                         ),
                       )
                       .animate(
@@ -60,7 +60,7 @@ class PingingFilterButton extends StatelessWidget {
                     height: 6,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: AppStyles.colors.orange100,
+                      color: AppColors.orange100,
                     ),
                   ),
                 ],

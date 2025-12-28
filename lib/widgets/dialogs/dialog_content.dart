@@ -28,9 +28,9 @@ class DialogContent extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
             child: Text(
               title!,
-              style: AppStyles.fontSize.fs18.copyWith(
+              style: AppFontSize.fs18.copyWith(
                 fontFamily: FontFamily.unbounded,
-                color: AppStyles.colors.whiteMilk,
+                color: AppColors.whiteMilk,
                 fontWeight: FontWeight.w600,
               ),
             ),

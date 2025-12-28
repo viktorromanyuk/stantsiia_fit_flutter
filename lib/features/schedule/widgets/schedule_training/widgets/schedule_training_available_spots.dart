@@ -9,8 +9,8 @@ class ScheduleTrainingAvailableSpots extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTextStyle(
-      style: AppStyles.fontSize.fs14.copyWith(
-        height: AppStyles.lineHeight.condensed,
+      style: AppFontSize.fs14.copyWith(
+        height: AppLineHeight.condensed,
         fontWeight: FontWeight.w500,
       ),
       child: Row(

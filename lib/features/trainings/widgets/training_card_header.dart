@@ -21,7 +21,7 @@ class TrainingCardHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: AppStyles.colors.black.withValues(alpha: 0.4),
+      color: AppColors.black.withValues(alpha: 0.4),
       padding: const EdgeInsets.all(20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -31,15 +31,15 @@ class TrainingCardHeader extends StatelessWidget {
             children: [
               Text(
                 trainingLevelInfo.title,
-                style: AppStyles.fontSize.fs16.copyWith(
-                  color: AppStyles.colors.whiteMilk, // TODO: make default text color whiteMilk
+                style: AppFontSize.fs16.copyWith(
+                  color: AppColors.whiteMilk, // TODO: make default text color whiteMilk
                   fontWeight: FontWeight.w500,
                 ),
               ),
               Text(
                 trainingLevelInfo.value,
-                style: AppStyles.fontSize.fs18.copyWith(
-                  color: AppStyles.colors.whiteMilk,
+                style: AppFontSize.fs18.copyWith(
+                  color: AppColors.whiteMilk,
                 ),
               ),
             ],
@@ -50,15 +50,15 @@ class TrainingCardHeader extends StatelessWidget {
             children: [
               Text(
                 'Тривалість',
-                style: AppStyles.fontSize.fs16.copyWith(
-                  color: AppStyles.colors.whiteMilk,
+                style: AppFontSize.fs16.copyWith(
+                  color: AppColors.whiteMilk,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               Text(
                 '$duration хвилин',
-                style: AppStyles.fontSize.fs18.copyWith(
-                  color: AppStyles.colors.whiteMilk,
+                style: AppFontSize.fs18.copyWith(
+                  color: AppColors.whiteMilk,
                 ),
               ),
             ],

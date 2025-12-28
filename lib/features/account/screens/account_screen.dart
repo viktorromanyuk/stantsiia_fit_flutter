@@ -57,16 +57,15 @@ class AccountScreen extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 50,
-                        backgroundColor: AppStyles.colors.gray,
+                        backgroundColor: AppColors.gray,
                         child: CircleAvatar(
                           radius: 48,
-                          backgroundColor: AppStyles.colors.grayDarkAccent,
-                          child: const Text(
+                          backgroundColor: AppColors.grayDarkAccent,
+                          child: Text(
                             'ВР',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
+                            style: AppFontSize.fs30.copyWith(
+                              fontFamily: FontFamily.unbounded,
+                              color: AppColors.whiteMilk,
                             ),
                           ),
                         ),
@@ -74,8 +73,8 @@ class AccountScreen extends StatelessWidget {
 
                       Text(
                         'Віктор Романюк',
-                        style: AppStyles.fontSize.fs20.copyWith(
-                          fontWeight: FontWeight.w500,
+                        style: AppFontSize.fs20.copyWith(
+                          fontFamily: FontFamily.unbounded,
                         ),
                       ),
                     ],
@@ -95,8 +94,8 @@ class AccountScreen extends StatelessWidget {
                         final isFirstInGroup = itemIndex == 0;
                         final isLastInGroup = itemIndex == items.length - 1;
                         final borderRadius = BorderRadius.vertical(
-                          top: isFirstInGroup ? AppStyles.borderRadius.r30 : AppStyles.borderRadius.r6,
-                          bottom: isLastInGroup ? AppStyles.borderRadius.r30 : AppStyles.borderRadius.r6,
+                          top: isFirstInGroup ? AppBorderRadius.r30 : AppBorderRadius.r6,
+                          bottom: isLastInGroup ? AppBorderRadius.r30 : AppBorderRadius.r6,
                         );
 
                         return Material(
@@ -105,8 +104,8 @@ class AccountScreen extends StatelessWidget {
                           clipBehavior: Clip.antiAlias,
                           child: Ink(
                             decoration: BoxDecoration(
-                              color: AppStyles.colors.grayDarkAccent,
-                              border: Border.all(color: AppStyles.colors.gray),
+                              color: AppColors.grayDarkAccent,
+                              border: Border.all(color: AppColors.gray),
                               borderRadius: borderRadius,
                             ),
                             child: InkResponse(
@@ -124,11 +123,11 @@ class AccountScreen extends StatelessWidget {
                                 trailing: data.action == null ? AppIcon(Assets.icons.caretRight, height: 12) : null,
                                 leading: SizedBox(
                                   width: 24,
-                                  child: Center(child: AppIcon(data.icon, color: AppStyles.colors.whiteMilk)),
+                                  child: Center(child: AppIcon(data.icon, color: AppColors.whiteMilk)),
                                 ),
                                 title: Text(
                                   data.title,
-                                  style: TextStyle(fontWeight: FontWeight.w500, color: AppStyles.colors.whiteMilk),
+                                  style: TextStyle(fontWeight: FontWeight.w500, color: AppColors.whiteMilk),
                                 ),
                                 onTap: data.action != null
                                     ? data.action!

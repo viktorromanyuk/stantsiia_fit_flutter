@@ -13,15 +13,15 @@ class TrainingsPackagesLoader extends StatelessWidget {
       sliver: SliverList.separated(
         itemBuilder: (BuildContext context, int index) => Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(AppStyles.borderRadius.r30),
-            border: Border.all(color: AppStyles.colors.whiteMilk),
+            borderRadius: BorderRadius.all(AppBorderRadius.r30),
+            border: Border.all(color: AppColors.whiteMilk),
           ),
           child: Stack(
             children: [
               Positioned.fill(
                 child: AppShimmer(
                   theme: ThemeMode.dark,
-                  borderRadius: AppStyles.borderRadius.r30.x,
+                  borderRadius: AppBorderRadius.r30.x,
                 ),
               ),
               AppShimmer.builder(
