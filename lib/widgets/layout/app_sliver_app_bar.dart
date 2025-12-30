@@ -160,8 +160,7 @@ class AppSliverAppBar extends StatelessWidget {
                   opacity: appBarState.expanded,
                   child: Text(
                     flexibleSpaceTitle ?? title,
-                    style: TextStyle(
-                      fontSize: context.breakpoints.minLg ? 40 : 30,
+                    style: AppFontSize.fs30.copyWith(
                       height: AppLineHeight.condensed,
                       fontFamily: FontFamily.unbounded,
                     ),

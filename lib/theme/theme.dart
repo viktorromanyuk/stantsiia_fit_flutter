@@ -25,6 +25,21 @@ abstract final class AppTheme {
         iconColor: AppColors.whiteMilk,
       ),
 
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: ButtonStyle(
+          splashFactory: InkSparkle.splashFactory,
+          side: WidgetStateProperty.all(BorderSide(color: AppColors.whiteMilk, width: 1)),
+          backgroundColor: WidgetStateProperty.all(AppColors.grayDarkAccent),
+          foregroundColor: WidgetStateProperty.all(AppColors.whiteMilk),
+          textStyle: WidgetStateProperty.all(AppFontSize.fs16.copyWith(fontFamily: FontFamily.unbounded)),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(AppBorderRadius.full),
+            ),
+          ),
+        ),
+      ),
+
       inputDecorationTheme: InputDecorationTheme(
         contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 13),
         filled: true,

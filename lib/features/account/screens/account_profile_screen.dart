@@ -12,19 +12,21 @@ class AccountProfileScreen extends StatefulWidget {
 }
 
 class _AccountProfileScreenState extends State<AccountProfileScreen> {
-  final _formKey = GlobalKey<FormState>();
+  final _nameController = FormFieldController();
+  final _phoneController = FormFieldController();
+  final _emailController = FormFieldController(text: 'viktoraromanyuk@gmail.com');
 
-  final _nameController = TextEditingController();
-  final _phoneController = TextEditingController();
-  final _emailController = TextEditingController(text: 'viktoraromanyuk@gmail.com');
+  late final _formController = FormController([
+    _nameController,
+    _phoneController,
+    _emailController,
+  ]);
 
   bool _isLoading = false;
 
   @override
   void dispose() {
-    _nameController.dispose();
-    _phoneController.dispose();
-    _emailController.dispose();
+    _formController.dispose();
     super.dispose();
   }
 
@@ -41,71 +43,53 @@ class _AccountProfileScreenState extends State<AccountProfileScreen> {
           padding: const EdgeInsets.all(16),
           sliver: SliverToBoxAdapter(
             child: Form(
-              key: _formKey,
+              key: _formController.formKey,
               child: Column(
                 spacing: 18,
                 children: [
                   AppTextFormField(
                     label: 'Ім\'я та прізвище',
-                    hint: 'Введіть ім\'я та прізвище',
+                    placeholder: 'Введіть ім\'я та прізвище',
                     controller: _nameController,
                     required: true,
                     enabled: !_isLoading,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Введіть ім\'я та прізвище';
-                      }
-                      return null;
-                    },
                   ),
 
                   AppTextFormField(
                     label: 'Номер телефону',
-                    hint: 'Введіть номер телефону',
+                    placeholder: 'Введіть номер телефону',
                     keyboardType: TextInputType.phone,
                     controller: _phoneController,
-                    inputFormatters: [AppInputFormatters.phone],
+                    inputFormatters: [AppInputFormatters.phone()],
                     required: true,
                     enabled: !_isLoading,
-                    validator: (value) {
-                      final phone = value?.trim() ?? '';
-
-                      final unmasked = AppInputFormatters.phone.unmaskText(phone);
-                      if (unmasked.length != 9) {
-                        return 'Недійсний формат';
-                      }
-
-                      return null;
-                    },
+                    validators: [AppValidators.phone],
                   ),
 
                   AppTextFormField(
                     label: 'Email',
-                    hint: 'Введіть email',
+                    placeholder: 'Введіть email',
                     keyboardType: TextInputType.emailAddress,
                     controller: _emailController,
                     enabled: false,
                   ),
 
-                  Padding(
-                    padding: const EdgeInsets.only(top: 14),
-                    child: AppButton(
-                      isLoading: _isLoading,
-                      onPressed: () async {
-                        if (_formKey.currentState?.validate() ?? false) {
-                          if (mounted) {
-                            setState(() => _isLoading = true);
-                          }
-
-                          await Future.delayed(const Duration(seconds: 2));
-
-                          if (mounted) {
-                            setState(() => _isLoading = false);
-                          }
+                  AppButton(
+                    isLoading: _isLoading,
+                    onPressed: () async {
+                      if (_formController.validate()) {
+                        if (mounted) {
+                          setState(() => _isLoading = true);
                         }
-                      },
-                      text: 'Зберегти',
-                    ),
+
+                        await Future.delayed(const Duration(seconds: 2));
+
+                        if (mounted) {
+                          setState(() => _isLoading = false);
+                        }
+                      }
+                    },
+                    text: 'Зберегти',
                   ),
                 ],
               ),

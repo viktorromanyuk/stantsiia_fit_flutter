@@ -6,8 +6,8 @@ import 'package:stantsiia_fit_flutter/styles/styles.dart';
 import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
 
 @RoutePage()
-class DefaultLayoutScreen extends StatelessWidget {
-  const DefaultLayoutScreen({super.key});
+class MainLayoutScreen extends StatelessWidget {
+  const MainLayoutScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -32,7 +32,7 @@ class AppScaffold extends StatelessWidget {
 
         if (scrollable)
           SliverToBoxAdapter(
-            child: SafeArea(top: false, child: SizedBox(height: 0)),
+            child: SafeArea(top: false, child: SizedBox.shrink()),
           ),
       ],
     );

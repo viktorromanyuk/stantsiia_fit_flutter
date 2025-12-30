@@ -6,34 +6,26 @@ import 'package:stantsiia_fit_flutter/widgets/widgets.dart';
 class AppButton extends StatelessWidget {
   const AppButton({
     super.key,
-    required this.onPressed,
+    this.onPressed,
     required this.text,
-    this.height = 64,
+    this.icon,
+    this.height = 56,
     this.showArrow = false,
     this.isLoading = false,
   });
 
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final String text;
   final double height;
   final bool showArrow;
   final bool isLoading;
+  final SvgGenImage? icon;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: height,
       child: OutlinedButton(
-        style: OutlinedButton.styleFrom(
-          splashFactory: InkSparkle.splashFactory,
-          side: BorderSide(color: AppColors.whiteMilk, width: 1),
-          backgroundColor: AppColors.grayDarkAccent,
-          foregroundColor: AppColors.whiteMilk,
-          textStyle: AppFontSize.fs18.copyWith(fontFamily: FontFamily.unbounded),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(AppBorderRadius.full),
-          ),
-        ),
         onPressed: isLoading ? null : onPressed,
         child: Stack(
           children: [
@@ -46,7 +38,15 @@ class AppButton extends StatelessWidget {
                   AnimatedOpacity(
                     opacity: isLoading ? 0 : 1,
                     duration: Duration(milliseconds: 200),
-                    child: Text(text),
+                    child: Row(
+                      spacing: 12,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        if (icon != null) AppIcon(icon!, width: 20),
+                        Text(text),
+                      ],
+                    ),
                   ),
                   if (showArrow)
                     Padding(

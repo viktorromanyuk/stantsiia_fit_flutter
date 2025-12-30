@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:stantsiia_fit_flutter/core/utils/utils.dart';
 import 'package:stantsiia_fit_flutter/styles/styles.dart';
 
 class AppTextFormField extends StatelessWidget {
@@ -12,10 +13,12 @@ class AppTextFormField extends StatelessWidget {
     this.readOnly = false,
     this.label,
     this.hint,
-    this.validator,
+    this.placeholder,
+    this.validators,
     this.controller,
     this.keyboardType,
     this.inputFormatters = const [],
+    this.onSubmitted,
   });
 
   final bool enabled;
@@ -26,23 +29,19 @@ class AppTextFormField extends StatelessWidget {
 
   final String? label;
   final String? hint;
-  final FormFieldValidator<String>? validator;
-  final TextEditingController? controller;
+  final String? placeholder;
+  final List<Validator>? validators;
+  final FormFieldController? controller;
   final TextInputType? keyboardType;
   final List<TextInputFormatter> inputFormatters;
+  final VoidCallback? onSubmitted;
 
   @override
   Widget build(BuildContext context) {
-    return FormField<String>(
-      validator: (value) {
-        final text = controller?.text ?? value ?? '';
-        if (required && text.isEmpty) {
-          return 'Обовʼязкове поле';
-        }
-        return validator?.call(text);
-      },
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      builder: (fieldState) => Column(
+    return AnimatedSize(
+      duration: const Duration(milliseconds: 150),
+      curve: Curves.easeOut,
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (label != null)
@@ -79,41 +78,56 @@ class AppTextFormField extends StatelessWidget {
                 ),
               ),
             ),
-          TextField(
+          TextFormField(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             enabled: enabled,
             autofocus: autofocus,
             obscureText: obscureText,
             readOnly: readOnly,
-            controller: controller,
+            controller: controller?.textController,
+            focusNode: controller?.focusNode,
             keyboardType: keyboardType,
             keyboardAppearance: Brightness.dark,
             inputFormatters: inputFormatters,
+            errorBuilder: (context, errorText) {
+              return Transform.translate(
+                offset: const Offset(-5, 0),
+                child: Text(
+                  errorText,
+                  style: AppFontSize.fs12.copyWith(
+                    height: AppLineHeight.none,
+                    color: AppColors.error,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              );
+            },
+
             decoration: InputDecoration(
               fillColor: enabled ? AppColors.grayDarkAccent : AppColors.disabledBg,
 
-              hintText: hint,
+              hintText: placeholder,
               hintStyle: AppFontSize.fs16.copyWith(
                 color: enabled ? AppColors.placeholder : AppColors.disabledText,
                 fontWeight: FontWeight.w500,
               ),
-
-              error: fieldState.errorText != null
-                  ? Transform.translate(
-                      offset: const Offset(-5, 0),
-                      child: Text(
-                        fieldState.errorText ?? '',
-                        style: AppFontSize.fs12.copyWith(
-                          height: AppLineHeight.none,
-                          color: AppColors.error,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    )
-                  : null,
             ),
-            onChanged: fieldState.didChange,
             onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
+            validator: AppValidators.combine([
+              if (required) AppValidators.required,
+              ...(validators ?? []),
+            ]),
           ),
+
+          if (hint != null)
+            Container(
+              padding: const EdgeInsets.only(top: 6),
+              alignment: Alignment.center,
+              child: Text(
+                hint ?? '',
+                style: AppFontSize.fs12.copyWith(color: AppColors.grayLight),
+              ),
+            ),
         ],
       ),
     );

@@ -9,7 +9,7 @@ abstract final class AppColors {
 
   // Grays
   static const gray = Color.fromRGBO(121, 134, 164, 1);
-  static const grayLight = Color.fromRGBO(217, 217, 217, 1);
+  static const grayLight = Color.fromRGBO(180, 186, 200, 1);
   static const grayDark = Color.fromRGBO(31, 33, 44, 1);
   static const grayDarkAccent = Color.fromRGBO(26, 28, 37, 1);
 
@@ -31,7 +31,7 @@ abstract final class AppColors {
   // Form
   static const error = Color.fromRGBO(245, 108, 108, 1);
 
-  static const disabledBg = Color.fromRGBO(255, 255, 245, 0.122);
-  static const disabledText = Color.fromRGBO(255, 255, 245, 0.38);
-  static const placeholder = Color.fromRGBO(168, 171, 178, 1);
+  static const disabledBg = Color.fromRGBO(58, 60, 67, 1);
+  static const disabledText = Color.fromRGBO(123, 124, 120, 1);
+  static const placeholder = Color.fromRGBO(150, 154, 162, 1);
 }

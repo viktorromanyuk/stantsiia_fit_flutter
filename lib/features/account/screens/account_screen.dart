@@ -9,7 +9,17 @@ import 'package:stantsiia_fit_flutter/router/router.gr.dart';
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
 
-  static final List<List<({String title, SvgGenImage icon, PageRouteInfo? route, VoidCallback? action})>> _navTiles = [
+  static final List<
+    List<
+      ({
+        String title,
+        SvgGenImage icon,
+        PageRouteInfo? route,
+        void Function(BuildContext context)? action,
+      })
+    >
+  >
+  _navTiles = [
     [
       (
         title: 'Мій профіль',
@@ -35,7 +45,9 @@ class AccountScreen extends StatelessWidget {
         title: 'Вийти',
         icon: Assets.icons.logout,
         route: null,
-        action: () => print('logout'),
+        action: (BuildContext context) => {
+          context.router.root.replaceAll([const AuthRoute()]),
+        },
       ),
     ],
   ];
@@ -114,7 +126,7 @@ class AccountScreen extends StatelessWidget {
                               highlightShape: BoxShape.rectangle,
                               borderRadius: borderRadius,
                               onTap: data.action != null
-                                  ? data.action!
+                                  ? () => data.action!(context)
                                   : data.route != null
                                   ? () => context.router.push(data.route!)
                                   : null,
@@ -130,7 +142,7 @@ class AccountScreen extends StatelessWidget {
                                   style: TextStyle(fontWeight: FontWeight.w500, color: AppColors.whiteMilk),
                                 ),
                                 onTap: data.action != null
-                                    ? data.action!
+                                    ? () => data.action!(context)
                                     : data.route != null
                                     ? () => context.router.push(data.route!)
                                     : null,
