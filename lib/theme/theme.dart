@@ -40,36 +40,35 @@ abstract final class AppTheme {
         ),
       ),
 
-      inputDecorationTheme: InputDecorationTheme(
-        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 13),
-        filled: true,
-
-        hintStyle: AppFontSize.fs16.copyWith(
-          fontWeight: FontWeight.w500,
-        ),
-
-        enabledBorder: OutlineInputBorder(
+      inputDecorationTheme: () {
+        final defaultBorder = OutlineInputBorder(
           borderRadius: BorderRadius.all(AppBorderRadius.r18),
           borderSide: BorderSide(color: AppColors.gray),
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(AppBorderRadius.r18),
-          borderSide: BorderSide(color: AppColors.gray),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(AppBorderRadius.r18),
+        );
+
+        final focusedBorder = defaultBorder.copyWith(
           borderSide: BorderSide(color: AppColors.whiteMilk),
-        ),
+        );
 
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(AppBorderRadius.r18),
+        final errorBorder = defaultBorder.copyWith(
           borderSide: BorderSide(color: AppColors.error),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(AppBorderRadius.r18),
-          borderSide: BorderSide(color: AppColors.error),
-        ),
-      ),
+        );
+
+        return InputDecorationTheme(
+          contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 13),
+          filled: true,
+
+          hintStyle: AppFontSize.fs16.copyWith(
+            fontWeight: FontWeight.w500,
+          ),
+
+          enabledBorder: defaultBorder,
+          disabledBorder: defaultBorder,
+          focusedBorder: focusedBorder,
+          errorBorder: errorBorder,
+          focusedErrorBorder: errorBorder,
+        );
+      }(),
 
       bottomSheetTheme: BottomSheetThemeData(
         dragHandleColor: AppColors.whiteMilk,
